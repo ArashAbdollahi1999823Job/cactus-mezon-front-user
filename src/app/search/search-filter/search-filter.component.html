@@ -1,0 +1,155 @@
+<div class="container-search">
+  <div class="search-bar">
+    <div class="container-search-btn">
+      <input type="text" #search id="input-search" class="input-search" placeholder="جستجو کنید..." (keyup.enter)="changeSearch()">
+      <button class="btn-search" (click)="changeSearch()"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+  <div class="select-filters">
+    <div class="select-right-filters">
+      <select (change)="onChangeType($any($event.target)?.value)">
+        <option class="option" value="0">دسته بندی</option>
+        <option class="option" *ngFor="let item of types" [value]="item?.id">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeBrand($any($event.target)?.value)">
+        <option class="option" value="0">برند</option>
+        <option class="option" *ngFor="let item of brands" [value]="item?.id">{{item?.title}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="select-filters">
+    <div class="select-right-filters">
+      <select (change)="onChangeSort($any($event.target)?.value)">
+        <option class="option" value="0">مرتب سازی</option>
+        <option [selected]="item.key=== filterProductParams?.eTypeSort" class="option" *ngFor="let item of sortOptions" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+    <div class="select-left-filters">
+      <select (change)="onChangeTypeSort($any($event.target)?.value)">
+        <option class="option" value="0">ترتیب</option>
+        <option [selected]="item.key=== filterProductParams?.sort" class="option" *ngFor="let item of sortTypeOptions" [value]="item?.key">{{item?.title}}</option>
+      </select>
+    </div>
+  </div>
+  <!--  <div class="container-menu">
+
+      <ng-container *ngFor="let item of types">
+        <div class="menu-item " [attr.pid]="item.id" (click)="toggleMenu($event)">
+          <span class="menu-title">{{item.title}}</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="item.id"></i>
+        </div>
+        <div class="item-content" [attr.cid]="item.id">
+  adsfasdfasdfsdaf
+        </div>
+      </ng-container>
+
+  &lt;!&ndash;    <div class="menu-item " [attr.pid]="1" (click)="toggleMenu($event)">
+        <span class="menu-title">مردانه</span>
+        <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+        <i class="fa fa-plus" [attr.piid]="1"></i>
+      </div>
+      <div class="item-content" [attr.cid]="1">
+        <div class="menu-item " [attr.pid]="2" (click)="toggleMenu($event)">
+          <span class="menu-title">مردانه</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="2"></i>
+        </div>
+        <div class="item-content" [attr.cid]="2">
+          <div class="menu-item " [attr.pid]="3" (click)="toggleMenu($event)">
+            <span class="menu-title">مردانه</span>
+            <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+            <i class="fa fa-plus" [attr.piid]="3"></i>
+          </div>
+          <div class="item-content" [attr.cid]="3">
+          </div>
+        </div>
+      </div>
+      <div class="menu-item " [attr.pid]="1" (click)="toggleMenu($event)">
+        <span class="menu-title">مردانه</span>
+        <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+        <i class="fa fa-plus" [attr.piid]="1"></i>
+      </div>
+      <div class="item-content" [attr.cid]="1">
+        <div class="menu-item " [attr.pid]="2" (click)="toggleMenu($event)">
+          <span class="menu-title">مردانه</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="2"></i>
+        </div>
+        <div class="item-content" [attr.cid]="2">
+          <div class="menu-item " [attr.pid]="3" (click)="toggleMenu($event)">
+            <span class="menu-title">مردانه</span>
+            <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+            <i class="fa fa-plus" [attr.piid]="3"></i>
+          </div>
+          <div class="item-content" [attr.cid]="3">
+          </div>
+        </div>
+      </div>
+      <div class="menu-item " [attr.pid]="1" (click)="toggleMenu($event)">
+        <span class="menu-title">مردانه</span>
+        <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+        <i class="fa fa-plus" [attr.piid]="1"></i>
+      </div>
+      <div class="item-content" [attr.cid]="1">
+        <div class="menu-item " [attr.pid]="2" (click)="toggleMenu($event)">
+          <span class="menu-title">مردانه</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="2"></i>
+        </div>
+        <div class="item-content" [attr.cid]="2">
+          <div class="menu-item " [attr.pid]="3" (click)="toggleMenu($event)">
+            <span class="menu-title">مردانه</span>
+            <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+            <i class="fa fa-plus" [attr.piid]="3"></i>
+          </div>
+          <div class="item-content" [attr.cid]="3">
+          </div>
+        </div>
+      </div>
+      <div class="menu-item " [attr.pid]="1" (click)="toggleMenu($event)">
+        <span class="menu-title">مردانه</span>
+        <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+        <i class="fa fa-plus" [attr.piid]="1"></i>
+      </div>
+      <div class="item-content" [attr.cid]="1">
+        <div class="menu-item " [attr.pid]="2" (click)="toggleMenu($event)">
+          <span class="menu-title">مردانه</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="2"></i>
+        </div>
+        <div class="item-content" [attr.cid]="2">
+          <div class="menu-item " [attr.pid]="3" (click)="toggleMenu($event)">
+            <span class="menu-title">مردانه</span>
+            <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+            <i class="fa fa-plus" [attr.piid]="3"></i>
+          </div>
+          <div class="item-content" [attr.cid]="3">
+          </div>
+        </div>
+      </div>
+      <div class="menu-item " [attr.pid]="1" (click)="toggleMenu($event)">
+        <span class="menu-title">مردانه</span>
+        <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+        <i class="fa fa-plus" [attr.piid]="1"></i>
+      </div>
+      <div class="item-content" [attr.cid]="1">
+        <div class="menu-item " [attr.pid]="2" (click)="toggleMenu($event)">
+          <span class="menu-title">مردانه</span>
+          <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+          <i class="fa fa-plus" [attr.piid]="2"></i>
+        </div>
+        <div class="item-content" [attr.cid]="2">
+          <div class="menu-item " [attr.pid]="3" (click)="toggleMenu($event)">
+            <span class="menu-title">مردانه</span>
+            <button class="btn-visit-menu">بازدید<i class="fa fa-eye"></i></button>
+            <i class="fa fa-plus" [attr.piid]="3"></i>
+          </div>
+          <div class="item-content" [attr.cid]="3">
+          </div>
+        </div>
+      </div>&ndash;&gt;
+    </div>-->
+</div>
