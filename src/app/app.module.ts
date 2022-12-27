@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import {SharedModule} from "./shared/shared.module";
 import { AppComponent } from './app-c/app.component';
@@ -10,6 +10,9 @@ import {SearchModule} from "./search/search.module";
 import {BasketModule} from "./basket/basket.module";
 import {AuthModule} from "./auth/auth.module";
 import {ChatModule} from "./chat/chat.module";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,9 +28,11 @@ import {ChatModule} from "./chat/chat.module";
     SearchModule,
     BasketModule,
     AuthModule,
-    ChatModule
+    ChatModule,
+    ToastrModule.forRoot({positionClass:'toast-top-right',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
