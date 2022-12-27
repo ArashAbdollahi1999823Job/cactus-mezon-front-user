@@ -3,6 +3,7 @@
 .result-card{
   display: flex;
   flex-flow: wrap;
+  justify-content: space-around;
   .container-slider-card-item {
     border-top: 2px solid $color-black;
     border-bottom: 2px solid $color-black;
@@ -11,7 +12,7 @@
     padding-top: 19px;
     background: $color-white-a5;
     margin: 2vh 5px;
-    width: 195px;
+    width: 180px;
 
     &:hover {
       transform: scale(1.01);
@@ -63,8 +64,8 @@
 
     .card-image {
       position: relative;
-      width: 195px;
-      height: 195px;
+      width: 180px;
+      height: 180px;
       padding: 4px;
       object-fit: contain;
       overflow: hidden;
@@ -93,7 +94,7 @@
         top: 4px;
         left: 0;
         position: absolute;
-        height: 195px;
+        height: 180px;
         background: $color-white;
         transition: ease .4s;
         opacity: .6;

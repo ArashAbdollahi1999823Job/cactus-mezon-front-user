@@ -25,7 +25,6 @@ export class SearchService {
   setParams(params:RequestShopParamsDto){
     this.shopParams=params;
   }
-
   getProducts():Observable<IPaginationResponseDto<IProductDto>>{
     let requestParams = this.generateRequestParams();
     return this.http.get<IPaginationResponseDto<IProductDto>>(this.backendUrl+"product",{params:requestParams});

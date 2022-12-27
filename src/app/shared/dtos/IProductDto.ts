@@ -1,6 +1,8 @@
 export interface IProductDto {
   id: number
   title: string
+
+  slug:string
   pictureThumbnailUrl: string
   metaDescription: string
   price: number

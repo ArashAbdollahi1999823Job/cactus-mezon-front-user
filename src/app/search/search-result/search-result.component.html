@@ -14,7 +14,7 @@
         <button class=" details-button"><i class="fa fa-heart-crack"></i></button>
         <button class=" details-button"><i class="fa fa-shop"></i></button>
       </div>
-      <a>
+      <a [routerLink]="[item.productType+'/'+item.title+'/'+item.slug]">
         <div class="card-enter-product">جزئیات</div>
       </a>
     </div>
