@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../services/search.service";
 import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
 import {IProductDto} from "../../shared/dtos/IProductDto";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-search-c',
@@ -10,8 +11,9 @@ import {IProductDto} from "../../shared/dtos/IProductDto";
 })
 export class SearchComponent implements OnInit {
   public products: IPaginationResponseDto<IProductDto> | undefined;
-
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService,private title:Title) {
+    this.title.setTitle("جستجو در فروشگاه کاکتوس")
+  }
 
   ngOnInit(): void {
     this.getProducts();

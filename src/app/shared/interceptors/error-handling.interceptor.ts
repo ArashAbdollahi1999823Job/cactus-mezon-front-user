@@ -12,9 +12,7 @@ import {Router} from "@angular/router";
 @Injectable()
 export class ErrorHandlingInterceptor implements HttpInterceptor {
 
-  constructor(private toastService: ToastrService, private router: Router) {
-  }
-
+  constructor(private toastService: ToastrService, private router: Router) {}
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -22,14 +20,13 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
           switch (error.error.statusCode) {
             case 404:
               this.router.navigateByUrl("/search");
-              this.toastService.warning(error.error.message)
+              this.toastService.error(error.error.message)
               break;
             default:
               break;
           }
         }
         return throwError(() => {
-          console.log(error)
           return error;
         })
       })

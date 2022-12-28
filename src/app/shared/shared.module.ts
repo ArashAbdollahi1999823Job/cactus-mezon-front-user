@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {NavComponent} from "./components/nav/nav.component";
 import {RouterModule} from "@angular/router";
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -11,8 +12,9 @@ import { ProductDetailsComponent } from './components/product-details/product-de
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+      NgxSpinnerModule.forRoot({type: 'line-scale-pulse-out'})
   ],
-  exports:[NavComponent,ProductDetailsComponent]
+  exports:[NavComponent,ProductDetailsComponent,NgxSpinnerModule]
 })
 export class SharedModule { }

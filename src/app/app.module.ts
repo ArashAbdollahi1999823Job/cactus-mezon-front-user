@@ -13,6 +13,7 @@ import {ChatModule} from "./chat/chat.module";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.interceptor";
+import {LoadingInterceptor} from "./shared/interceptors/loading.interceptor";
 
 @NgModule({
   declarations: [
@@ -29,10 +30,10 @@ import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.int
     BasketModule,
     AuthModule,
     ChatModule,
-    ToastrModule.forRoot({positionClass:'toast-top-right',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),
+    ToastrModule.forRoot({positionClass:'toast-top-full-width',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),
     BrowserAnimationsModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true}],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true},{provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
