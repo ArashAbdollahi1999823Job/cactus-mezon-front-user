@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { BasketRoutingModule } from './basket-routing.module';
 import { BasketComponent } from './basket-c/basket.component';
+import { OrderTotalComponent } from './order-total/order-total.component';
 
 
 @NgModule({
   declarations: [
-    BasketComponent
+    BasketComponent,
+    OrderTotalComponent
   ],
   imports: [
     CommonModule,

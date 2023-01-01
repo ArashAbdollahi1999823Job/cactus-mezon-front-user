@@ -27,13 +27,13 @@ export class SearchService {
   }
   getProducts():Observable<IPaginationResponseDto<IProductDto>>{
     let requestParams = this.generateRequestParams();
-    return this.http.get<IPaginationResponseDto<IProductDto>>(this.backendUrl+"product",{params:requestParams});
+    return this.http.get<IPaginationResponseDto<IProductDto>>(this.backendUrl+"/product",{params:requestParams});
   }
   getBrands(){
-    return this.http.get<any>(this.backendUrl+"productBrand")
+    return this.http.get<any>(this.backendUrl+"/productBrand")
   }
   getTypes(){
-    return this.http.get<any>(this.backendUrl+"productType")
+    return this.http.get<any>(this.backendUrl+"/productType")
   }
 
   private generateRequestParams() {

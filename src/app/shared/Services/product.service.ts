@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProductBySlug(slug:string):Observable<IProductDto>{
-    return this.http.get<IProductDto>(`${this.backendUrl}product/${slug}`);
+    return this.http.get<IProductDto>(`${this.backendUrl}/product/${slug}`);
   }
 
 }

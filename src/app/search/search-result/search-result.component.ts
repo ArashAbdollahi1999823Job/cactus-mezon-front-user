@@ -1,13 +1,18 @@
 import {Component, Input} from '@angular/core';
 import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
 import {IProductDto} from "../../shared/dtos/IProductDto";
+import {BasketService} from "../../basket/Services/basket.service";
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
+
 export class SearchResultComponent {
+  constructor(private basketService: BasketService) {
+  }
+
   @Input("products") products: IPaginationResponseDto<IProductDto> | undefined;
 
   showDetails(event: any) {
@@ -34,5 +39,10 @@ export class SearchResultComponent {
     })
     cardDetails.style.width = "15px";
     cardDetails.style.borderRight = "0px solid black";
+  }
+
+  addItemToBasket(item: any) {
+    this.basketService.addCustomerBasketItemToCustomerBasket(item, 1).subscribe((res)=>{
+    })
   }
 }

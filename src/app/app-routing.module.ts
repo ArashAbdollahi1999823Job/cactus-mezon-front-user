@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'chat',loadChildren:()=>import('./chat/chat.module').then(x=>x.ChatModule)},
   {path:'favorite',loadChildren:()=>import('./favorite/favorite.module').then(x=>x.FavoriteModule)},
   {path:'search',loadChildren:()=>import('./search/search.module').then(x=>x.SearchModule),data:{Title:"فروشگاه یزرگ کاکتوس"}},
-  {path:'basket',loadChildren:()=>import('./basket/basket.module').then(x=>x.BasketModule)},
+  {path:'basket',loadChildren:()=>import('./basket/basket.module').then(x=>x.BasketModule),data:{Title: "سبد خرید فروشگاه بزرگ کاکتوس"}},
   {path:'auth',loadChildren:()=>import('./auth/auth.module').then(x=>x.AuthModule)},
   {path:'**',loadChildren:()=>import('./search/search.module').then(x=>x.SearchModule)},
 ];

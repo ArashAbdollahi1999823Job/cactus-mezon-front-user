@@ -12,7 +12,8 @@
       </i><br>جستجو</a>
     </li>
 
-    <li class="nav-ul-li" routerLinkActive="active">
+    <li class="nav-ul-li "  routerLinkActive="active">
+      <div class="count" *ngIf="customerBasket$ | async as customerBasket">{{customerBasket.customerBasketItems.length}}</div>
       <a routerLink="/basket">
         <i class="fa fa-shopping-basket nav-ul-li-i" aria-hidden="true">
         </i><br>سبد</a>

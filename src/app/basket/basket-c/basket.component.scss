@@ -1,0 +1,21 @@
+@import "src/assets/styles/practicalValue";
+
+.body-basket {
+  width: 100%;
+  height: 92vh;
+  background-color: $color-white-a6;
+  overflow-y: scroll;
+  .table {
+    border: 1px solid black;
+    background: $color-brown-2-a7;
+    width: 100%;
+    td  {
+      border: 1px solid black;
+      text-align:center;
+    }
+    th{
+      border: 1px solid black;
+      text-align: center;
+    }
+  }
+}
