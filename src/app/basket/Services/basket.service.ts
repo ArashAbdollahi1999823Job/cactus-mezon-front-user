@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable, of, tap} from "rxjs";
 import {ICustomerBasketDto} from "../../shared/dtos/basket/ICustomerBasketDto";
 import {HttpClient} from "@angular/common/http";
-import {IProductDto} from "../../shared/dtos/IProductDto";
+import {IProductDto} from "../../shared/dtos/product/IProductDto";
 import {ICustomerBasketItemsDto} from "../../shared/dtos/basket/ICustomerBasketItemsDto";
 import {CustomerBasketDto} from "../../shared/dtos/basket/CustomerBasketDto";
 import {IBasketTotal} from "../../shared/dtos/basket/IBasketTotal";

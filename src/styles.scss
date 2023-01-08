@@ -21,3 +21,10 @@ body {
   font-family: IRANSans !important;
   position: relative;
 }
+.input-success{
+  /*  box-shadow:1px 1px 1px 5px green ;*/
+  border: 1px solid green !important;
+}
+.input-error{
+  border: 1px solid red !important;
+}

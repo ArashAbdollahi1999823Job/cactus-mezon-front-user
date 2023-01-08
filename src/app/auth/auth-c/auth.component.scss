@@ -1,0 +1,24 @@
+@import "src/assets/styles/practicalValue";
+
+.body-auth {
+  width: 100%;
+  height: 92vh;
+  background-color: $color-black-a9;
+  overflow-y: scroll;
+  .auth-btn-container{
+    display: flex;
+    width: 100%;
+    button{
+      width: 33.3333%;
+      height: 5vh;
+      cursor: pointer;
+      background: $color-black;
+      color: $color-burlywood;
+      border: 1px solid burlywood;
+    }
+  }
+}
+.active{
+  color: $color-white !important;
+height: 6vh !important;
+}

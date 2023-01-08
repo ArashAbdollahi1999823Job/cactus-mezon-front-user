@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IProductDto} from "../dtos/IProductDto";
+import {IProductDto} from "../dtos/product/IProductDto";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 

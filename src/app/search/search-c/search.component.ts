@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../services/search.service";
 import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
-import {IProductDto} from "../../shared/dtos/IProductDto";
+import {IProductDto} from "../../shared/dtos/product/IProductDto";
 import {Title} from "@angular/platform-browser";
 
 @Component({

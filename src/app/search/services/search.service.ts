@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {RequestShopParamsDto} from "../../shared/dtos/RequestShopParamsDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
-import {IProductDto} from "../../shared/dtos/IProductDto";
+import {IProductDto} from "../../shared/dtos/product/IProductDto";
 import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'

@@ -27,6 +27,7 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
           }
         }
         return throwError(() => {
+          this.toastService.error(error.error.message)
           return error;
         })
       })

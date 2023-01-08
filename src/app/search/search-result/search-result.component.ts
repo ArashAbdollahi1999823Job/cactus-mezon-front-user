@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
-import {IProductDto} from "../../shared/dtos/IProductDto";
+import {IProductDto} from "../../shared/dtos/product/IProductDto";
 import {BasketService} from "../../basket/Services/basket.service";
 
 @Component({
