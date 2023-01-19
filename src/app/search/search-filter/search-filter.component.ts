@@ -81,9 +81,9 @@ export class SearchFilterComponent implements OnInit {
     this.searchService.setParams(this.filterProductParams);
     this.UpdateProduct.emit(true);
   }
-  onChangeTypeSort(eTypeSort: any) {
+  onChangeTypeSort(sortType: any) {
     // @ts-ignore
-    this.filterProductParams.eTypeSort=eTypeSort;
+    this.filterProductParams.sortType=sortType;
     // @ts-ignore
     this.searchService.setParams(this.filterProductParams);
     this.UpdateProduct.emit(true);

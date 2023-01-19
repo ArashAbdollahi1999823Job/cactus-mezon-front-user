@@ -23,7 +23,7 @@
     <div class="select-right-filters">
       <select (change)="onChangeSort($any($event.target)?.value)">
         <option class="option" value="0">مرتب سازی</option>
-        <option [selected]="item.key=== filterProductParams?.eTypeSort" class="option" *ngFor="let item of sortOptions" [value]="item?.key">{{item?.title}}</option>
+        <option [selected]="item.key=== filterProductParams?.sortType" class="option" *ngFor="let item of sortOptions" [value]="item?.key">{{item?.title}}</option>
       </select>
     </div>
     <div class="select-left-filters">

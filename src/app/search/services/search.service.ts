@@ -44,7 +44,7 @@ export class SearchService {
     requestParams = requestParams.append('pageIndex', this.shopParams.pageIndex);
     requestParams = requestParams.append('pageSize', this.shopParams.pageSize);
     requestParams = requestParams.append('sort', this.shopParams.sort);
-    requestParams = requestParams.append('eTypeSort', this.shopParams.eTypeSort);
+    requestParams = requestParams.append('sortType', this.shopParams.sortType);
     return requestParams;
   }
 }
