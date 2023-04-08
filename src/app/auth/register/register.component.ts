@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../Services/auth.service";
-import {IRegisterDto} from "../../shared/dtos/identity/IRegisterDto";
-import {IUserDto} from "../../shared/dtos/identity/IUserDto";
+import {IRegisterDto} from "../../shared/dto/identity/IRegisterDto";
+import {IUserDto} from "../../shared/dto/identity/IUserDto";
 import {ToastrService} from "ngx-toastr";
 
 @Component({

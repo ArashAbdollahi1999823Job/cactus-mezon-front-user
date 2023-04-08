@@ -1,0 +1,28 @@
+<div class="container-slider-card-item" (mouseenter)="showDetails($event)" (mouseleave)="hideDetails($event)" >
+  <div class="timer" #timerEl *ngIf="productDto.off"></div>
+  <div class="exist" *ngIf="productDto.count>0">موجود</div>
+  <div class="notExist" *ngIf="productDto.count==0">ناموجود</div>
+  <div class="old-price" ><del>{{productDto.price|number}}</del></div>
+  <div class="old-price" *ngIf="!productDto.off"  >{{productDto.price|number}}</div>
+  <div class="new-Price" *ngIf="productDto.off">{{(productDto.price-(productDto.price/100)*productDto.off.offPercent)|number}}</div>
+  <div class="card-image">
+    <ng-container *ngFor="let picture of productDto.pictures" >
+      <img src="{{backendUrlPicture}}/{{picture.pictureUrl}} " >
+    </ng-container>
+
+    <span class="off" *ngIf="productDto.off">{{productDto.off.offPercent}}%</span>
+    <div class="card-details">
+      <button class=" details-button"><i class="fa fa-comment"></i></button>
+      <!-- <button class=" details-button"><i class="fa fa-cart-plus"></i></button>-->
+      <button class=" details-button"><i class="fa fa-share-alt-square"></i></button>
+      <button class=" details-button"><i class="fa fa-heart-crack"></i></button>
+      <button class=" details-button"><i class="fa fa-shop"></i></button>
+    </div>
+    <a>
+      <div class="card-enter-product">جزئیات</div>
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="card-title">{{productDto.name}}</div>
+  </div>
+</div>

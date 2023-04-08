@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../Services/auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ILoginDto} from "../../shared/dtos/identity/ILoginDto";
+import {ILoginDto} from "../../shared/dto/identity/ILoginDto";
 import {ToastrService} from "ngx-toastr";
-import {IUserDto} from "../../shared/dtos/identity/IUserDto";
+import {IUserDto} from "../../shared/dto/identity/IUserDto";
 import {Router} from "@angular/router";
 
 @Component({

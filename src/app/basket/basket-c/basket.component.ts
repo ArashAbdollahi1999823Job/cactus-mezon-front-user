@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {Observable} from "rxjs";
-import {ICustomerBasketDto} from "../../shared/dtos/basket/ICustomerBasketDto";
+import {ICustomerBasketDto} from "../../shared/dto/basket/ICustomerBasketDto";
 import {BasketService} from "../Services/basket.service";
-import {ICustomerBasketItemsDto} from "../../shared/dtos/basket/ICustomerBasketItemsDto";
+import {ICustomerBasketItemsDto} from "../../shared/dto/basket/ICustomerBasketItemsDto";
 @Component({
   selector: 'app-basket-c',
   templateUrl: './basket.component.html',

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {isEmpty, Observable} from "rxjs";
-import {IUserDto} from "../../shared/dtos/identity/IUserDto";
+import {IUserDto} from "../../shared/dto/identity/IUserDto";
 import {AuthService} from "../Services/auth.service";
 import {Router} from "@angular/router";
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 import {allPageAnimation} from "../../shared/animations/allPageAnimation";
 
 @Component({

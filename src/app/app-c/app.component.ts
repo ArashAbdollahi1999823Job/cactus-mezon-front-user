@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from "../basket/Services/basket.service";
 import {environment} from "../../environments/environment";
-import {IUserDto} from "../shared/dtos/identity/IUserDto";
+import {IUserDto} from "../shared/dto/identity/IUserDto";
 import {AuthService} from "../auth/Services/auth.service";
 import {allPageAnimation} from "../shared/animations/allPageAnimation";
 declare var $: any;
@@ -17,21 +17,17 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.initialBasket();
-    // @ts-ignore
     this.initialUser();
   }
 
 
   private initialUser() {
-    // @ts-ignore
     const user=<IUserDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
     if (user) {
-      // @ts-ignore
       this.authService.setCurrentUser(user)
     }
   }
   private initialBasket() {
-    // @ts-ignore
     this.basketService.getCustomerBasket(localStorage.getItem(environment.keyBasketLocalStorage)).subscribe((res) => {
     })
   }

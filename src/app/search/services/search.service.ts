@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {RequestShopParamsDto} from "../../shared/dtos/RequestShopParamsDto";
+import {RequestShopParamsDto} from "../../shared/dto/RequestShopParamsDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {IPaginationResponseDto} from "../../shared/dtos/IPaginationResponseDto";
-import {IProductDto} from "../../shared/dtos/product/IProductDto";
+import {IPaginationResponseDto} from "../../shared/dto/IPaginationResponseDto";
+import {IProductDto} from "../../shared/dto/product/IProductDto";
 import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {SearchService} from "../services/search.service";
-import {IBrandDto} from "../../shared/dtos/product/IBrandDto";
-import {ITypeDto} from 'src/app/shared/dtos/product/ITypeDto';
-import {RequestShopParamsDto} from "../../shared/dtos/RequestShopParamsDto";
+import {IBrandDto} from "../../shared/dto/product/IBrandDto";
+import {ITypeDto} from 'src/app/shared/dto/product/ITypeDto';
+import {RequestShopParamsDto} from "../../shared/dto/RequestShopParamsDto";
 @Component({
   selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',

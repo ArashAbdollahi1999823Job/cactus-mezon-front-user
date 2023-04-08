@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {RequestShopParamsDto} from "../../shared/dtos/RequestShopParamsDto";
+import {RequestShopParamsDto} from "../../shared/dto/RequestShopParamsDto";
 import {SearchService} from "../services/search.service";
 @Component({
   selector: 'app-search-pagination',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from "../../../basket/Services/basket.service";
 import {Observable} from "rxjs";
-import {ICustomerBasketDto} from "../../dtos/basket/ICustomerBasketDto";
+import {ICustomerBasketDto} from "../../dto/basket/ICustomerBasketDto";
 
 @Component({
   selector: 'app-nav',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BasketService} from "../Services/basket.service";
 import {Observable} from "rxjs";
-import {IBasketTotal} from "../../shared/dtos/basket/IBasketTotal";
+import {IBasketTotal} from "../../shared/dto/basket/IBasketTotal";
 @Component({
   selector: 'app-order-total',
   templateUrl: './order-total.component.html',

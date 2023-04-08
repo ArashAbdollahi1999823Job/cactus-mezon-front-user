@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable} from "rxjs";
-import {IUserDto} from "../../shared/dtos/identity/IUserDto";
-import {ILoginDto} from "../../shared/dtos/identity/ILoginDto";
+import {IUserDto} from "../../shared/dto/identity/IUserDto";
+import {ILoginDto} from "../../shared/dto/identity/ILoginDto";
 import {HttpClient} from "@angular/common/http";
-import {IRegisterDto} from "../../shared/dtos/identity/IRegisterDto";
+import {IRegisterDto} from "../../shared/dto/identity/IRegisterDto";
 import {Router} from "@angular/router";
 
 @Injectable({

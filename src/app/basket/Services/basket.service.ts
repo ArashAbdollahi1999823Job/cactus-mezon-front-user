@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable, of, tap} from "rxjs";
-import {ICustomerBasketDto} from "../../shared/dtos/basket/ICustomerBasketDto";
+import {ICustomerBasketDto} from "../../shared/dto/basket/ICustomerBasketDto";
 import {HttpClient} from "@angular/common/http";
-import {IProductDto} from "../../shared/dtos/product/IProductDto";
-import {ICustomerBasketItemsDto} from "../../shared/dtos/basket/ICustomerBasketItemsDto";
-import {CustomerBasketDto} from "../../shared/dtos/basket/CustomerBasketDto";
-import {IBasketTotal} from "../../shared/dtos/basket/IBasketTotal";
+import {IProductDto} from "../../shared/dto/product/IProductDto";
+import {ICustomerBasketItemsDto} from "../../shared/dto/basket/ICustomerBasketItemsDto";
+import {CustomerBasketDto} from "../../shared/dto/basket/CustomerBasketDto";
+import {IBasketTotal} from "../../shared/dto/basket/IBasketTotal";
 
 @Injectable({
   providedIn: 'root'
