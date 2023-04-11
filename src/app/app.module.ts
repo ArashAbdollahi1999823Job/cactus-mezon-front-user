@@ -14,18 +14,20 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.interceptor";
 import {LoadingInterceptor} from "./shared/interceptors/loading.interceptor";
+import {TypeModule} from "./type/type.module";
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    IndexModule,
+    TypeModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     FavoriteModule,
-    IndexModule,
     SearchModule,
     BasketModule,
     AuthModule,

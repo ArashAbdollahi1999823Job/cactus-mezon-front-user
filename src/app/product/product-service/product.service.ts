@@ -41,6 +41,7 @@ export class ProductService {
     requestProductParam = requestProductParam.append('pageIndex', this.productParamDto.pageIndex);
     requestProductParam = requestProductParam.append('pageSize', this.productParamDto.pageSize);
     requestProductParam=requestProductParam.append('sortType',this.productParamDto.sortType);
+    requestProductParam=requestProductParam.append('user',this.productParamDto.user)
     return requestProductParam;
   }
 

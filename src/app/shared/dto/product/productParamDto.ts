@@ -15,4 +15,5 @@ export class ProductParamDto{
   public off: number;
   public sortType: SortType=SortType.desc;
   public storeId: string;
+  public user:boolean=true;
 }
