@@ -1,14 +1,16 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ProductDto} from "../../../shared/dto/product/productDto";
 import {environment} from "../../../../environments/environment.prod";
+import {Clipboard} from "@angular/cdk/clipboard";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
-  selector: 'product-item',
-  templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.scss']
+  selector: 'slide-one',
+  templateUrl: './slide-one.component.html',
+  styleUrls: ['./slide-one.component.scss']
 })
-export class ProductItemComponent implements OnInit{
+export class SlideOneComponent implements OnInit{
   @Input('productDto') productDto: ProductDto;
   public backendUrlPicture=environment.backendUrlPicture;
   @ViewChild('timerEl',{static:false}) timerEl:ElementRef;
@@ -37,6 +39,8 @@ export class ProductItemComponent implements OnInit{
     cardDetails.style.width = "15px";
     cardDetails.style.borderRight = "0px solid black";
   }
+  constructor(private clipboard:Clipboard,private toastService:ToastrService) {
+  }
   timer() {
     if (this.productDto.off) {
       let end = new Date(this.productDto.off.endDate)
@@ -53,5 +57,9 @@ export class ProductItemComponent implements OnInit{
           this.timerEl.nativeElement.innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
         }, 1000)
       }
+  }
+  copyProductUrl(slug: string) {
+    const successful = this.clipboard.copy(slug);
+    if (successful) this.toastService.success('ادرس با موفقیت کپی شد.')
   }
 }

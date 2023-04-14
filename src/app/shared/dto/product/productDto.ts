@@ -21,5 +21,5 @@ export class ProductDto {
   inventoryId:number
   off: OffDto
   offId:number
-  pictures:ProductPictureDto[];
+  productPictures:ProductPictureDto[];
 }

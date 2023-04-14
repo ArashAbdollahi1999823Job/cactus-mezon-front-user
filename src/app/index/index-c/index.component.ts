@@ -23,7 +23,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.title.setTitle("فروشگاه بزرگ کاکتوس")
   }
 
-
   public subscription: Subscription;
   public typesDto: TypeDto[];
 
@@ -35,10 +34,10 @@ export class IndexComponent implements OnInit, OnDestroy {
     let typeParamDto = new TypeParamDto();
     typeParamDto.parentTypeId = 0;
     this.typeService.typeSetParam(typeParamDto);
-    this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
+  this.subscription=  this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typesDto = res.data;
-        this.typesDto.forEach(x => {
+        this.typesDto?.forEach(x => {
           this.productGetAll(x.id)
         })
       }
@@ -47,14 +46,15 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   public productGetAll(typeId: number) {
     let productParamDto = new ProductParamDto();
+    productParamDto.pageSize=5;
     productParamDto.typeId = typeId;
     this.productService.productSetParam(productParamDto);
-    this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
+    this.subscription=  this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
-        this.typesDto.forEach(x => {
+        this.typesDto?.forEach(x => {
           if (x.id == typeId) {
             x.products = res.data;
-            x.products.forEach(x => {
+            x.products?.forEach(x => {
               this.productPictureGetAll(x.id, 1)
             })
           }
@@ -68,14 +68,14 @@ export class IndexComponent implements OnInit, OnDestroy {
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;
     this.productPictureService.productPictureSetParam(productPictureParamDto);
-    this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
+    this.subscription=  this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
-        this.typesDto.forEach(x => {
-          x.products.forEach(x => {
+        this.typesDto?.forEach(x => {
+          x.products?.forEach(x => {
             if (x.id == res[0].productId) {
               if(res[0]){
               }
-              x.pictures = res;
+              x.productPictures = res;
             }
           })
         })

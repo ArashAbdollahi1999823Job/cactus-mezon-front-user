@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   constructor(private basketService:BasketService,private authService:AuthService) {}
 
   ngOnInit(): void {
-    this.initialBasket();
+    /*this.initialBasket();*/
     this.initialUser();
   }
 

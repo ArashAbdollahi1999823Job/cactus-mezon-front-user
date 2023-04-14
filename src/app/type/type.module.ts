@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { TypeRoutingModule } from './type-routing.module';
 import { TypeComponent } from './type-c/type.component';
-import { TypeSliderComponent } from './type-slider/type-slider.component';
-
-
+import { SliderTwoComponent } from './slider-two/slider-two-c/slider-two.component';
+import {IndexModule} from "../index/index.module";
 @NgModule({
   declarations: [
     TypeComponent,
-    TypeSliderComponent
+    SliderTwoComponent,
   ],
   imports: [
     CommonModule,
-    TypeRoutingModule
+    TypeRoutingModule,
+    IndexModule
   ]
 })
 export class TypeModule { }

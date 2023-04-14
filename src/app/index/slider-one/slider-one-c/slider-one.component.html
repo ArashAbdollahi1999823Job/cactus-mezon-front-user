@@ -1,12 +1,13 @@
 <section class="container-slider-card">
-    <div class="container-slider-card-woman-items" #key>
+    <div class="container-slider-card-woman-items" (scroll)="scroll()" #key>
       <ng-container *ngFor="let item of typeDto.products">
-        <product-item [productDto]="item"></product-item>
+        <slide-one [productDto]="item"></slide-one>
       </ng-container>
     </div>
   <div class="slider-button-div">
     <button class="btn-arrow-slider-man" (click)="btnClickRight()"><i class="fa fa-arrow-alt-circle-right"></i></button>
-    <a routerLink="Type/{{typeDto.id}}"><button class="slider-button-enter"> ورود به دسته {{typeDto.name}} </button></a>
+    <a *ngIf="haveChild" routerLink="/Type/{{typeDto.slug}}"><button class="slider-button-enter"> ورود به دسته {{typeDto.name}} </button></a>
+    <a *ngIf="!haveChild" ><button class="slider-button-enter">  {{typeDto.name}} </button></a>
     <button class="btn-arrow-slider-man" (click)="btnClickLeft()"><i class="fa fa-arrow-alt-circle-left"></i></button>
   </div>
 </section>
