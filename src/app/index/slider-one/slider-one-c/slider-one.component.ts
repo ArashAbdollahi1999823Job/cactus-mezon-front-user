@@ -1,14 +1,4 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input, OnChanges,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {ProductParamDto} from "../../../shared/dto/product/productParamDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
@@ -18,7 +8,6 @@ import {ProductPictureDto} from "../../../shared/dto/productPicture/productPictu
 import {ProductService} from "../../../product/product-service/product.service";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {Subscription} from "rxjs";
-import {Platform} from "@angular/cdk/platform";
 import {TypeService} from "../../../type/type-service/type.service";
 import {TypeParamDto} from "../../../shared/dto/type/typeParamDto";
 
@@ -27,7 +16,7 @@ import {TypeParamDto} from "../../../shared/dto/type/typeParamDto";
   templateUrl: './slider-one.component.html',
   styleUrls: ['./slider-one.component.scss']
 })
-export class SliderOneComponent implements OnInit {
+export class SliderOneComponent implements OnInit ,OnDestroy {
   slider: Element;
   @Input("typeDto") typeDto: TypeDto;
   public haveChild: boolean = false;
@@ -37,14 +26,12 @@ export class SliderOneComponent implements OnInit {
 
   constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService) {
   }
-
   ngOnInit(): void {
     setTimeout(() => {
       this.btnClickLeft();
     }, 1000)
     this.checkChild()
   }
-
   public checkChild() {
     let typeParamDto = new TypeParamDto();
     typeParamDto.pageIndex = 1;
@@ -59,7 +46,6 @@ export class SliderOneComponent implements OnInit {
       }
     })
   }
-
   btnClickRight() {
     this.slider = this.key.nativeElement;
     let scrollRight = setInterval(() => {
@@ -93,18 +79,16 @@ export class SliderOneComponent implements OnInit {
         res.data.forEach(x => {
           this.typeDto.products.push(x);
           this.productPictureGetAll(x.id, 1);
-          console.log(this.typeDto.products)
         });
-
       }
     })
   }
-  public productPictureGetAll(productId: number, sort: number): any {
+  public productPictureGetAll(productId: number, sort: number){
     let productPictureParamDto = new ProductPictureParamDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;
     this.productPictureService.productPictureSetParam(productPictureParamDto);
-    return this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
+    this.subscription= this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
         if (res) {
           this.typeDto.products?.forEach(x => {
             if (x.id == res[0].productId) {
@@ -123,5 +107,9 @@ export class SliderOneComponent implements OnInit {
       this.pageIndex++;
       this.productGetAll(this.typeDto.id);
     }
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription)this.subscription.unsubscribe();
   }
 }
