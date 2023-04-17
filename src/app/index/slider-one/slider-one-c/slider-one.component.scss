@@ -1,7 +1,13 @@
 @import "../../../../assets/styles/practicalValue";
+.bg-black-a7{
+  background:$color-black-a7 !important;
+}
+.bg-brown-a3{
+  background:$color-brown-2-a3 !important;
+}
 .container-slider-card {
   width: 100%;
-  background:$color-black-a4 ;
+  background:$color-black-a6;
   .slider-button-div {
     display: flex;
     justify-content: space-around;

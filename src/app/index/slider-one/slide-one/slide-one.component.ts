@@ -36,7 +36,7 @@ export class SlideOneComponent implements OnInit{
     detailsButton.forEach(x => {
       x.style.fontSize = '1vh';
     })
-    cardDetails.style.width = "15px";
+    cardDetails.style.width = "0px";
     cardDetails.style.borderRight = "0px solid black";
   }
   constructor(private clipboard:Clipboard,private toastService:ToastrService) {

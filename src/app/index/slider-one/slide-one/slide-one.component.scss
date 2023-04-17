@@ -1,46 +1,47 @@
 @import "../../../../assets/styles/practicalValue";
 .container-slider-card-item {
-  border-top: 2px solid $color-saddlebrown;
-  border-bottom: 2px solid $color-saddlebrown;
+  border-top: 2px solid saddlebrown;
+  border-bottom: 2px solid saddlebrown;
   position: relative;
-  padding-top: 19px;
-  background: $color-white-a7;
-  margin: 1vh 20px;
+  background: $color-white-a9;
+  margin: 2vh 20px;
   width: 222px;
   &:hover {
     transform: scale(1.1);
     transition: all ease .3s;
   }
   .timer {
-    margin:0 auto  ;
+    border-radius: 20% 20% 0 0 ;
+    margin:0 auto;
     height: 20px;
     position: absolute;
-    top: -10px;
+    top: -20px;
     right: 0;
-    opacity: 1;
     background: $color-saddlebrown;
     display: inline;
-    color: $color-black;
+    color: burlywood;
     font-size: 1.5vh;
-    padding: 1px 3px;
+    padding: 2px 5px;
+    line-height: 17px;
   }
   .exist {
+    z-index: 2;
     margin:0 auto  ;
     height: 30px;
     transform:rotateZ(-45deg);
     position: absolute;
     top: -10px;
     left: -20px;
-    opacity: 1;
+    opacity: .9;
     background: greenyellow;
     display: inline;
     color: $color-black;
     font-size: 1.5vh;
     padding: 1px 3px;
-    border-radius: 30% 10% 30%  10%;
     border: 1px solid green;
   }
   .notExist {
+    z-index: 2;
     border: 1px solid red;
     margin:0 auto  ;
     height: 30px;
@@ -48,7 +49,7 @@
     position: absolute;
     top: -10px;
     left: -20px;
-    opacity: 1;
+    opacity: .9;
     background: gold;
     display: inline;
     color: $color-black;
@@ -62,12 +63,12 @@
     position: absolute;
     bottom: -10px;
     right: 0;
-    opacity: 1;
     background: $color-saddlebrown;
     display: inline;
-    color: $color-black;
+    color: burlywood;
+
     font-size: 1.5vh;
-    padding: 1px 3px;
+    padding: 1px 5px;
   }
   .old-price{
     margin:0 auto  ;
@@ -75,23 +76,22 @@
     position: absolute;
     bottom: -10px;
     left: 0;
-    opacity: 1;
     background: $color-saddlebrown;
     display: inline;
-    color: $color-black;
+    color: burlywood;
+
     font-size: 1.5vh;
-    padding: 1px 3px;
+    padding: 1px 5px;
   }
   .card-image{
     position: relative;
-    width: 215px;
+    width: 222px;
     height: 215px;
-    padding: 4px;
     object-fit: cover;
     overflow: hidden;
     .card-enter-product {
-      bottom: 4px;
-      right: 4px;
+      bottom: 0;
+      right: 0;
       width: 0;
       overflow: hidden;
       position: absolute;
@@ -108,7 +108,7 @@
       }
     }
     .card-details {
-      top: 4px;
+      top: 0;
       left: 0;
       position: absolute;
       height: 214px;
@@ -121,7 +121,7 @@
       .details-button {
         border: none;
         width: 100%;
-        height: 20%;
+        height: 25%;
         font-size: 1vh;
         &:hover {
           background: $color-saddlebrown;
@@ -130,8 +130,8 @@
       }
     }
     img {
-      width: 215px;
-      height: 215px;
+      width: inherit;
+      height:inherit;
       object-fit: cover;
     }
     .off {
@@ -149,7 +149,7 @@
     color: $color-black;
     .card-title {
       text-align: center;
-      padding: 20px 15px;
+      padding: 30px 15px;
     }
   }
 }

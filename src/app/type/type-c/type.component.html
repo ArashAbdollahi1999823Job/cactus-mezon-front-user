@@ -1,2 +1,2 @@
 <slider-two [typeDto]="typeDto"></slider-two>
-<slider-one *ngFor="let type of typesDto" [typeDto]="type"></slider-one>
+<slider-one *ngFor="let type of typesDto;let index=index" [typeDto]="type" [index]="index"></slider-one>

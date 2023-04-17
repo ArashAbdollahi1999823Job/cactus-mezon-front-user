@@ -19,18 +19,28 @@ import {TypeParamDto} from "../../../shared/dto/type/typeParamDto";
 export class SliderOneComponent implements OnInit ,OnDestroy {
   slider: Element;
   @Input("typeDto") typeDto: TypeDto;
+  @Input("index") index:number;
   public haveChild: boolean = false;
   @ViewChild('key') key: ElementRef;
   public subscription: Subscription;
   public pageIndex = 1;
 
-  constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService) {
+  constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService,private el:ElementRef) {
   }
   ngOnInit(): void {
+    this.changeBg();
     setTimeout(() => {
       this.btnClickLeft();
     }, 1000)
     this.checkChild()
+  }
+
+  private changeBg() {
+    if (this.index % 2 == 0) {
+      this.el.nativeElement.querySelector(".container-slider-card").classList.add('bg-black-a7')
+    } else if (this.index % 2 == 1) {
+      this.el.nativeElement.querySelector(".container-slider-card").classList.add('bg-brown-a3')
+    }
   }
   public checkChild() {
     let typeParamDto = new TypeParamDto();
@@ -103,7 +113,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
   }
   scroll() {
     this.slider = this.key.nativeElement;
-    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth) {
+    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth+100) {
       this.pageIndex++;
       this.productGetAll(this.typeDto.id);
     }
