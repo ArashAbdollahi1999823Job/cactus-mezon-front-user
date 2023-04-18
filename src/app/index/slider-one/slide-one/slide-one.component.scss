@@ -107,6 +107,32 @@
         background: $color-saddlebrown;
       }
     }
+    .colors{
+      bottom: 0;
+      right: 70px;
+      width: 90px;
+      overflow: hidden;
+      position: absolute;
+      text-align: center;
+      line-height: 300%;
+      border: 1px solid $color-black;
+      border-bottom: 0;
+      height: 0;
+      background: white;
+      transition: ease .4s;
+      opacity: .6;
+      display: flex;
+      flex-grow: 1;
+
+      &:hover{
+        background: $color-saddlebrown;
+      }
+      .color{
+       /* width: 33%;
+        height: 50%;*/
+        flex-grow: 1;
+      }
+    }
     .card-details {
       top: 0;
       left: 0;

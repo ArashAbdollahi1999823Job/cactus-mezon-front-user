@@ -3,7 +3,7 @@ import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {ProductParamDto} from "../../../shared/dto/product/productParamDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../../shared/dto/product/productDto";
-import {ProductPictureParamDto} from "../../../shared/dto/productPicture/productPictureParamDto";
+import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../../shared/dto/productPicture/productPictureDto";
 import {ProductService} from "../../../product/product-service/product.service";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
@@ -94,10 +94,10 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     })
   }
   public productPictureGetAll(productId: number, sort: number){
-    let productPictureParamDto = new ProductPictureParamDto();
+    let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;
-    this.productPictureService.productPictureSetParam(productPictureParamDto);
+    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
     this.subscription= this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
         if (res) {
           this.typeDto.products?.forEach(x => {

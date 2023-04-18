@@ -1,5 +1,5 @@
 <div class="slider" >
-  <div class="slide active" *ngFor="let typePicture of typeDto?.typePictures">
+  <div class="slide fadeIn" *ngFor="let typePicture of typeDto?.typePictures">
     <img src="{{backendUrlPicture}}/{{typePicture.pictureUrl}}" alt="{{typePicture.pictureAlt}}" title="{{typePicture.pictureTitle}}">
   </div>
   <a class="prev" (click)="plus()">&lt;</a>

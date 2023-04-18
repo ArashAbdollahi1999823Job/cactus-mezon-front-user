@@ -9,7 +9,7 @@ import {ProductParamDto} from "../../shared/dto/product/productParamDto";
 import {ProductService} from "../../product/product-service/product.service";
 import {ProductDto} from "../../shared/dto/product/productDto";
 import {ProductPictureService} from "../../shared/Services/product-picture.service";
-import {ProductPictureParamDto} from "../../shared/dto/productPicture/productPictureParamDto";
+import {ProductPictureSearchDto} from "../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../shared/dto/productPicture/productPictureDto";
 import {environment} from "../../../environments/environment.prod";
 
@@ -64,15 +64,15 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   public productPictureGetAll(productId: number, sort: number) {
-    let productPictureParamDto = new ProductPictureParamDto();
+    let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;
-    this.productPictureService.productPictureSetParam(productPictureParamDto);
+    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
     this.subscription=  this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
         this.typesDto?.forEach(x => {
           x.products?.forEach(x => {
-            if (x.id == res[0].productId) {
+            if (x.id == res[0]?.productId) {
               if(res[0]){
               }
               x.productPictures = res;

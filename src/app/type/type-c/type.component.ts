@@ -9,7 +9,7 @@ import {TypePictureParamDto} from "../../shared/dto/typePicture/typePictureParam
 import {TypePictureDto} from "../../shared/dto/typePicture/typePictureDto";
 import {ProductParamDto} from "../../shared/dto/product/productParamDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
-import {ProductPictureParamDto} from "../../shared/dto/productPicture/productPictureParamDto";
+import {ProductPictureSearchDto} from "../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../shared/dto/productPicture/productPictureDto";
 import {ProductPictureService} from "../../shared/Services/product-picture.service";
 import {ProductService} from "../../product/product-service/product.service";
@@ -92,10 +92,10 @@ export class TypeComponent implements OnInit, OnDestroy {
     })
   }
   public productPictureGetAll(productId: number, sort: number) {
-    let productPictureParamDto = new ProductPictureParamDto();
+    let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;
-    this.productPictureService.productPictureSetParam(productPictureParamDto);
+    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
     this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
         this.typesDto?.forEach(x => {

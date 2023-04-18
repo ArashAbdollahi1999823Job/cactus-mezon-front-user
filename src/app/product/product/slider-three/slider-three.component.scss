@@ -1,0 +1,165 @@
+@import "src/assets/styles/practicalValue";
+
+
+.slider-container {
+  margin: 0 auto;
+  width: 100%;
+  height: 500px;
+
+  .image-container {
+    overflow: hidden;
+
+    .picture-main {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .images-container {
+    overflow-X: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  .slider-container {
+    width: 100%;
+    height: 400px;
+
+    .image-container {
+      width: 100%;
+      height: 400px;
+    }
+
+    .images-container {
+      width: 100%;
+      height: 100px;
+      display: flex;
+
+      .picture-one {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $sm) and (max-width: $md) {
+  .slider-container {
+    width: 80%;
+    height: 500px;
+
+    .image-container {
+      width: 100%;
+      height: 400px;
+    }
+
+    .images-container {
+      width: 100%;
+      height: 100px;
+      display: flex;
+    }
+  }
+
+}
+
+@media only screen and (min-width: $md) and (max-width: $lg) {
+  .slider-container {
+    width: 80%;
+    height: 500px;
+
+    .image-container {
+      width: 80%;
+      height: 500px;
+      float: left;
+    }
+
+    .images-container {
+      width: 20%;
+      height: 500px;
+      float: right;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+    }
+  }
+
+}
+
+@media only screen and (min-width: $lg) and (max-width: $xl) {
+  .slider-container {
+    width: 60%;
+    height: 600px;
+
+    .image-container {
+      width: 80%;
+      height: 600px;
+      float: left;
+    }
+
+    .images-container {
+      width: 20%;
+      height: 600px;
+      float: right;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+    }
+  }
+
+}
+
+@media only screen and (min-width: $xl) {
+  .slider-container {
+    width: 60%;
+    height: 700px;
+
+    .image-container {
+      width: 80%;
+      height: 700px;
+      float: left;
+    }
+
+    .images-container {
+      width: 20%;
+      height: 700px;
+      float: right;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+    }
+  }
+}
+
+@keyframes fadeI {
+  0% {    filter: blur(50px)  }
+  100% {    filter: blur(0px)  }
+}
+
+@keyframes fadeO {
+  0% {    filter: blur(0px)  }
+  100% {    filter: blur(50px)  }
+}
+
+.block {
+  display: block;
+}
+
+.deActive {
+  display: none;
+}
+
+
+.fadeIn {
+  animation-name: fadeI;
+  animation-duration: .4s;
+}
+
+.fadeOut {
+  animation-name: fadeO;
+  animation-duration: .4s;
+}
