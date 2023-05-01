@@ -1,0 +1,69 @@
+.details-container{
+  background-color:white;
+  width: 100%;
+  height: auto;
+  .name{
+    display: flex;
+    justify-content: space-between;
+    line-height: 60px;
+    padding: 0 10px;
+    color: black;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+  }
+  .btn{
+    width: 50px;
+    height:50px ;
+    background-color: rgba(255,255,255,.4);
+    border: none;
+    border-radius: 5px;
+    .icon{
+      font-size: 30px;
+      color: burlywood;
+    }
+  }
+  .colors{
+    display: flex;
+
+  }
+  .color{
+    width: 30px;
+    height: 30px;
+  }
+  .end-btn{
+    height: 50px;
+    width: 50%;
+    border: 1px solid tan;
+    background-color: rgba(0,0,0,.5);
+    color: burlywood;
+  }
+}
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}
+.description{
+  padding: 10px 10px;
+}
+td{
+  text-align: center;
+  height: 50px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3px;
+  color: white;
+}
+tr:nth-child(odd){
+  background-color: rgba(0,0,0,.9);
+
+}
+tr:nth-child(even){
+  background-color: rgba(0,0,0,.5);
+}
+

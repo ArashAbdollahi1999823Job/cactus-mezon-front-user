@@ -12,7 +12,7 @@ import {IBasketTotal} from "../../shared/dto/basket/IBasketTotal";
   providedIn: 'root'
 })
 export class BasketService {
-  private backendUrl = environment.backendUrl;
+ /* private backendUrl = environment.backendUrl;
   // @ts-ignore
   private customerBasket = new BehaviorSubject<ICustomerBasketDto>(null);//need this to do next
   public customerBasket$ = this.customerBasket.asObservable();//need this to do subscribe
@@ -32,7 +32,7 @@ export class BasketService {
     }
     return of(null)
   }
-  decreaseItemQuantity(id: number) {
+  decreaseItemQuantity(id: string) {
     const basket = this.getCurrentCustomerBasket();
     const index = basket.customerBasketItems.findIndex(x => x.id === id);
     if (id != -1) {
@@ -138,5 +138,5 @@ export class BasketService {
     }, 0);
     let total = subTotal + shipping;
     this.totalBasket.next({shipping: shipping, total: total, subTotal: subTotal})
-  }
+  }*/
 }

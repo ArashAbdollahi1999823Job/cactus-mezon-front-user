@@ -28,7 +28,7 @@ export class TypeService {
     if (this.typeParamDto.name) requestTypeParam = requestTypeParam.append("name", this.typeParamDto.name);
     if (this.typeParamDto.slug) requestTypeParam = requestTypeParam.append("slug", this.typeParamDto.slug);
     if (this.typeParamDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeParamDto.parentTypeId);
-    if (this.typeParamDto.parentTypeId ==0) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeParamDto.parentTypeId);
+    if (this.typeParamDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeParamDto.parentTypeId);
     if (this.typeParamDto.justParentTypeId) requestTypeParam = requestTypeParam.append("justParentTypeId", this.typeParamDto.justParentTypeId);
     if (this.typeParamDto.id) requestTypeParam=requestTypeParam.append('id',this.typeParamDto.id);
     requestTypeParam = requestTypeParam.append('pageIndex', this.typeParamDto.pageIndex);

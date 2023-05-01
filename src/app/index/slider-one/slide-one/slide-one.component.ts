@@ -14,6 +14,7 @@ export class SlideOneComponent implements OnInit{
   @Input('productDto') productDto: ProductDto;
   public backendUrlPicture=environment.backendUrlPicture;
   @ViewChild('timerEl',{static:false}) timerEl:ElementRef;
+
   ngOnInit(): void {
     this.timer()
   }

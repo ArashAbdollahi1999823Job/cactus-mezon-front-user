@@ -9,11 +9,11 @@ import {IBasketTotal} from "../../shared/dto/basket/IBasketTotal";
 })
 
 
-export class OrderTotalComponent implements OnInit{
-  public basketTotal$:Observable<IBasketTotal>|undefined;
-  constructor(private basketService:BasketService) {  }
+export class OrderTotalComponent {
+/*  public basketTotal$:Observable<IBasketTotal>|undefined;
+  constructor(private basketService:BasketService) {  }*/
 
-  ngOnInit(): void {
+/*  ngOnInit(): void {
     this.basketTotal$=this.basketService.totalBasket$;
-  }
+  }*/
 }

@@ -12,13 +12,13 @@ import {Subscription} from "rxjs";
   styleUrls: ['./slider-three.component.scss']
 })
 export class SliderThreeComponent implements OnChanges {
-  @Input('productId') productId: number;
+  @Input('productId') productId: string;
   private subscription: Subscription;
   public productPictureDtos: ProductPictureDto[];
   public backendUrlPicture = environment.backendUrlPicture;
   public idToShow:number;
 
-  constructor(private productPictureService: ProductPictureService,private el:ElementRef) {
+  constructor(private productPictureService: ProductPictureService) {
   }
 
   ngOnChanges(): void {
@@ -40,9 +40,14 @@ export class SliderThreeComponent implements OnChanges {
   }
 
 
-  changePicture(id: number) {
+  changePicture(id: string,event:HTMLElement) {
    let element= document.getElementById(id.toString());
     let lasElement=document.getElementsByClassName('block')[0];
+    let pictureOne=document.getElementsByClassName('picture-one')
+    for (let i=0;i<=pictureOne.length;i++){
+      pictureOne.item(i)?.classList?.remove('scale')
+    }
+    event.classList.add('scale');
     if(id.toString()==lasElement.id)return;
     lasElement.classList.add('fadeOut');
     setTimeout(()=>{

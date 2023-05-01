@@ -8,8 +8,8 @@ export class TypeParamDto {
   pageIndex:number=1;
   pageSize:number=7;
   name:string;
-  parentTypeId:number
+  parentTypeId:string
   activeType:ActiveType=ActiveType.notImportant;
   sortType:SortType=SortType.desc;
-  justParentTypeId:number;
+  justParentTypeId:string;
 }

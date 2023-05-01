@@ -8,7 +8,39 @@
 
   .image-container {
     overflow: hidden;
-
+    position: relative;
+    .heart{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      height: 30px;
+      color: rgba(255,0,0,.5);
+      font-size: 30px;
+    }
+    .share{
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      height: 30px;
+      color: rgba(255,0,0,.5);
+      font-size: 30px;
+    }
+    .shop{
+      position: absolute;
+      top: 160px;
+      right: 10px;
+      height: 30px;
+      color: rgba(255,0,0,.5);
+      font-size: 25px;
+    }
+    .comment{
+      position: absolute;
+      top: 110px;
+      right: 10px;
+      height: 30px;
+      color: rgba(255,0,0,.5);
+      font-size: 30px;
+    }
     .picture-main {
       width: 100%;
       height: 100%;
@@ -17,6 +49,8 @@
 
   .images-container {
     overflow-X: scroll;
+    background-color: white;
+    height: 150px;
 
     &::-webkit-scrollbar {
       width: 0;
@@ -28,19 +62,21 @@
 @media only screen and (max-width: $sm) {
   .slider-container {
     width: 100%;
-    height: 400px;
-
+    height: 550px;
     .image-container {
       width: 100%;
       height: 400px;
     }
-
     .images-container {
       width: 100%;
-      height: 100px;
+      height: 150px;
       display: flex;
-
+      align-items: center;
+      justify-content: space-around;
+      overflow: scroll;
       .picture-one {
+        border-radius: 5%;
+        margin: 0 5px;
         width: 100px;
         height: 100px;
       }
@@ -50,18 +86,26 @@
 
 @media only screen and (min-width: $sm) and (max-width: $md) {
   .slider-container {
-    width: 80%;
-    height: 500px;
+    width: 100%;
+    height: 650px;
 
     .image-container {
       width: 100%;
-      height: 400px;
+      height: 500px;
     }
 
     .images-container {
       width: 100%;
-      height: 100px;
+      height: 150px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .picture-one {
+        border-radius: 5%;
+        margin: 0 5px;
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 
@@ -70,21 +114,23 @@
 @media only screen and (min-width: $md) and (max-width: $lg) {
   .slider-container {
     width: 80%;
-    height: 500px;
-
+    height: 650px;
     .image-container {
-      width: 80%;
+      width: 100%;
       height: 500px;
-      float: left;
     }
-
     .images-container {
-      width: 20%;
-      height: 500px;
-      float: right;
+      width: 100%;
+      height: 150px;
       display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
+      align-items: center;
+      justify-content: space-between;
+      .picture-one {
+        border-radius: 5%;
+        margin: 0 5px;
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 
@@ -93,56 +139,68 @@
 @media only screen and (min-width: $lg) and (max-width: $xl) {
   .slider-container {
     width: 60%;
-    height: 600px;
-
+    height: 650px;
     .image-container {
-      width: 80%;
-      height: 600px;
-      float: left;
+      width: 100%;
+      height: 500px;
     }
-
     .images-container {
-      width: 20%;
-      height: 600px;
-      float: right;
+      width: 100%;
+      height: 150px;
       display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
+      align-items: center;
+      justify-content: space-around;
+      .picture-one {
+        border-radius: 5%;
+        margin: 0 5px;
+        width: 100px;
+        height: 100px;
+      }
     }
   }
-
 }
 
 @media only screen and (min-width: $xl) {
   .slider-container {
-    width: 60%;
-    height: 700px;
-
+    width: 50%;
+    height: 650px;
     .image-container {
-      width: 80%;
-      height: 700px;
-      float: left;
+      width: 100%;
+      height: 500px;
     }
-
     .images-container {
-      width: 20%;
-      height: 700px;
-      float: right;
+      width: 100%;
+      height: 150px;
       display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
+      align-items: center;
+      justify-content: space-between;
+      .picture-one {
+        border-radius: 5%;
+        margin: 0 5px;
+        width: 100px;
+        height: 100px;
+      }
     }
   }
+
 }
 
 @keyframes fadeI {
-  0% {    filter: blur(50px)  }
-  100% {    filter: blur(0px)  }
+  0% {
+    filter: blur(50px)
+  }
+  100% {
+    filter: blur(0px)
+  }
 }
 
 @keyframes fadeO {
-  0% {    filter: blur(0px)  }
-  100% {    filter: blur(50px)  }
+  0% {
+    filter: blur(0px)
+  }
+  100% {
+    filter: blur(50px)
+  }
 }
 
 .block {
@@ -151,6 +209,7 @@
 
 .deActive {
   display: none;
+
 }
 
 
@@ -162,4 +221,9 @@
 .fadeOut {
   animation-name: fadeO;
   animation-duration: .4s;
+}
+
+.scale {
+  transform: scale(1.1);
+  box-shadow: 0 0 6px black;
 }

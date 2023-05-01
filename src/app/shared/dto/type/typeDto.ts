@@ -2,14 +2,14 @@ import {ProductDto} from "../product/productDto";
 import {TypePictureDto} from "../typePicture/typePictureDto";
 
 export class TypeDto {
-  id: number;
+  id: string;
   slug:string;
   name:string;
   description:string;
   metaDescription:string;
   summary:string;
   isActive: true;
-  parentTypeId:number;
+  parentTypeId:string;
   parentType:string;
   products:ProductDto[];
   typePictures:TypePictureDto[];

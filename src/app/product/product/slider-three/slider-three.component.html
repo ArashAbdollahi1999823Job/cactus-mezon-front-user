@@ -1,9 +1,14 @@
 <div class="slider-container">
   <div class="image-container">
+    <span class="heart"><i class="fa fa-heart"></i></span>
+    <span class="share"><i class="fa fa-share-alt-square"></i></span>
+    <span class="comment"><i class="fa fa-comment"></i></span>
+    <span class="shop"><i class="fa fa-shop"></i></span>
     <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}"
          *ngFor="let productPicture of productPictureDtos;let index=index" class="picture-main " [ngClass]="index==0? 'block':''" id="{{productPicture.id}}">
   </div>
   <div class="images-container">
-    <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}" alt="" *ngFor="let productPicture of productPictureDtos" class="picture-one" (click)="changePicture(productPicture.id)">
+    <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}" #pictureOne alt="" *ngFor="let productPicture of productPictureDtos" class="picture-one"
+         (click)="changePicture(productPicture.id,pictureOne)">
   </div>
 </div>

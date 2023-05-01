@@ -78,7 +78,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       this.productGetAll(this.typeDto.id);
     }
   }
-  public productGetAll(typeId: number) {
+  public productGetAll(typeId: string) {
     let productParamDto = new ProductParamDto();
     productParamDto.pageSize = 5;
     productParamDto.pageIndex = this.pageIndex;
@@ -93,7 +93,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       }
     })
   }
-  public productPictureGetAll(productId: number, sort: number){
+  public productPictureGetAll(productId: string, sort: number){
     let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;

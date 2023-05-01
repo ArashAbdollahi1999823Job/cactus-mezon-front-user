@@ -1,5 +1,5 @@
 export interface ICustomerBasketItemsDto {
-  id: number
+  id: string
   isDelete?: boolean
   product: string
   type: string

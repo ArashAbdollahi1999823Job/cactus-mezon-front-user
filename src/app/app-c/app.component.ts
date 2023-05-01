@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class AppComponent implements OnInit{
   title = 'فروشگاه بزرگ کاکتوس';
-  constructor(private basketService:BasketService,private authService:AuthService) {}
+  constructor(private authService:AuthService) {}
 
   ngOnInit(): void {
     /*this.initialBasket();*/
@@ -27,8 +27,8 @@ export class AppComponent implements OnInit{
       this.authService.setCurrentUser(user)
     }
   }
-  private initialBasket() {
+ /* private initialBasket() {
     this.basketService.getCustomerBasket(localStorage.getItem(environment.keyBasketLocalStorage)).subscribe((res) => {
     })
-  }
+  }*/
 }

@@ -8,13 +8,15 @@ import {ICustomerBasketDto} from "../../dto/basket/ICustomerBasketDto";
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit{
-   customerBasket$ : Observable<ICustomerBasketDto> | undefined;
+export class NavComponent{
+/*
+/!*   customerBasket$ : Observable<ICustomerBasketDto> | undefined;
   constructor(private basketService:BasketService) {
-  }
+  }*!/
   ngOnInit(): void {
-    this.customerBasket$=this.basketService.customerBasket$;
+    /!*this.customerBasket$=this.basketService.customerBasket$;*!/
   }
+*/
 
 }
 

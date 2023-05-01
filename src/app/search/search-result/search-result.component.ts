@@ -10,9 +10,6 @@ import {BasketService} from "../../basket/Services/basket.service";
 })
 
 export class SearchResultComponent {
-  constructor(private basketService: BasketService) {
-  }
-
   @Input("products") products: IPaginationResponseDto<IProductDto> | undefined;
 
   showDetails(event: any) {
@@ -41,8 +38,8 @@ export class SearchResultComponent {
     cardDetails.style.borderRight = "0px solid black";
   }
 
-  addItemToBasket(item: any) {
+/*  addItemToBasket(item: any) {
     this.basketService.addCustomerBasketItemToCustomerBasket(item, 1).subscribe((res)=>{
     })
-  }
+  }*/
 }

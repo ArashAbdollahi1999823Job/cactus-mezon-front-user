@@ -75,3 +75,7 @@
     animation: halfRotate 1s;
   }
 }
+.active{
+  animation: hoverNav .3s;
+  animation-fill-mode: forwards;
+}

@@ -74,7 +74,7 @@ export class TypeComponent implements OnInit, OnDestroy {
       }
     })
   }
-  public productGetAll(typeId: number) {
+  public productGetAll(typeId: string) {
     let productParamDto = new ProductParamDto();
     productParamDto.typeId = typeId;
     this.productService.productSetParam(productParamDto);
@@ -91,7 +91,7 @@ export class TypeComponent implements OnInit, OnDestroy {
       }
     })
   }
-  public productPictureGetAll(productId: number, sort: number) {
+  public productPictureGetAll(productId: string, sort: number) {
     let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;

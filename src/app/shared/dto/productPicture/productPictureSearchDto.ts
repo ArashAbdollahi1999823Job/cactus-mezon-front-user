@@ -1,6 +1,6 @@
 export class ProductPictureSearchDto {
-  id:number;
-  productId: number;
+  id:string;
+  productId: string;
   sort:number;
   startRange:number;
   endRange:number;

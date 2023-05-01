@@ -10,17 +10,17 @@ import {ICustomerBasketItemsDto} from "../../shared/dto/basket/ICustomerBasketIt
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent {
-  customerBasket$ : Observable<ICustomerBasketDto> | undefined;
-  constructor(private title: Title, private basketService: BasketService) {this.title.setTitle("سبد خرید فروشگاه بزرگ کاکتوس")}
-  ngOnInit(): void {
+/*  customerBasket$ : Observable<ICustomerBasketDto> | undefined;*/
+  constructor(private title: Title) {this.title.setTitle("سبد خرید فروشگاه بزرگ کاکتوس")}
+/*  ngOnInit(): void {
     this.customerBasket$=this.basketService.customerBasket$;
-  }
-  increaseItemQuantity(item:ICustomerBasketItemsDto) {
+  }*/
+/*  increaseItemQuantity(item:ICustomerBasketItemsDto) {
     // @ts-ignore
     this.basketService.increaseItemQuantity(item.id).subscribe();
   }
   decreaseItemQuantity(item:ICustomerBasketItemsDto) {
     // @ts-ignore
     this.basketService.decreaseItemQuantity(item.id).subscribe();
-  }
+  }*/
 }

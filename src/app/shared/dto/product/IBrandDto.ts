@@ -9,5 +9,5 @@ export interface IBrandDto{
   createdBy: number
   lastModified: string
   lastModifiedBy: number
-  id: number
+  id: string
 }

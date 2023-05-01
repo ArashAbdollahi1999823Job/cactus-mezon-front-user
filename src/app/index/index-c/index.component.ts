@@ -32,7 +32,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   public typeGetAll() {
     let typeParamDto = new TypeParamDto();
-    typeParamDto.parentTypeId = 0;
+    typeParamDto.parentTypeId = "00000000-0000-0000-0000-000000000000";
     this.typeService.typeSetParam(typeParamDto);
   this.subscription=  this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
@@ -44,7 +44,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     })
   }
 
-  public productGetAll(typeId: number) {
+  public productGetAll(typeId: string) {
     let productParamDto = new ProductParamDto();
     productParamDto.pageSize=5;
     productParamDto.typeId = typeId;
@@ -63,7 +63,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     })
   }
 
-  public productPictureGetAll(productId: number, sort: number) {
+  public productPictureGetAll(productId: string, sort: number) {
     let productPictureParamDto = new ProductPictureSearchDto();
     productPictureParamDto.productId = productId;
     productPictureParamDto.sort = sort;

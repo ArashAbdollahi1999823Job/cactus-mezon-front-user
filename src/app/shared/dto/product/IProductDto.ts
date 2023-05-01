@@ -1,5 +1,5 @@
 export interface IProductDto {
-  id: number
+  id: string
   title: string
 
   slug:string

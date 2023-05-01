@@ -1,10 +1,10 @@
 export class ProductPictureDto {
-  id: number
+  id: string
   pictureTitle: any
   pictureAlt: string
   pictureUrl: string
   sort: number
   isActive: boolean
   product: string
-  productId: number
+  productId: string
 }
