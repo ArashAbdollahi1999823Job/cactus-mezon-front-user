@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {isEmpty, Observable} from "rxjs";
-import {IUserDto} from "../../shared/dto/identity/IUserDto";
+import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {AuthService} from "../Services/auth.service";
 import {Router} from "@angular/router";
 import {allPageAnimation} from "../../shared/animations/allPageAnimation";
@@ -13,7 +13,7 @@ import {allPageAnimation} from "../../shared/animations/allPageAnimation";
 })
 export class AuthComponent implements OnInit {
   // @ts-ignore
-  currentUser$: Observable<IUserDto>;
+  currentUser$: Observable<UserAuthorizeDto>;
 
   constructor(private authService: AuthService, private router: Router) {
   }

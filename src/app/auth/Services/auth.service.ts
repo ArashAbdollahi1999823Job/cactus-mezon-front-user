@@ -1,37 +1,37 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable} from "rxjs";
-import {IUserDto} from "../../shared/dto/identity/IUserDto";
-import {ILoginDto} from "../../shared/dto/identity/ILoginDto";
+import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
+import {LoginDto} from "../../shared/dto/identity/loginDto";
 import {HttpClient} from "@angular/common/http";
 import {IRegisterDto} from "../../shared/dto/identity/IRegisterDto";
 import {Router} from "@angular/router";
+import {PresenceService} from "../../shared/Services/presence.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private backendUrl=environment.backendUrl;
-// @ts-ignore
-  private currentUser=new BehaviorSubject<IUserDto>(null);
+  private backendUrlUser=environment.backendUrlUser;
+  private currentUser=new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$=this.currentUser.asObservable();
-  constructor(private http:HttpClient,private router:Router) { }
-
-  public login(loginDto:ILoginDto):Observable<IUserDto>{
-    return this.http.post<IUserDto>(`${this.backendUrl}/account/login`,loginDto).pipe(map((res):IUserDto=>{
+  constructor(private http:HttpClient,private router:Router,private presenceService:PresenceService) { }
+  public login(loginDto:LoginDto):Observable<UserAuthorizeDto>{
+    return this.http.put<UserAuthorizeDto>(`${this.backendUrlUser}/AccountUser/UserLogin`,loginDto).pipe(map((res):UserAuthorizeDto=>{
       if(res){
         this.setCurrentUser(res);
+        this.presenceService.createHubConnection(res);
         return res;
       }
-      // @ts-ignore
         return null;
     })
     );
   }
   public register(registerDto:IRegisterDto){
-    return this.http.post<IUserDto>(`${this.backendUrl}/account/register`,registerDto).pipe(map((res:IUserDto)=>{
+    return this.http.post<UserAuthorizeDto>(`${this.backendUrlUser}/account/register`,registerDto).pipe(map((res:UserAuthorizeDto)=>{
       if (res){
         this.setCurrentUser(res);
+        this.presenceService.createHubConnection(res);
         return res;
       }
       return null;
@@ -39,14 +39,11 @@ export class AuthService {
   }
   public logout(){
     localStorage.removeItem(environment.keyUserToken);
-    // @ts-ignore
     this.currentUser.next(null);
     this.router.navigateByUrl('/');
+    this.presenceService.stopHubConnection();
   }
-
-
-
-  public setCurrentUser(user:IUserDto){
+  public setCurrentUser(user:UserAuthorizeDto){
     if(user){
       localStorage.setItem(environment.keyUserToken,JSON.stringify(user))
       this.currentUser.next(user);

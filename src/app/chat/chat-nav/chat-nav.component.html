@@ -1,0 +1,35 @@
+<div class="nav">
+  <div class="logo-container">
+    <div class="logo">
+      <img src="assets/images/logo3.png" width="60px" height="60px" alt="">
+    </div>
+    <div class="logo-text"></div>
+  </div>
+
+  <a [routerLink]="boss.phoneNumber" *ngFor="let boss of userDtosBoss">
+    <div class="user-container " [class.online]="(presenceService.usersOnline$ | async).includes(boss.phoneNumber)">
+      <div class="user-img ">
+        <img src="assets/images/userIcon.png">
+      </div>
+      <div class="logo-text">{{boss.username}}</div>
+    </div>
+  </a>
+
+  <a [routerLink]="admin.phoneNumber" *ngFor="let admin of userDtosAdmin">
+    <div class="user-container " [class.online]="(presenceService.usersOnline$ | async).includes(admin.phoneNumber)">
+      <div class="user-img ">
+        <img src="assets/images/userIcon.png">
+      </div>
+      <div class="logo-text">{{admin.username}}</div>
+    </div>
+  </a>
+
+  <a [routerLink]="seller.phoneNumber" *ngFor="let seller of userDtosSeller">
+    <div class="user-container " [class.online]="(presenceService.usersOnline$ | async).includes(seller.phoneNumber)">
+      <div class="user-img ">
+        <img src="assets/images/userIcon.png">
+      </div>
+      <div class="logo-text">{{seller.username}}</div>
+    </div>
+  </a>
+</div>

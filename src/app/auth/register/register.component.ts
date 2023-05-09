@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../Services/auth.service";
 import {IRegisterDto} from "../../shared/dto/identity/IRegisterDto";
-import {IUserDto} from "../../shared/dto/identity/IUserDto";
+import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched()
     }
-    this.authService.register(<IRegisterDto>this.registerForm.value).subscribe((res: IUserDto) => {
+    this.authService.register(<IRegisterDto>this.registerForm.value).subscribe((res: UserAuthorizeDto) => {
       if (res) {
         this.toast.success("ثبت نام موفقیت انجام شد", res.username)
       }
