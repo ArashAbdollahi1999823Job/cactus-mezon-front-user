@@ -86,7 +86,6 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     this.productService.productSetParam(productParamDto);
     this.subscription = this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
-        this.typeDto.products=[];
         res.data.forEach(x => {
           this.typeDto.products.push(x);
           this.productPictureGetAll(x.id, 1);
@@ -119,7 +118,6 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       this.productGetAll(this.typeDto.id);
     }
   }
-
   ngOnDestroy(): void {
     if(this.subscription)this.subscription.unsubscribe();
   }

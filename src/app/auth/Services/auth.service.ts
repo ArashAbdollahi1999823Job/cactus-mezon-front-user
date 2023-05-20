@@ -7,7 +7,6 @@ import {HttpClient} from "@angular/common/http";
 import {IRegisterDto} from "../../shared/dto/identity/IRegisterDto";
 import {Router} from "@angular/router";
 import {PresenceService} from "../../shared/Services/presence.service";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +19,7 @@ export class AuthService {
     return this.http.put<UserAuthorizeDto>(`${this.backendUrlUser}/AccountUser/UserLogin`,loginDto).pipe(map((res):UserAuthorizeDto=>{
       if(res){
         this.setCurrentUser(res);
+        localStorage.setItem(environment.storage.myPhoneNumber,this.getPhoneNumber());
         this.presenceService.createHubConnection(res);
         return res;
       }
@@ -27,10 +27,18 @@ export class AuthService {
     })
     );
   }
+  public getToken() {
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    if (user) {
+      return user.token;
+    }
+    return null
+  }
   public register(registerDto:IRegisterDto){
     return this.http.post<UserAuthorizeDto>(`${this.backendUrlUser}/account/register`,registerDto).pipe(map((res:UserAuthorizeDto)=>{
       if (res){
         this.setCurrentUser(res);
+        localStorage.setItem(environment.storage.myPhoneNumber,this.getPhoneNumber());
         this.presenceService.createHubConnection(res);
         return res;
       }
@@ -48,5 +56,11 @@ export class AuthService {
       localStorage.setItem(environment.keyUserToken,JSON.stringify(user))
       this.currentUser.next(user);
     }
+  }
+  public decodeToken(token: string) {
+    return JSON.parse(atob(token.split('.')[1]))
+  }
+  public getPhoneNumber():string  {
+    return  this.decodeToken(this.getToken())?.PhoneNumber;
   }
 }

@@ -13,12 +13,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./chat-nav.component.scss']
 })
 export class ChatNavComponent implements OnInit {
+  public backendUrlPicture=environment.backendUrlPicture;
   public userDtosBoss:UserDto[];
   public userDtosAdmin:UserDto[];
   public userDtosSeller:UserDto[];
+  public myPhoneNumber:string;
   constructor(private userService:UserService,public presenceService:PresenceService,public router:Router) {
   }
   ngOnInit(): void {
+    this.myPhoneNumber=localStorage.getItem(environment.storage.myPhoneNumber);
     this.userGetAsBoss();
     this.userGetAsAdmin();
     this.userGetAsSeller();
@@ -50,7 +53,4 @@ export class ChatNavComponent implements OnInit {
       this.userDtosSeller=res.data;
     })
   }
-  setDataForInterChat(phoneNumber: string) {
-    localStorage.setItem(environment.storage.otherUserPhoneNumberForChat,phoneNumber);
-    this.router.navigate(['chat'], { queryParams: { phoneNumber: phoneNumber }})  }
 }

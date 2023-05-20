@@ -5,6 +5,7 @@ import {ProductItemDto} from "../productItem/productItemDto";
 
 
 export class ProductDto {
+  sellerPhoneNumber:string
   id: string
   name: string
   slug: string

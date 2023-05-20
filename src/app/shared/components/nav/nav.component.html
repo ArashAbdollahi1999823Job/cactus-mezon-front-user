@@ -1,39 +1,40 @@
 <nav class="nav">
   <ul class="nav-ul">
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="/" routerLinkActive="active">
-        <i class="fa-solid fa-tree fa-fade nav-ul-li-i" aria-hidden="true">
-    </i>
-        <br>کاکتوس</a>
-    </li>
+    <a routerLink="/">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="fa-solid fa-tree fa-fade nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i>
+        <br>کاکتوس
+      </li>
+    </a>
+    <a routerLink="/search">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="fa fa-search nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+        </i><br>جستجو
+      </li>
+    </a>
+    <a routerLink="/favorite">
 
-    <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="/search"><i class="fa fa-search nav-ul-li-i" aria-hidden="true">
-      </i><br>جستجو</a>
-    </li>
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa fa-heartbeat nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>علاقه ها
+      </li>
+    </a>
 
-<!--    <li class="nav-ul-li "  routerLinkActive="active">
-      <div class="count" *ngIf="customerBasket$ | async as customerBasket">{{customerBasket.customerBasketItems.length}}</div>
-      <a routerLink="/basket">
-        <i class="fa fa-shopping-basket nav-ul-li-i" aria-hidden="true">
-        </i><br>سبد</a>
-    </li>-->
-
-    <li class="nav-ul-li" routerLinkActive="active">
-      <a routerLink="/favorite">
-        <i class="fa fa-heartbeat nav-ul-li-i" aria-hidden="true">
-        </i><br>علاقه ها</a>
-    </li>
-
-    <li class="nav-ul-li" routerLinkActive="active">
-      <a routerLink="/chat"><i class="fa fa-comments nav-ul-li-i" aria-hidden="true">
-      </i><br>چت</a>
-    </li>
-
-    <li class="nav-ul-li" routerLinkActive="active">
-      <a routerLink="/auth"><i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true">
-      </i><br>پروفایل</a>
-    </li>
-
+    <a routerLink="/chat">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <span class="message-count" *ngIf="(presenceService.messageUnReadDtos$ | async)?.length>0">
+          {{(presenceService.messageUnReadDtos$ | async)?.length}}
+        </span>
+        <i class="fa fa-comments nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>چت
+      </li>
+    </a>
+    <a routerLink="/auth">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>پروفایل
+      </li>
+    </a>
   </ul>
 </nav>

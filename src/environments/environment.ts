@@ -7,7 +7,8 @@ export const environment={
   chatHubUrl:"http://localhost:9001/hubs/chat",
   storage:{
     otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat",
-    groupName:"groupName"
+    groupName:"groupName",
+    myPhoneNumber:"myPhoneNumber",
   },
   roles:{
     boss:"Boss",

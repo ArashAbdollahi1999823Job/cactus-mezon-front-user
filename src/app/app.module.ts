@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.interceptor";
 import {LoadingInterceptor} from "./shared/interceptors/loading.interceptor";
 import {TypeModule} from "./type/type.module";
+import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import {TypeModule} from "./type/type.module";
     ToastrModule.forRoot({positionClass:'toast-top-full-width',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),
     BrowserAnimationsModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true},{provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    {provide: HTTP_INTERCEPTORS,  useClass: JwtInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
