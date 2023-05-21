@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../product-service/product.service";
 import {ActivatedRoute} from "@angular/router";
-import {ProductParamDto} from "../../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../../shared/dto/product/productSearchDto";
 import {ProductDto} from "../../../shared/dto/product/productDto";
 
 @Component({
@@ -21,9 +21,9 @@ constructor(private productService:ProductService,private activatedRoute:Activat
   }
 
   private productGet() {
-    let productParamDto=new ProductParamDto();
+    let productParamDto=new ProductSearchDto();
     productParamDto.slug=this.productSlug;
-    this.productService.productSetParam(productParamDto);
+    this.productService.productSearchDtoSet(productParamDto);
     this.productService.productGetAll().subscribe((res)=>{
       this.productDto=res.data[0];
     })

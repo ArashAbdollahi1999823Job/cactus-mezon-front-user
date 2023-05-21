@@ -14,7 +14,8 @@ import { SlideOneComponent } from './slider-one/slide-one/slide-one.component';
         SlideOneComponent,
     ],
     exports: [
-        SliderOneComponent
+        SliderOneComponent,
+        SlideOneComponent
     ],
     imports: [
         CommonModule,

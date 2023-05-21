@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {GroupDto} from "../../shared/dto/Chat/Group/GroupDto";
 import {MessageSearchDto} from "../../shared/dto/Chat/message/messageSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
-import {ProductParamDto} from "../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {IsReadType} from "../../shared/enum/isReadType";
 @Injectable({
   providedIn: 'root'

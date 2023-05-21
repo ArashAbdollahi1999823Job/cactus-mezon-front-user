@@ -1,5 +1,6 @@
 <div class="body-search">
-  <app-search-filter (UpdateProduct)="updateProduct($event)"></app-search-filter>
-  <app-search-result [products]="products"></app-search-result>
-  <app-search-pagination (UpdateProduct)="updateProduct($event)"   [count]="products?.count" [index]="products?.pageIndex" [size]="products?.pageSize"></app-search-pagination>
+  <app-search-filter (productUpdate)="productUpdate($event)"></app-search-filter>
+  <app-search-result (productUpdate)="productUpdate($event)"  [paginationProductDto]="paginationProductDto"></app-search-result>
+<!--  <app-search-pagination (productUpdate)="productUpdate($event)" [count]="paginationProductDto?.count"
+                         [index]="paginationProductDto?.pageIndex" [size]="paginationProductDto?.pageSize"></app-search-pagination>-->
 </div>

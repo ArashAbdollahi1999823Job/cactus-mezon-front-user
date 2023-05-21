@@ -1,7 +1,7 @@
 @import "src/assets/styles/practicalValue";
-.body-search{
+
+.body-search {
   width: 100%;
-  height: 92vh;
+  height: calc(100vh - 70px);
   background-color: $color-white-a4;
-  overflow-y: scroll;
 }

@@ -1,21 +1,26 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {SearchService} from "../services/search.service";
-import {IBrandDto} from "../../shared/dto/product/IBrandDto";
-import {ITypeDto} from 'src/app/shared/dto/product/ITypeDto';
-import {RequestShopParamsDto} from "../../shared/dto/RequestShopParamsDto";
+import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
+import {BrandDto} from "../../shared/dto/brand/brandDto";
+import {TypeDto} from "../../shared/dto/type/typeDto";
+import {ProductService} from "../../product/product-service/product.service";
+import {BrandService} from "../../shared/Services/brand.service";
+import {BrandSearchDto} from "../../shared/dto/brand/brandSearchDto";
+import {Subscription} from "rxjs";
+import {PaginationDto} from "../../shared/dto/base/paginationDto";
+import {TypeService} from "../../type/type-service/type.service";
+import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
 @Component({
   selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.scss']
 })
-
-
 export class SearchFilterComponent implements OnInit {
-  @Output() UpdateProduct=new EventEmitter<boolean>();
-  public filterProductParams: RequestShopParamsDto | undefined;
-  public brands: IBrandDto[] | undefined;
-  public types: ITypeDto[] | undefined;
-  @ViewChild("search",{static:false}) searchTerm: ElementRef | undefined;
+  @Output() productUpdate=new EventEmitter<boolean>();
+  public productSearchDto: ProductSearchDto;
+  public brandDtos: BrandDto[];
+  public typeDtos: TypeDto[];
+  private subscription:Subscription;
+  @ViewChild("search",{static:false}) searchTerm: ElementRef;
   sortOptions=[
     {key:1,title:'اسم'},
     {key:2,title:'قیمت'},
@@ -25,76 +30,49 @@ export class SearchFilterComponent implements OnInit {
     {key:2,title:'اخر به اول'},
   ];
 
-  constructor(private ef: ElementRef, private searchService: SearchService) {}
+  constructor(private ef: ElementRef, private productService: ProductService,private brandService:BrandService,private typeService:TypeService) {}
   ngOnInit(): void {
-    this.filterProductParams = this.searchService.getParams();
-    this.getBrands();
-    this.getTypes();
+    this.productSearchDto = this.productService.productSearchDtoGet();
+    this.brandGetAll();
+    this.typeGetAll();
   }
-  private getBrands() {
-    return this.searchService.getBrands().subscribe((res) => {
-      this.brands = res;
+  private brandGetAll():void {
+    let brandSearchDto=new BrandSearchDto();
+    this.brandService.brandSearchDtoSet(brandSearchDto);
+    this.subscription= this.brandService.brandGetAll().subscribe((paginationBrandDtoRes:PaginationDto<BrandDto>) => {
+      this.brandDtos = paginationBrandDtoRes.data;
     });
   }
-  private getTypes() {
-    return this.searchService.getTypes().subscribe((res) => {
-      this.types = res;
+  private typeGetAll():void {
+    let typeSearchDto=new TypeSearchDto();
+    this.typeService.typeSearchDtoSet(typeSearchDto);
+    this.subscription= this.typeService.typeGetAll().subscribe((paginationTypeDtoRes:PaginationDto<TypeDto>) => {
+      this.typeDtos = paginationTypeDtoRes.data;
     });
   }
-/*  toggleMenu($event: any) {
-    let id = $event.srcElement.attributes.pid.value;
-    let content = this.ef.nativeElement.querySelectorAll(`[cid*="` + id + `"]`)[0];
-    let i = this.ef.nativeElement.querySelectorAll(`[piid*="` + id + `"]`)[0];
-    if (i.classList.contains("fa-plus")) {
-      i.classList.remove("fa-plus");
-      i.classList.add('fa-minus');
-    } else {
-      i.classList.remove('fa-minus');
-      i.classList.add("fa-plus");
-    }
-    if (content.style.height == 0 || null) {
-      content.style.height = 'auto';
-    } else if (content.style.height == '0px') {
-      content.style.height = 'auto';
-    } else {
-      content.style.height = 0;
-    }
-  }*/
-  onChangeType(typeId: any) {
-    // @ts-ignore
-    this.filterProductParams.typeId=typeId;
-    // @ts-ignore
-    this.searchService.setParams(this.filterProductParams);
-    this.UpdateProduct.emit(true);
+  public onChangeType(typeId: any):void {
+    this.productSearchDto.typeId=typeId;
+    this.productService.productSearchDtoSet(this.productSearchDto);
+    this.productUpdate.emit(true);
   }
-  onChangeBrand(brandId: any) {
-    // @ts-ignore
-    this.filterProductParams.brandId=brandId;
-    // @ts-ignore
-    this.searchService.setParams(this.filterProductParams);
-    this.UpdateProduct.emit(true);
+  public onChangeBrand(brandId: any):void {
+    this.productSearchDto.brandId=brandId;
+    this.productService.productSearchDtoSet(this.productSearchDto);
+    this.productUpdate.emit(true);
   }
-  onChangeSort(sort: any) {
-    // @ts-ignore
-    this.filterProductParams.sort=sort;
-    // @ts-ignore
-    this.searchService.setParams(this.filterProductParams);
-    this.UpdateProduct.emit(true);
+  public onChangeSort(sort: any):void {
+    this.productSearchDto.sortType=sort;
+    this.productService.productSearchDtoSet(this.productSearchDto);
+    this.productUpdate.emit(true);
   }
-  onChangeTypeSort(sortType: any) {
-    // @ts-ignore
-    this.filterProductParams.sortType=sortType;
-    // @ts-ignore
-    this.searchService.setParams(this.filterProductParams);
-    this.UpdateProduct.emit(true);
+  public onChangeTypeSort(sortType: any):void {
+    this.productSearchDto.sortType=sortType;
+    this.productService.productSearchDtoSet(this.productSearchDto);
+    this.productUpdate.emit(true);
   }
-
   changeSearch() {
-    // @ts-ignore
-    this.filterProductParams.search=this.searchTerm?.nativeElement?.value;
-
-    // @ts-ignore
-    this.searchService.setParams(this.filterProductParams);
-    this.UpdateProduct.emit(true);
+    this.productSearchDto.name=this.searchTerm?.nativeElement?.value;
+    this.productService.productSearchDtoSet(this.productSearchDto);
+    this.productUpdate.emit(true);
   }
 }

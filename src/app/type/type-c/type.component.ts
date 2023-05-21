@@ -2,12 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {TypeService} from "../type-service/type.service";
 import {TypeDto} from "../../shared/dto/type/typeDto";
-import {TypeParamDto} from "../../shared/dto/type/typeParamDto";
+import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {TypePictureService} from "../../shared/Services/type-picture.service";
 import {TypePictureParamDto} from "../../shared/dto/typePicture/typePictureParamDto";
 import {TypePictureDto} from "../../shared/dto/typePicture/typePictureDto";
-import {ProductParamDto} from "../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
 import {ProductPictureSearchDto} from "../../shared/dto/productPicture/productPictureSearchDto";
 import {ProductPictureDto} from "../../shared/dto/productPicture/productPictureDto";
@@ -39,9 +39,9 @@ export class TypeComponent implements OnInit, OnDestroy {
     this.typeGet();
   }
   public typeGet() {
-    let typeParamDto = new TypeParamDto();
+    let typeParamDto = new TypeSearchDto();
     typeParamDto.slug = this.typeSlug;
-    this.typeService.typeSetParam(typeParamDto);
+    this.typeService.typeSearchDtoSet(typeParamDto);
     this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typeDto = res.data[0];
@@ -62,9 +62,9 @@ export class TypeComponent implements OnInit, OnDestroy {
     })
   }
   public typeGetAll() {
-    let typeParamDto = new TypeParamDto();
+    let typeParamDto = new TypeSearchDto();
     typeParamDto.justParentTypeId = this.typeDto.id;
-    this.typeService.typeSetParam(typeParamDto);
+    this.typeService.typeSearchDtoSet(typeParamDto);
     this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typesDto = res.data;
@@ -75,9 +75,9 @@ export class TypeComponent implements OnInit, OnDestroy {
     })
   }
   public productGetAll(typeId: string) {
-    let productParamDto = new ProductParamDto();
+    let productParamDto = new ProductSearchDto();
     productParamDto.typeId = typeId;
-    this.productService.productSetParam(productParamDto);
+    this.productService.productSearchDtoSet(productParamDto);
     this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
         this.typesDto.forEach(x => {

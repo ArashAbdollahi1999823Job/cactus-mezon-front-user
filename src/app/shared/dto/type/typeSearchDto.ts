@@ -2,7 +2,7 @@ import {ActiveType} from "../../enum/activeType";
 import {SortType} from "../../enum/sortType";
 
 
-export class TypeParamDto {
+export class TypeSearchDto {
   slug:string;
   id:string;
   pageIndex:number=1;

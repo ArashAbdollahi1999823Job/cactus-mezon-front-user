@@ -3,18 +3,24 @@ import {ProductDto} from "../../../shared/dto/product/productDto";
 import {environment} from "../../../../environments/environment.prod";
 import {Clipboard} from "@angular/cdk/clipboard";
 import {ToastrService} from "ngx-toastr";
+import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
+import {ProductPictureDto} from "../../../shared/dto/productPicture/productPictureDto";
+import {Subscription} from "rxjs";
+import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 @Component({
-  selector: 'slide-one',
-  templateUrl: './slide-one.component.html',
-  styleUrls: ['./slide-one.component.scss']
+  selector: 'card-search-product-result',
+  templateUrl: './card-search-product-result.component.html',
+  styleUrls: ['./card-search-product-result.component.scss']
 })
-export class SlideOneComponent implements OnInit{
+export class CardSearchProductResultComponent implements OnInit{
   @Input('productDto') productDto: ProductDto;
   public backendUrlPicture=environment.backendUrlPicture;
   @ViewChild('timerEl',{static:false}) timerEl:ElementRef;
+  private subscription:Subscription;
 
   ngOnInit(): void {
     this.timer()
+    this.productPictureGetAll(this.productDto.id, 1);
   }
   showDetails(event: any) {
     let cardDetails = event.srcElement.querySelector('.card-details');
@@ -46,8 +52,7 @@ export class SlideOneComponent implements OnInit{
     cardDetails.style.width = "0px";
     cardDetails.style.borderRight = "0px solid black";
   }
-  constructor(private clipboard:Clipboard,private toastService:ToastrService) {
-  }
+  constructor(private clipboard:Clipboard,private toastService:ToastrService,private productPictureService:ProductPictureService) {}
   timer() {
     if (this.productDto.off) {
       let end = new Date(this.productDto.off.endDate)
@@ -68,5 +73,17 @@ export class SlideOneComponent implements OnInit{
   copyProductUrl(slug: string) {
     const successful = this.clipboard.copy(slug);
     if (successful) this.toastService.success('ادرس با موفقیت کپی شد.')
+  }
+  public productPictureGetAll(productId: string, sort: number){
+    let productPictureParamDto = new ProductPictureSearchDto();
+    productPictureParamDto.productId = productId;
+    productPictureParamDto.sort = sort;
+    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
+    this.subscription= this.productPictureService.productPictureGetAll().subscribe((productPictureDtosRes: ProductPictureDto[]) => {
+        if (productPictureDtosRes) {
+          this.productDto.productPictures=productPictureDtosRes;
+        }
+      }
+    )
   }
 }

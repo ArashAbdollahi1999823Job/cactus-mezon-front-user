@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TypeDto} from "../../../shared/dto/type/typeDto";
-import {ProductParamDto} from "../../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../../shared/dto/product/productSearchDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../../shared/dto/product/productDto";
 import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
@@ -9,7 +9,7 @@ import {ProductService} from "../../../product/product-service/product.service";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {Subscription} from "rxjs";
 import {TypeService} from "../../../type/type-service/type.service";
-import {TypeParamDto} from "../../../shared/dto/type/typeParamDto";
+import {TypeSearchDto} from "../../../shared/dto/type/typeSearchDto";
 
 @Component({
   selector: 'slider-one',
@@ -43,11 +43,11 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     }
   }
   public checkChild() {
-    let typeParamDto = new TypeParamDto();
+    let typeParamDto = new TypeSearchDto();
     typeParamDto.pageIndex = 1;
     typeParamDto.pageSize = 1;
     typeParamDto.justParentTypeId = this.typeDto.id;
-    this.typeService.typeSetParam(typeParamDto);
+    this.typeService.typeSearchDtoSet(typeParamDto);
     this.typeService.typeGetAll().subscribe((res:PaginationDto<TypeDto>) => {
       if (res) {
         if (res.data[0] != null) {
@@ -79,13 +79,14 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     }
   }
   public productGetAll(typeId: string) {
-    let productParamDto = new ProductParamDto();
+    let productParamDto = new ProductSearchDto();
     productParamDto.pageSize = 5;
     productParamDto.pageIndex = this.pageIndex;
     productParamDto.typeId = typeId;
-    this.productService.productSetParam(productParamDto);
+    this.productService.productSearchDtoSet(productParamDto);
     this.subscription = this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
+        this.pageIndex=res.pageIndex;
         res.data.forEach(x => {
           this.typeDto.products.push(x);
           this.productPictureGetAll(x.id, 1);

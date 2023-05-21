@@ -1,7 +1,7 @@
 import {ActiveType} from "../../enum/activeType";
 import {SortType} from "../../enum/sortType";
 
-export class ProductParamDto{
+export class ProductSearchDto {
   public pageIndex: number=1;
   public pageSize: number=10;
   public id: string;

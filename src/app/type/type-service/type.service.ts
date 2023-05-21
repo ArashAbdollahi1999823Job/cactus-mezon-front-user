@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment.prod";
-import {TypeParamDto} from "../../shared/dto/type/typeParamDto";
+import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TypeDto} from "../../shared/dto/type/typeDto";
@@ -11,13 +11,13 @@ import {PaginationDto} from "../../shared/dto/base/paginationDto";
 })
 export class TypeService {
   private backendUrlUser = environment.backendUrlUser;
-  public typeParamDto = new TypeParamDto();
+  public typeSearchDto :TypeSearchDto;
   public constructor(private http: HttpClient) {}
-  public typeGetParam() {
-    return this.typeParamDto;
+  public typeSearchDtoGet() {
+    return this.typeSearchDto;
   }
-  public typeSetParam(typeParamDto: TypeParamDto) {
-    this.typeParamDto = typeParamDto;
+  public typeSearchDtoSet(typeSearchDto: TypeSearchDto) {
+    this.typeSearchDto = typeSearchDto;
   }
   public typeGetAll(): Observable<PaginationDto<TypeDto>> {
     let productTypeParam = this.generateTypeParam();
@@ -25,16 +25,16 @@ export class TypeService {
   }
   private generateTypeParam() {
     let requestTypeParam = new HttpParams();
-    if (this.typeParamDto.name) requestTypeParam = requestTypeParam.append("name", this.typeParamDto.name);
-    if (this.typeParamDto.slug) requestTypeParam = requestTypeParam.append("slug", this.typeParamDto.slug);
-    if (this.typeParamDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeParamDto.parentTypeId);
-    if (this.typeParamDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeParamDto.parentTypeId);
-    if (this.typeParamDto.justParentTypeId) requestTypeParam = requestTypeParam.append("justParentTypeId", this.typeParamDto.justParentTypeId);
-    if (this.typeParamDto.id) requestTypeParam=requestTypeParam.append('id',this.typeParamDto.id);
-    requestTypeParam = requestTypeParam.append('pageIndex', this.typeParamDto.pageIndex);
-    requestTypeParam = requestTypeParam.append('pageSize', this.typeParamDto.pageSize);
-    requestTypeParam = requestTypeParam.append('isActive', this.typeParamDto.activeType);
-    requestTypeParam=requestTypeParam.append('sortType',this.typeParamDto.sortType);
+    if (this.typeSearchDto.name) requestTypeParam = requestTypeParam.append("name", this.typeSearchDto.name);
+    if (this.typeSearchDto.slug) requestTypeParam = requestTypeParam.append("slug", this.typeSearchDto.slug);
+    if (this.typeSearchDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeSearchDto.parentTypeId);
+    if (this.typeSearchDto.parentTypeId) requestTypeParam = requestTypeParam.append("parentTypeId", this.typeSearchDto.parentTypeId);
+    if (this.typeSearchDto.justParentTypeId) requestTypeParam = requestTypeParam.append("justParentTypeId", this.typeSearchDto.justParentTypeId);
+    if (this.typeSearchDto.id) requestTypeParam=requestTypeParam.append('id',this.typeSearchDto.id);
+    requestTypeParam = requestTypeParam.append('pageIndex', this.typeSearchDto.pageIndex);
+    requestTypeParam = requestTypeParam.append('pageSize', this.typeSearchDto.pageSize);
+    requestTypeParam = requestTypeParam.append('isActive', this.typeSearchDto.activeType);
+    requestTypeParam=requestTypeParam.append('sortType',this.typeSearchDto.sortType);
     return requestTypeParam;
   }
 }

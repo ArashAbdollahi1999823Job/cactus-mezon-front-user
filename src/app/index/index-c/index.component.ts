@@ -4,8 +4,8 @@ import {Observable, Subscription} from "rxjs";
 import {TypeService} from "../../type/type-service/type.service";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {TypeDto} from "../../shared/dto/type/typeDto";
-import {TypeParamDto} from "../../shared/dto/type/typeParamDto";
-import {ProductParamDto} from "../../shared/dto/product/productParamDto";
+import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
+import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {ProductService} from "../../product/product-service/product.service";
 import {ProductDto} from "../../shared/dto/product/productDto";
 import {ProductPictureService} from "../../shared/Services/product-picture.service";
@@ -31,9 +31,9 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   public typeGetAll() {
-    let typeParamDto = new TypeParamDto();
+    let typeParamDto = new TypeSearchDto();
     typeParamDto.parentTypeId = "00000000-0000-0000-0000-000000000000";
-    this.typeService.typeSetParam(typeParamDto);
+    this.typeService.typeSearchDtoSet(typeParamDto);
   this.subscription=  this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typesDto = res.data;
@@ -45,10 +45,10 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   public productGetAll(typeId: string) {
-    let productParamDto = new ProductParamDto();
+    let productParamDto = new ProductSearchDto();
     productParamDto.pageSize=5;
     productParamDto.typeId = typeId;
-    this.productService.productSetParam(productParamDto);
+    this.productService.productSearchDtoSet(productParamDto);
     this.subscription=  this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
         this.typesDto?.forEach(x => {

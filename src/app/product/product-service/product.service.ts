@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
-import {ProductParamDto} from "../../shared/dto/product/productParamDto";
+import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {Observable} from "rxjs";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +12,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
   private backendUrlUser = environment.backendUrlUser;
-  public productParamDto : ProductParamDto;
-
-
-  public productGetParam() {
-    return this.productParamDto;
+  public productSearchDto : ProductSearchDto;
+  public productSearchDtoGet() {
+    return this.productSearchDto;
   }
-  public productSetParam(productParamDto: ProductParamDto) {
-    this.productParamDto = productParamDto;
+  public productSearchDtoSet(productParamDto: ProductSearchDto) {
+    this.productSearchDto = productParamDto;
   }
   public productGetAll(): Observable<PaginationDto<ProductDto>> {
     let productParam = this.generateProductParam();
@@ -28,20 +25,20 @@ export class ProductService {
   }
   private generateProductParam() {
     let requestProductParam = new HttpParams();
-    if (this.productParamDto.id) requestProductParam=requestProductParam.append('id',this.productParamDto.id);
-    requestProductParam = requestProductParam.append('isActive', this.productParamDto.isActive);
-    if (this.productParamDto.name) requestProductParam = requestProductParam.append("name", this.productParamDto.name);
-    if (this.productParamDto.slug) requestProductParam = requestProductParam.append("slug", this.productParamDto.slug);
-    if (this.productParamDto.price) requestProductParam = requestProductParam.append("price", this.productParamDto.price);
-    if (this.productParamDto.typeId) requestProductParam = requestProductParam.append("typeId", this.productParamDto.typeId);
-    if (this.productParamDto.inventoryId) requestProductParam = requestProductParam.append("inventoryId", this.productParamDto.inventoryId);
-    if (this.productParamDto.brandId) requestProductParam = requestProductParam.append("brandId", this.productParamDto.brandId);
-    if (this.productParamDto.storeId) requestProductParam = requestProductParam.append("storeId", this.productParamDto.storeId);
-    if (this.productParamDto.off) requestProductParam = requestProductParam.append("off", this.productParamDto.off);
-    requestProductParam = requestProductParam.append('pageIndex', this.productParamDto.pageIndex);
-    requestProductParam = requestProductParam.append('pageSize', this.productParamDto.pageSize);
-    requestProductParam=requestProductParam.append('sortType',this.productParamDto.sortType);
-    requestProductParam=requestProductParam.append('user',this.productParamDto.user)
+    if (this.productSearchDto.id) requestProductParam=requestProductParam.append('id',this.productSearchDto.id);
+    requestProductParam = requestProductParam.append('isActive', this.productSearchDto.isActive);
+    if (this.productSearchDto.name) requestProductParam = requestProductParam.append("name", this.productSearchDto.name);
+    if (this.productSearchDto.slug) requestProductParam = requestProductParam.append("slug", this.productSearchDto.slug);
+    if (this.productSearchDto.price) requestProductParam = requestProductParam.append("price", this.productSearchDto.price);
+    if (this.productSearchDto.typeId) requestProductParam = requestProductParam.append("typeId", this.productSearchDto.typeId);
+    if (this.productSearchDto.inventoryId) requestProductParam = requestProductParam.append("inventoryId", this.productSearchDto.inventoryId);
+    if (this.productSearchDto.brandId) requestProductParam = requestProductParam.append("brandId", this.productSearchDto.brandId);
+    if (this.productSearchDto.storeId) requestProductParam = requestProductParam.append("storeId", this.productSearchDto.storeId);
+    if (this.productSearchDto.off) requestProductParam = requestProductParam.append("off", this.productSearchDto.off);
+    requestProductParam = requestProductParam.append('pageIndex', this.productSearchDto.pageIndex);
+    requestProductParam = requestProductParam.append('pageSize', this.productSearchDto.pageSize);
+    requestProductParam=requestProductParam.append('sortType',this.productSearchDto.sortType);
+    requestProductParam=requestProductParam.append('user',this.productSearchDto.user)
     return requestProductParam;
   }
 
