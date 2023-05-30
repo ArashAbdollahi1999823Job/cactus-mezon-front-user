@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
@@ -11,20 +11,20 @@ import {PresenceService} from "../../shared/Services/presence.service";
   providedIn: 'root'
 })
 export class AuthService {
-  private backendUrlUser=environment.backendUrlUser;
-  private currentUser=new BehaviorSubject<UserAuthorizeDto>(null);
-  public currentUser$=this.currentUser.asObservable();
-  constructor(private http:HttpClient,private router:Router,private presenceService:PresenceService) { }
-  public login(loginDto:LoginDto):Observable<UserAuthorizeDto>{
-    return this.http.put<UserAuthorizeDto>(`${this.backendUrlUser}/AccountUser/UserLogin`,loginDto).pipe(map((res):UserAuthorizeDto=>{
-      if(res){
-        this.setCurrentUser(res);
-        localStorage.setItem(environment.storage.myPhoneNumber,this.getPhoneNumber());
-        this.presenceService.createHubConnection(res);
-        return res;
-      }
+  private backendUrlUser = environment.backendUrlUser;
+  private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
+  public currentUser$ = this.currentUser.asObservable();
+  constructor(private http: HttpClient, private router: Router, private presenceService: PresenceService) {}
+  public login(loginDto: LoginDto): Observable<UserAuthorizeDto> {
+    return this.http.put<UserAuthorizeDto>(`${this.backendUrlUser}/AccountUser/UserLogin`, loginDto).pipe(map((userAuthorizeDtoRes): UserAuthorizeDto => {
+        if (userAuthorizeDtoRes) {
+          this.setCurrentUser(userAuthorizeDtoRes);
+          localStorage.setItem(environment.storage.myPhoneNumber, this.getPhoneNumber());
+          this.presenceService.createHubConnection(userAuthorizeDtoRes);
+          return userAuthorizeDtoRes;
+        }
         return null;
-    })
+      })
     );
   }
   public getToken() {
@@ -34,33 +34,35 @@ export class AuthService {
     }
     return null
   }
-  public register(registerDto:IRegisterDto){
-    return this.http.post<UserAuthorizeDto>(`${this.backendUrlUser}/account/register`,registerDto).pipe(map((res:UserAuthorizeDto)=>{
-      if (res){
+  public register(registerDto: IRegisterDto) :Observable<UserAuthorizeDto>{
+    return this.http.post<UserAuthorizeDto>(`${this.backendUrlUser}/account/register`, registerDto).pipe(map((res: UserAuthorizeDto) => {
+      if (res) {
         this.setCurrentUser(res);
-        localStorage.setItem(environment.storage.myPhoneNumber,this.getPhoneNumber());
+        localStorage.setItem(environment.storage.myPhoneNumber, this.getPhoneNumber());
         this.presenceService.createHubConnection(res);
         return res;
       }
       return null;
     }))
   }
-  public logout(){
+  public logout() {
     localStorage.removeItem(environment.keyUserToken);
     this.currentUser.next(null);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/Cactus');
     this.presenceService.stopHubConnection();
   }
-  public setCurrentUser(user:UserAuthorizeDto){
-    if(user){
-      localStorage.setItem(environment.keyUserToken,JSON.stringify(user))
-      this.currentUser.next(user);
+  public setCurrentUser(userAuthorizeDto: UserAuthorizeDto) {
+    if (userAuthorizeDto) {
+      localStorage.setItem(environment.keyUserToken, JSON.stringify(userAuthorizeDto))
+      this.currentUser.next(userAuthorizeDto);
     }
   }
-  public decodeToken(token: string) {
+  public decodeToken(token: string){
+    if(token){
     return JSON.parse(atob(token.split('.')[1]))
+    }
   }
-  public getPhoneNumber():string  {
-    return  this.decodeToken(this.getToken())?.PhoneNumber;
+  public getPhoneNumber(): string {
+    return this.decodeToken(this.getToken())?.PhoneNumber;
   }
 }

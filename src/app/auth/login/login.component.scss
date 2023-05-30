@@ -11,22 +11,25 @@
     .error{
       color: red;
     }
-    input {
-      background: black;
-      padding-right: 10px;
-      color: white;
-      margin: 5px 0;
 
+    input {
+      background: white;
+      padding-right: 10px;
+      color: black;
+      margin: 5px 0;
       border: none;
       border-bottom: 2px solid saddlebrown;
       height: 50px;
       width: 80%;
+      border-radius: 5px;
       &:focus{
         outline: none;
       }
     }
 
     button {
+      margin-top: 50px;
+      border-radius: 5px;
       width: 80%;
       border: 1px solid darkslategray;
       background: navajowhite;

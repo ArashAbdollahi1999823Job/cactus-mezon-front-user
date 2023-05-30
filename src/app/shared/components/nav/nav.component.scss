@@ -24,6 +24,11 @@
       .nav-ul-li-i {
         padding-top: 10px;
       }
+      .logo{
+        width: 100%;
+        max-width: 80px;
+        height: 100%;
+      }
       .message-count{
         position: absolute;
         width: 20px;
@@ -35,7 +40,7 @@
         font-size: 15px;
         line-height: 23px;
         border: 1px solid black;
-        border-radius: 50%;
+        border-radius: 5px;
       }
     }
   }

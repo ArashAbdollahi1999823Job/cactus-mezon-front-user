@@ -7,7 +7,6 @@ import { AppComponent } from './app-c/app.component';
 import {FavoriteModule} from "./favorite/favorite.module";
 import {IndexModule} from "./index/index.module";
 import {SearchModule} from "./search/search.module";
-import {BasketModule} from "./basket/basket.module";
 import {AuthModule} from "./auth/auth.module";
 import {ChatModule} from "./chat/chat.module";
 import {ToastrModule} from "ngx-toastr";
@@ -30,7 +29,6 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
     SharedModule,
     FavoriteModule,
     SearchModule,
-    BasketModule,
     AuthModule,
     ChatModule,
     ToastrModule.forRoot({positionClass:'toast-top-full-width',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),

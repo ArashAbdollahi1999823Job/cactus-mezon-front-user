@@ -1,0 +1,41 @@
+.bg-red{
+  background: red;
+}
+.bg-red-a4{
+  background-color: rgba(255,0,0,.4);
+}
+.bg-green{
+  background: green;
+}
+.bg-green-a1{
+  background-color: rgba(0,255,0,.1);
+}.bg-green-a4{
+  background-color: rgba(0,255,0,.4);
+}
+
+.displayNone{
+  display: none;
+}
+.displayBlock{
+  display: block !important;
+}
+
+
+.input-success{
+  border: 1px solid green !important;
+}
+.input-error{
+  border: 1px solid red !important;
+}
+.disable{
+  opacity: 0.3;
+}
+.error{
+  color: red;
+  margin: 10px 0;
+}
+
+
+.text-green{
+  color: green;
+}

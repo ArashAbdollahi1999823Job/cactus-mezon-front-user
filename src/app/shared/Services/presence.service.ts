@@ -28,19 +28,9 @@ export class PresenceService {
     this.hubConnection.start().catch((err)=>{
       this.toastService.error("err.message()")
     })
-
-    this.hubConnection.on("UserIsOnline",(userName:string)=>{
-      this.toastService.info(userName+"is online");
-    });
-    this.hubConnection.on("UserIsOffline",(userName:string)=>{
-      this.toastService.error(userName+"is offline")
-    });
     this.hubConnection.on("UsersOnlineGet",(users:string[])=>{
       this.usersOnline.next(users);
     });
-    this.hubConnection.on("PresenceMessageUpdate", () => {
-      this.toastService.info('شما پیام جدید دارید')
-    })
     this.hubConnection.on("MessageUnReadUpdate", () => {
       let messageSearchDto=new MessageSearchDto();
       messageSearchDto.isRead=IsReadType.UnRead;

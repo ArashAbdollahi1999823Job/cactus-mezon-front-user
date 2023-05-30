@@ -2,7 +2,7 @@ import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {ChatService} from "../chat-service/chat.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserDto} from "../../shared/dto/user/userDto";
 import {UserService} from "../../shared/Services/user.service";
 import {UserSearchDto} from "../../shared/dto/user/userSearchDto";
@@ -14,6 +14,8 @@ import {HubConnectionState} from "@microsoft/signalr";
 import {MessageSearchDto} from "../../shared/dto/Chat/message/messageSearchDto";
 import {MessageDto} from "../../shared/dto/Chat/message/messageDto";
 import {IsReadType} from "../../shared/enum/isReadType";
+import {ToastrService} from "ngx-toastr";
+
 @Component({
   selector: 'chat-body',
   templateUrl: './chat-body.component.html',
@@ -25,41 +27,53 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
   public backendUrlPicture = environment.backendUrlPicture;
   public userDtoResponder: UserDto;
   public intervalReloadGroup;
+  public divShowMessage: Element;
+  public urlPicture;
   public messageAddForm: FormGroup = new FormGroup({
-    content: new FormControl(null, []),
-    file: new FormControl('', []),
-    fileSource: new FormControl('')
+    content: new FormControl(null, [Validators.required]),
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
   })
-  constructor(public chatService: ChatService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService, public presenceService: PresenceService, private ef: ElementRef) {
+
+  constructor(private toastService: ToastrService, public chatService: ChatService,
+              private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService, public presenceService: PresenceService, private ef: ElementRef) {
   }
+
   ngOnInit(): void {
     this.handleChangeRoute();
     this.responderPhoneNumber = this.activatedRoute.snapshot.paramMap.get('PhoneNumber');
     this.GroupAdd();
     this.userResponderGet();
   }
-  onFileChange(event: any) {
+  onFileChange(event: any):void {
+    let reader = new FileReader();
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      let file = null;
+      file = event.target.files[0];
       this.messageAddForm.patchValue({
         fileSource: file,
       })
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.urlPicture = reader.result;
+      }
     }
+    this.pictureShowDelete();
   }
-  private GroupAdd() {
+  private GroupAdd():void {
     this.intervalReloadGroup = setInterval(() => {
       if (this.chatService.chatHub.state == HubConnectionState.Connected) {
         this.chatService.groupAdd(this.responderPhoneNumber).subscribe((groupDtoRes: GroupDto) => {
-          if(groupDtoRes){
-            localStorage.setItem(environment.storage.groupName,groupDtoRes.name)
-            if(groupDtoRes)clearInterval(this.intervalReloadGroup);
+          if (groupDtoRes) {
+            localStorage.setItem(environment.storage.groupName, groupDtoRes.name)
+            if (groupDtoRes) clearInterval(this.intervalReloadGroup);
             this.messageGetAll();
           }
         })
       }
     }, 500)
   }
-  public userResponderGet() {
+  public userResponderGet():void {
     let userSearchDto = new UserSearchDto();
     userSearchDto.searchPhoneNumber = this.responderPhoneNumber;
     this.userService.userSearchDtoSet(userSearchDto);
@@ -75,27 +89,78 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
       }
     })
   }
-  public messageAdd() {
-      const formData = new FormData();
-      formData.append('picture', this.messageAddForm.get("fileSource").value);
-      formData.append('content', this.messageAddForm.get("content").value);
-      formData.append('responderPhoneNumber', this.responderPhoneNumber);
-      formData.append('groupName', localStorage.getItem(environment.storage.groupName));
-     this.chatService.messageAdd(formData).subscribe();
+  public messageAdd():void {
+      if (this.messageAddForm.controls['fileSource'].errors && this.messageAddForm.controls['content'].errors) {
+        this.toastService.error(environment.messages.common.messageEmpty);
+        return;
+      }
+    const formData = new FormData();
+    formData.append('picture', this.messageAddForm.get("fileSource").value);
+    formData.append('content', this.messageAddForm.get("content").value);
+    formData.append('responderPhoneNumber', this.responderPhoneNumber);
+    formData.append('groupName', localStorage.getItem(environment.storage.groupName));
+    this.chatService.messageAdd(formData).subscribe();
+    this.messageAddForm.reset();
+    this.pictureDontShowDelete();
+    this.messageAddForm.controls['fileSource'].reset();
+    this.messageAddForm.controls['file'].reset();
+    this.urlPicture = null;
+    let inputPictureEl:HTMLInputElement=this.ef.nativeElement.getElementsByClassName("input-picture")[0];
+    inputPictureEl.value=null;
   }
-  public showFile() {
-    var inputFile = this.ef.nativeElement.getElementsByClassName('input-picture')[0].click();
+  public showFile():void {
+    this.ef.nativeElement.getElementsByClassName('input-picture')[0].click();
   }
-  public messageGetAll(){
-    let messageSearchDto=new MessageSearchDto();
-    messageSearchDto.groupName=localStorage.getItem(environment.storage.groupName);
-    messageSearchDto.isRead=IsReadType.notImportant;
+  public scrollToEnd(): void {
+    this.divShowMessage = this.ef.nativeElement.getElementsByClassName('show-message')[0];
+    setTimeout(() => {
+      this.divShowMessage.scroll({top: this.divShowMessage.scrollHeight, behavior: 'smooth'})
+    })
+  }
+  public messageGetAll():void {
+    let messageSearchDto = new MessageSearchDto();
+    messageSearchDto.groupName = localStorage.getItem(environment.storage.groupName);
+    messageSearchDto.isRead = IsReadType.notImportant;
     this.chatService.messageSearchDtoSet(messageSearchDto);
-    this.chatService.messageGetAll().subscribe((paginationMessageDtoRes:PaginationDto<MessageDto>)=>{
-      if(paginationMessageDtoRes){
+    this.chatService.messageGetAll().subscribe((paginationMessageDtoRes: PaginationDto<MessageDto>) => {
+      if (paginationMessageDtoRes) {
         this.chatService.messageDtos.next(paginationMessageDtoRes.data);
+        this.scrollToEnd();
       }
     })
+  }
+  private pictureShowDelete():void {
+    let showFileEl: Element;
+    showFileEl = this.ef.nativeElement.getElementsByClassName('btn-picture')[0];
+    showFileEl.classList.add('displayNone');
+    showFileEl.classList.remove('displayBlock');
+
+    let urlPictureEl: Element;
+    urlPictureEl = this.ef.nativeElement.getElementsByClassName('urlPicture')[0];
+    urlPictureEl.classList.add('displayBlock');
+    urlPictureEl.classList.remove('DisplayNone');
+  }
+  private pictureDontShowDelete():void {
+    let showFileEl: Element;
+    showFileEl = this.ef.nativeElement.getElementsByClassName('btn-picture')[0];
+    showFileEl.classList.add('displayBlock');
+    showFileEl.classList.remove('displayNone');
+
+    let urlPictureEl: Element;
+    urlPictureEl = this.ef.nativeElement.getElementsByClassName('urlPicture')[0];
+    urlPictureEl.classList.add('displayNone');
+    urlPictureEl.classList.remove('displayBlock');
+  }
+  public urlPictureDelete():void {
+    if(confirm(environment.messages.common.doYouWantToCancelSendThisPicture))
+    {
+      this.pictureDontShowDelete();
+      this.messageAddForm.controls['fileSource'].reset();
+      this.messageAddForm.controls['file'].reset();
+      this.urlPicture = null
+      let inputPictureEl:HTMLInputElement=this.ef.nativeElement.getElementsByClassName("input-picture")[0];
+      inputPictureEl.value = null;
+    }
   }
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();

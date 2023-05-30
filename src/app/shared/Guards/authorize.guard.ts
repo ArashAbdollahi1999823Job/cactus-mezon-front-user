@@ -7,7 +7,7 @@ import {ToastrService} from "ngx-toastr";
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
+export class AuthorizeGuard implements CanActivate {
   constructor(private authService: AuthService, private toast: ToastrService, private router: Router) {
   }
 

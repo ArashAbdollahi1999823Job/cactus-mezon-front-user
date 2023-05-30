@@ -12,11 +12,10 @@
 
     <span class="off" *ngIf="productDto.off">{{productDto.off.offPercent}}%</span>
     <div class="card-details">
-      <a routerLink="chat/{{productDto.sellerPhoneNumber}}">
+      <a routerLink="/chat/{{productDto.sellerPhoneNumber}}">
 
       <button class=" details-button"><i class="fa fa-comment"></i></button>
       </a>
-      <!-- <button class=" details-button"><i class="fa fa-cart-plus"></i></button>-->
       <button class=" details-button" (click)="copyProductUrl(productDto.slug)"><i class="fa fa-share-alt-square"></i></button>
       <button class=" details-button"><i class="fa fa-heart-crack"></i></button>
       <button class=" details-button"><i class="fa fa-shop"></i></button>

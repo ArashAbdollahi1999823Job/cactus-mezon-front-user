@@ -26,7 +26,12 @@ export const environment={
 
   messages:{
     common:{
-      failedConnectionChatHub:"ارتباط برای چت برقرار نشد"
+      messageEmpty:"پیام شما خالی است ",
+      failedConnectionChatHub:"ارتباط برای چت برقرار نشد",
+      doYouWantToExit:"ایا میخاهید خارج شوید؟",
+      registerSuccess:"ثبت نام موفقیت انجام شد",
+      loginSuccess:"ورود با موفقیت انجام شد",
+      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستلدن این عکس را کنسل کنید؟"
     }
   }
 }

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {BasketService} from "../basket/Services/basket.service";
 import {environment} from "../../environments/environment";
 import {UserAuthorizeDto} from "../shared/dto/identity/userAuthorizeDto";
 import {AuthService} from "../auth/Services/auth.service";
@@ -15,9 +14,7 @@ declare var $: any;
 export class AppComponent implements OnInit{
   title = 'فروشگاه بزرگ کاکتوس';
   constructor(private authService:AuthService,private presenceService:PresenceService) {}
-
   ngOnInit(): void {
-    /*this.initialBasket();*/
     this.initialUser();
   }
 
@@ -29,8 +26,4 @@ export class AppComponent implements OnInit{
       this.presenceService.createHubConnection(user);
     }
   }
- /* private initialBasket() {
-    this.basketService.getCustomerBasket(localStorage.getItem(environment.keyBasketLocalStorage)).subscribe((res) => {
-    })
-  }*/
 }

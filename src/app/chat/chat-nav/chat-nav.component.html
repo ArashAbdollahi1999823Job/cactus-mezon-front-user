@@ -1,7 +1,7 @@
 <div class="nav">
   <div class="logo-container">
-    <div class="logo">
-      <img src="assets/images/logo3.png" width="60px" height="60px" alt="">
+    <div class="logo" (click)="toggleExpand()">
+      <i class="fa fa-arrow-alt-circle-left"></i>
     </div>
     <div class="logo-text"></div>
   </div>
@@ -16,10 +16,16 @@
             [class.display-block]="(presenceService.usersOnline$ | async).includes(boss.phoneNumber)"></span>
       <ng-container *ngIf="(presenceService.messageUnReadDtos$ | async) as unReadMessage">
         <ng-container *ngFor="let m of unReadMessage">
-<span class="message-count" *ngIf="m.askerPhoneNumber==boss.phoneNumber && m.responderPhoneNumber==myPhoneNumber">
+            <span class="message-count"
+                  *ngIf="m.askerPhoneNumber==boss.phoneNumber && m.responderPhoneNumber==myPhoneNumber">
                      <i class="fa fa-envelope"></i>
-          </span></ng-container>
+          </span>
+        </ng-container>
       </ng-container>
+      <div class="information">
+        <div class="name">{{boss.username}}</div>
+        <div class="role">{{boss.description}}</div>
+      </div>
     </div>
   </a>
   <a [routerLink]="admin.phoneNumber" *ngFor="let admin of userDtosAdmin">
@@ -38,6 +44,10 @@
           </span>
         </ng-container>
       </ng-container>
+      <div class="information">
+        <div class="name">{{admin.username}}</div>
+        <div class="role">{{admin.description}}</div>
+      </div>
     </div>
   </a>
   <a [routerLink]="seller.phoneNumber" *ngFor="let seller of userDtosSeller">
@@ -54,6 +64,10 @@
                      <i class="fa-solid fa-envelope"></i>
           </span></ng-container>
       </ng-container>
+      <div class="information">
+        <div class="name">{{seller.username}}</div>
+        <div class="role">{{seller.description}}</div>
+      </div>
     </div>
   </a>
 </div>

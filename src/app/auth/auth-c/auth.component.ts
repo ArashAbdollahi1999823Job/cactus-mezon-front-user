@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {isEmpty, Observable} from "rxjs";
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
 import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {AuthService} from "../Services/auth.service";
 import {Router} from "@angular/router";
@@ -12,14 +12,11 @@ import {allPageAnimation} from "../../shared/animations/allPageAnimation";
   animations:[allPageAnimation]
 })
 export class AuthComponent implements OnInit {
-  // @ts-ignore
   currentUser$: Observable<UserAuthorizeDto>;
-
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router,private changeRef: ChangeDetectorRef) {
   }
-
+  ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
   ngOnInit(): void {
-    // @ts-ignore
     this.currentUser$ = this.authService.currentUser$;
     this.navigateUserByAuth();
   }
