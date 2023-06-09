@@ -51,7 +51,6 @@
     overflow-X: scroll;
     background-color: white;
     height: 150px;
-
     &::-webkit-scrollbar {
       width: 0;
       height: 0;
@@ -72,7 +71,7 @@
       height: 150px;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       overflow: scroll;
       .picture-one {
         border-radius: 5%;

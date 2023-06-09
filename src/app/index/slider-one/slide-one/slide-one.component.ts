@@ -1,8 +1,9 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ProductDto} from "../../../shared/dto/product/productDto";
-import {environment} from "../../../../environments/environment.prod";
+import {environment} from "../../../../environments/environment";
 import {Clipboard} from "@angular/cdk/clipboard";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 @Component({
   selector: 'slide-one',
   templateUrl: './slide-one.component.html',
@@ -16,7 +17,7 @@ export class SlideOneComponent implements OnInit{
   ngOnInit(): void {
     this.timer()
   }
-  showDetails(event: any) {
+ public showDetails(event: any):void {
     let cardDetails = event.srcElement.querySelector('.card-details');
     let detailsButton = event.srcElement.querySelectorAll('.details-button');
     let cardEnterProduct = event.srcElement.querySelectorAll('.card-enter-product')[0];
@@ -31,7 +32,7 @@ export class SlideOneComponent implements OnInit{
       x.style.fontSize = '1.7vh';
     })
   }
-  hideDetails(event: any) {
+ public hideDetails(event: any):void {
     let cardDetails = event.srcElement.querySelector('.card-details');
     let detailsButton = event.srcElement.querySelectorAll('.details-button');
     let cardEnterProduct = event.srcElement.querySelectorAll('.card-enter-product')[0];
@@ -48,7 +49,7 @@ export class SlideOneComponent implements OnInit{
   }
   constructor(private clipboard:Clipboard,private toastService:ToastrService) {
   }
-  timer() {
+ public timer():void {
     if (this.productDto.off) {
       let end = new Date(this.productDto.off.endDate)
       let now = new Date();
@@ -65,8 +66,8 @@ export class SlideOneComponent implements OnInit{
         }, 1000)
       }
   }
-  copyProductUrl(slug: string) {
-    const successful = this.clipboard.copy(slug);
-    if (successful) this.toastService.success('ادرس با موفقیت کپی شد.')
+ public copyProductUrl(slug: string):void {
+    const successful = this.clipboard.copy(`${location.href}/${slug}`);
+    if (successful) this.toastService.success(environment.messages.common.addressCopySuccess)
   }
 }

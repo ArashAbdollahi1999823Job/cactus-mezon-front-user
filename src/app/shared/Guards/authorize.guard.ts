@@ -3,6 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {map} from 'rxjs';
 import {AuthService} from "../../auth/Services/auth.service";
 import {ToastrService} from "ngx-toastr";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthorizeGuard implements CanActivate {
       if (user) {
         return true;
       } else {
-        this.toast.error("ابتدا وارد سایت شوید");
+        this.toast.error(environment.messages.common.pleaseEnterSite);
         this.router.navigateByUrl("/auth/login");
         return false;
       }

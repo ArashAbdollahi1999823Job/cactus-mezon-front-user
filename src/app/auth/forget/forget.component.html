@@ -1,1 +1,25 @@
-<p>forget works!</p>
+<div class="login-container">
+  <div class="login">
+    <form [formGroup]="forgetForm" (ngSubmit)="forgetSend()">
+      <div>
+        <input type="tel" placeholder="شماره همراه..." formControlName="phoneNumber" name="phoneNumber" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" required
+               [ngClass]="
+                     forgetForm.controls.phoneNumber.touched && forgetForm.controls.phoneNumber.errors?.required
+                     || forgetForm.controls.phoneNumber.errors?.maxlength ||
+                     forgetForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="forgetForm.controls.phoneNumber.hasError('required') &&forgetForm.controls.phoneNumber.touched">
+          لطفا شماره همراه را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" forgetForm.controls.phoneNumber.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" forgetForm.controls.phoneNumber.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 11 باشد !
+        </div>
+        <div class="error" *ngIf=" forgetForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
+      </div>
+      <button type="submit" [disabled]="!forgetForm.valid" [ngClass]="!forgetForm.valid ? 'disable':''">درخواست رمز</button>
+    </form>
+  </div>
+</div>

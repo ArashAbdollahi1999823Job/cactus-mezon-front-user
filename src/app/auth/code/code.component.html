@@ -1,0 +1,32 @@
+<div class="login-container">
+  <div class="login">
+    <form [formGroup]="codeForm" (ngSubmit)="codeSend()">
+      <div>
+        <div class="warning">
+          اگر از این صحفه خارج شوید عملیات ثبت نام کنسل میشد لطفا تا دریافت کد صبور باشید <br>
+          با تشکر
+        </div>
+        <input type="text" placeholder="کد تایید..." formControlName="code"  required
+               [ngClass]="
+                     codeForm.controls.code.touched && codeForm.controls.code.errors?.required
+                     || codeForm.controls.code.errors?.maxlength ||
+                     codeForm.controls.code.errors?.minlength ? 'input-error' :'input-success'">
+        <div class="error"
+             *ngIf="codeForm.controls.code.hasError('required') && codeForm.controls.code.touched">
+          لطفا کد تایید  را وارد کنید !
+        </div>
+        <div class="error" *ngIf=" codeForm.controls.code.hasError('maxlength')">تعداد
+          کاراکتر ها نمیتواند بیشتر از 6 باشد !
+        </div>
+        <div class="error" *ngIf=" codeForm.controls.code.hasError('minlength')">تعداد
+          کاراکتر ها نمیتواند کمتر از 6 باشد !
+        </div>
+      </div>
+      <div class="timer" #timerEl>
+        90
+      </div>
+      <button type="submit" [disabled]="!codeForm.valid" [ngClass]="!codeForm.valid ? 'disable':''">ثبت</button>
+    </form>
+
+  </div>
+</div>

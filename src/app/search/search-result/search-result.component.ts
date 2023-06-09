@@ -46,7 +46,7 @@ export class SearchResultComponent {
 
   public scroll() {
     this.slider = this.key.nativeElement;
-    if (this.slider.scrollTop > this.slider.scrollHeight - 720) {
+    if (this.slider.scrollTop > this.slider.scrollHeight -800) {
       let productSearchDto = this.productService.productSearchDtoGet();
       this.pageIndex++;
       productSearchDto.pageIndex = this.pageIndex;

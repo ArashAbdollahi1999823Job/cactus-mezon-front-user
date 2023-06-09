@@ -9,6 +9,7 @@ export const environment={
     otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat",
     groupName:"groupName",
     myPhoneNumber:"myPhoneNumber",
+    myPhoneNumberForAuth:"myPhoneNumberForAuth",
   },
   roles:{
     boss:"Boss",
@@ -23,15 +24,27 @@ export const environment={
   },
   keyBasketLocalStorage:"customerBasketId",
   keyUserToken:"userToken",
-
   messages:{
     common:{
-      messageEmpty:"پیام شما خالی است ",
-      failedConnectionChatHub:"ارتباط برای چت برقرار نشد",
+      pleaseEnterSite:"لطفا ابتدا وارد سایت شوید.",
+      messageEmpty:"پیام شما خالی است! ",
+      failedConnectionChatHub:"ارتباط برای چت برقرار نشد!",
       doYouWantToExit:"ایا میخاهید خارج شوید؟",
-      registerSuccess:"ثبت نام موفقیت انجام شد",
-      loginSuccess:"ورود با موفقیت انجام شد",
-      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستلدن این عکس را کنسل کنید؟"
+      registerSuccess:"ثبت نام موفقیت انجام شد.",
+      loginSuccess:"ورود با موفقیت انجام شد.",
+      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستلدن این عکس را کنسل کنید؟",
+      addressCopySuccess:"ادرس با موفقیت کپی شد.",
+      confirmPhoneNumberSuccess:"شماره موبایل با موفقیت تایید شد.",
+      confirmPhoneNumberNotDonePleaseRegisterAgain:"عملیات تایید شماره تلفن انجام نشد لطفا دوباره ثبت نام کنید!",
+    }
+    ,
+    auth: {
+      forgetPasswordSendSuccess:"رمز با موفقیت به سیم کارت شما ارسال شد."
+    },
+},
+  setting:{
+    auth:{
+      secondEndCode:"90"
     }
   }
 }

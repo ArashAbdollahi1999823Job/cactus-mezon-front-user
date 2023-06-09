@@ -2,14 +2,16 @@
   <div class="name">
     <span>{{productDto?.name}}</span>
     <span> فروشگاه {{productDto?.store}}</span>
-    <span class="" *ngIf="productDto?.count==0" style="color: darkorange;font-size: 15px">ناموجود</span>
-    <span class="" *ngIf="productDto?.count>0" style="color: forestgreen;font-size: 15px">موجود</span>
+    <span class="not-exist" *ngIf="productDto?.count==0">ناموجود</span>
+    <span class="exist" *ngIf="productDto?.count>0">موجود</span>
   </div>
   <div class="name">
     <span><ng-container *ngIf="productDto?.colorDtos?.length > 0">رنگ بندی:</ng-container></span>
-    <span class="colors"><ng-container *ngIf="productDto?.colorDtos"><div class="color"
-                                                                          *ngFor="let color of productDto?.colorDtos"
-                                                                          style="background-color: {{color?.value}}"></div></ng-container></span>
+    <span class="colors"><ng-container *ngIf="productDto?.colorDtos">
+      <div class="color" *ngFor="let color of productDto?.colorDtos" style="background-color: {{color?.value}}">
+      </div>
+    </ng-container>
+    </span>
   </div>
   <div class="name">
     <span>قیمت:</span>
@@ -22,26 +24,28 @@
   <div class="name">
     <span><ng-container *ngIf="productDto?.off">تخفیف:</ng-container></span>
     <span><ng-container *ngIf="productDto?.off">{{productDto?.off?.name}}</ng-container></span>
-    <span style="color: forestgreen"><ng-container *ngIf="productDto?.off">{{productDto?.off?.offPercent}}
-      %</ng-container></span>
-    <span><ng-container *ngIf="productDto?.off"><span class="timer" #timerEl>2:03:48:20</span></ng-container></span>
+    <span style="color: forestgreen">
+      <ng-container *ngIf="productDto?.off">
+        {{productDto?.off?.offPercent}}%
+      </ng-container>
+    </span>
+    <span>
+      <ng-container *ngIf="productDto?.off">
+        <span class="timer" #timerEl>2:03:48:20</span>
+      </ng-container></span>
   </div>
-  <div class="" style="padding: 10px 10px;color: black">
+  <div class="description" >
     {{productDto?.description}}
   </div>
-  <button (click)="change(information)" id="information" #information class="end-btn"> مشخصات</button>
-  <button class="end-btn" (click)="change(comment)" id="comment" #comment> نظرات</button>
-  <div class="information end-paper" style="width: 100%;height: auto;">
-    <div class="items">
+  <div class="items">
+    <div class="header">مشخصات</div>
+    <div class="value">
       <table>
-        <tbody>
-        <tr *ngFor="let productItem of productDto?.productItemDtos">
-          <td>{{productItem.name}}</td>
-          <td>{{productItem.value}}</td>
+        <tr *ngFor="let item of productDto?.productItemDtos">
+          <td>{{item.name}}</td>
+          <td>{{item.value}}</td>
         </tr>
-        </tbody>
       </table>
     </div>
   </div>
-  <div class="comment end-paper" style="width: 100%;height: 700px;background-color: red"></div>
 </div>

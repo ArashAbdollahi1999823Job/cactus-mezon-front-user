@@ -1,12 +1,9 @@
 <div class="body-auth">
-
   <div class="auth-btn-container">
     <button  routerLink="./login" routerLinkActive="active">ورود</button>
     <button routerLink="./register" routerLinkActive="active">ثبت نام</button>
     <button routerLink="./forget" routerLinkActive="active">فراموشی رمز عبور</button>
   </div>
-
-
 
 <main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
   <router-outlet #o="outlet"></router-outlet>

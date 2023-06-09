@@ -9,4 +9,6 @@ export interface UserDto {
   password: string
   roles: RoleDto[]
   userPictureDto:UserPictureDto;
+  name:string;
+
 }

@@ -1,9 +1,10 @@
 <div class="slider-container">
   <div class="image-container">
     <span class="heart"><i class="fa fa-heart"></i></span>
-    <span class="share"><i class="fa fa-share-alt-square"></i></span>
+    <span class="share"><i class="fa fa-share-alt-square" (click)="copyProductUrl()"></i></span>
+    <a routerLink="/chat/{{productDto.sellerPhoneNumber}}">
     <span class="comment"><i class="fa fa-comment"></i></span>
-    <span class="shop"><i class="fa fa-shop"></i></span>
+    </a>
     <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}"
          *ngFor="let productPicture of productPictureDtos;let index=index" class="picture-main " [ngClass]="index==0? 'block':''" id="{{productPicture.id}}">
   </div>

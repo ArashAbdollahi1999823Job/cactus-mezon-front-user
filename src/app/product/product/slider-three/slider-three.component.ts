@@ -4,43 +4,37 @@ import {environment} from "../../../../environments/environment";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
 import {Subscription} from "rxjs";
-
-
+import {Clipboard} from "@angular/cdk/clipboard";
+import {ToastrService} from "ngx-toastr";
+import {ProductDto} from "../../../shared/dto/product/productDto";
 @Component({
   selector: 'slider-three',
   templateUrl: './slider-three.component.html',
   styleUrls: ['./slider-three.component.scss']
 })
 export class SliderThreeComponent implements OnChanges {
-  @Input('productId') productId: string;
+  @Input('productDto') productDto:ProductDto;
   private subscription: Subscription;
   public productPictureDtos: ProductPictureDto[];
   public backendUrlPicture = environment.backendUrlPicture;
-  public idToShow:number;
-
-  constructor(private productPictureService: ProductPictureService) {
+  constructor(private productPictureService: ProductPictureService,private clipboard:Clipboard,private toastService:ToastrService) {
   }
-
   ngOnChanges(): void {
     this.productPicturesGet();
   }
-
-  public productPicturesGet() {
+  public productPicturesGet():void {
     let productPictureSearchDto = new ProductPictureSearchDto();
     productPictureSearchDto.startRange = environment.productSetting.sliderStart;
     productPictureSearchDto.endRange = environment.productSetting.sliderEnd;
-    productPictureSearchDto.productId = this.productId;
+    productPictureSearchDto.productId = this.productDto.id;
     this.productPictureService.productPictureSearchDtoSet(productPictureSearchDto);
     this.subscription = this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
       if (res) {
         this.productPictureDtos=res;
-
       }
     })
   }
-
-
-  changePicture(id: string,event:HTMLElement) {
+  public changePicture(id: string,event:HTMLElement):void {
    let element= document.getElementById(id.toString());
     let lasElement=document.getElementsByClassName('block')[0];
     let pictureOne=document.getElementsByClassName('picture-one')
@@ -57,5 +51,9 @@ export class SliderThreeComponent implements OnChanges {
       element.classList.add('fadeIn');
       lasElement.classList.remove('fadeOut','block')
     },350)
+  }
+  public copyProductUrl():void {
+    const successful = this.clipboard.copy(`${location.href}`);
+    if (successful) this.toastService.success(environment.messages.common.addressCopySuccess)
   }
 }

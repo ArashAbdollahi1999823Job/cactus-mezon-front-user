@@ -45,6 +45,7 @@ export class SearchFilterComponent implements OnInit {
   }
   private typeGetAll():void {
     let typeSearchDto=new TypeSearchDto();
+    typeSearchDto.pageSize=100;
     this.typeService.typeSearchDtoSet(typeSearchDto);
     this.subscription= this.typeService.typeGetAll().subscribe((paginationTypeDtoRes:PaginationDto<TypeDto>) => {
       this.typeDtos = paginationTypeDtoRes.data;
@@ -52,15 +53,18 @@ export class SearchFilterComponent implements OnInit {
   }
   public onChangeType(typeId: any):void {
     this.productSearchDto.typeId=typeId;
+    this.productSearchDto.pageIndex=1;
     this.productService.productSearchDtoSet(this.productSearchDto);
     this.productUpdate.emit(true);
   }
   public onChangeBrand(brandId: any):void {
     this.productSearchDto.brandId=brandId;
+    this.productSearchDto.pageIndex=1;
     this.productService.productSearchDtoSet(this.productSearchDto);
     this.productUpdate.emit(true);
+
   }
-  public onChangeSort(sort: any):void {
+/*  public onChangeSort(sort: any):void {
     this.productSearchDto.sortType=sort;
     this.productService.productSearchDtoSet(this.productSearchDto);
     this.productUpdate.emit(true);
@@ -69,7 +73,7 @@ export class SearchFilterComponent implements OnInit {
     this.productSearchDto.sortType=sortType;
     this.productService.productSearchDtoSet(this.productSearchDto);
     this.productUpdate.emit(true);
-  }
+  }*/
   changeSearch() {
     this.productSearchDto.name=this.searchTerm?.nativeElement?.value;
     this.productService.productSearchDtoSet(this.productSearchDto);

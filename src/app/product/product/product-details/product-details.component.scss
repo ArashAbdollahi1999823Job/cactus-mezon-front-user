@@ -11,6 +11,15 @@
     width: 100%;
     height: 60px;
     align-items: center;
+    .not-exist{
+      color: darkorange;font-size: 15px
+    }
+    .exist{
+      color: forestgreen;font-size: 15px
+    }
+  }
+  .description{
+    padding: 10px 10px;color: black;
   }
   .btn{
     width: 50px;
@@ -39,14 +48,24 @@
     color: burlywood;
   }
 }
-.hide{
-  display: none;
-}
-.show{
-  display: block;
-}
 .description{
   padding: 10px 10px;
+}
+.items{
+  width: 100%;
+  padding: 10px 0;
+  .header{
+    width: 90%;
+    height: 50px;
+    border: 1px solid black;
+    margin: 0 auto;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 50px;
+  }
+  .value{
+    width: 100%;
+  }
 }
 td{
   text-align: center;

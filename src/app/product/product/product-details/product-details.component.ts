@@ -9,11 +9,9 @@ import {ProductDto} from "../../../shared/dto/product/productDto";
 export class ProductDetailsComponent implements OnChanges {
   @Input('productDto') productDto: ProductDto;
   @ViewChild('timerEl') timerEl: ElementRef;
-
   ngOnChanges(changes: SimpleChanges): void {
     this.timer()
   }
-
   timer() {
     if (this?.productDto?.off) {
       let end = new Date(this.productDto.off.endDate)
@@ -30,16 +28,5 @@ export class ProductDetailsComponent implements OnChanges {
         this.timerEl.nativeElement.innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
       }, 1000)
     }
-  }
-
-
-  change(event: HTMLElement) {
-    let classToShow = event.id.toString();
-    let elementToHide = document.getElementsByClassName('end-paper');
-    for (let i = 0; i < elementToHide.length; i++) {
-      elementToHide.item(i).classList.add('hide');
-      elementToHide.item(i).classList.remove('show');
-    }
-    document.getElementsByClassName(event.id.toString())[0].classList.add('show')
   }
 }
