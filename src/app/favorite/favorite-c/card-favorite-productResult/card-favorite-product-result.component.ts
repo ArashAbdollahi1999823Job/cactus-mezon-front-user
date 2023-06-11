@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ProductDto} from "../../../shared/dto/product/productDto";
 import {environment} from "../../../../environments/environment";
 import {Clipboard} from "@angular/cdk/clipboard";
@@ -9,20 +9,21 @@ import {Subscription} from "rxjs";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {UserAuthorizeDto} from "../../../shared/dto/identity/userAuthorizeDto";
 import {FavoriteAddDto} from "../../../shared/dto/favorite/favoriteAddDto";
+import {FavoriteDeleteDto} from "../../../shared/dto/favorite/favoriteDeleteDto";
 import {AuthService} from "../../../auth/Services/auth.service";
-import {Router} from "@angular/router";
-import {FavoriteService} from "../../../favorite/favorite-service/favorite.service";
+import {FavoriteService} from "../../favorite-service/favorite.service";
 
 @Component({
-  selector: 'card-search-product-result',
-  templateUrl: './card-search-product-result.component.html',
-  styleUrls: ['./card-search-product-result.component.scss']
+  selector: 'card-favorite-product-result',
+  templateUrl: './card-favorite-product-result.component.html',
+  styleUrls: ['./card-favorite-product-result.component.scss']
 })
-export class CardSearchProductResultComponent implements OnInit {
+export class CardFavoriteProductResultComponent implements OnInit {
   @Input('productDto') productDto: ProductDto;
   public backendUrlPicture = environment.backendUrlPicture;
   @ViewChild('timerEl', {static: false}) timerEl: ElementRef;
   private subscription: Subscription;
+  @Output('favoriteUpdate') favoriteUpdate=new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.timer()
@@ -61,7 +62,7 @@ export class CardSearchProductResultComponent implements OnInit {
     cardDetails.style.borderRight = "0px solid black";
   }
 
-  constructor(private clipboard: Clipboard, private toastService: ToastrService, private productPictureService: ProductPictureService, private authService: AuthService, private router: Router, private favoriteService: FavoriteService) {
+  constructor(private clipboard: Clipboard, private toastService: ToastrService, private productPictureService: ProductPictureService, private authService: AuthService, private favoriteService: FavoriteService) {
   }
 
   public timer(): void {
@@ -100,24 +101,18 @@ export class CardSearchProductResultComponent implements OnInit {
     )
   }
 
-  public favoriteAdd(productId: string) {
-    let checkLogin;
-    this.subscription = this.authService.currentUser$.subscribe((user: UserAuthorizeDto) => {
-      checkLogin = !!user;
-    })
+  public favoriteDelete(productId: string): void {
+    if(confirm(environment.messages.favorite.doYouWantToDeleteFavorite)){
+      let favoriteDeleteDto = new FavoriteDeleteDto();
+      favoriteDeleteDto.userId = this.authService.getUserId();
+      favoriteDeleteDto.productId = productId;
 
-    if (checkLogin == false) {
-      this.toastService.info(environment.messages.favorite.pleaseInter);
-      this.router.navigateByUrl('auth/login');
-      return;
+      this.subscription = this.favoriteService.favoriteDelete(favoriteDeleteDto).subscribe((res: boolean) => {
+        if (res == true) {
+          this.toastService.success(environment.messages.favorite.favoriteDeleteSuccess);
+          this.favoriteUpdate.emit(true);
+        }
+      })
     }
-
-    let favoriteAddDto = new FavoriteAddDto();
-    favoriteAddDto.userId = this.authService.getUserId();
-    favoriteAddDto.productId = productId;
-
-    this.subscription = this.favoriteService.favoriteAdd(favoriteAddDto).subscribe((res: boolean) => {
-      if (res == true) this.toastService.success(environment.messages.favorite.favoriteAddSuccess)
-    })
   }
 }

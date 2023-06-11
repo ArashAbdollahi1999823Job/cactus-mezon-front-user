@@ -16,7 +16,7 @@
       <button class=" details-button"><i class="fa fa-comment"></i></button>
       </a>
       <button class=" details-button" (click)="copyProductUrl(productDto.slug)"><i class="fa fa-share-alt-square"></i></button>
-      <button class=" details-button" (click)="favoriteAdd(productDto.id)"><i class="fa fa-heart-crack"></i></button>
+      <button class=" details-button text-red" (click)="favoriteDelete(productDto.id)" ><i class="fa fa-trash-alt"></i></button>
     </div>
     <a routerLink="/{{productDto.type}}/{{productDto.slug}}">
       <div class="card-enter-product">جزئیات</div>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
@@ -28,7 +28,6 @@ export class SearchComponent implements OnInit ,OnDestroy{
       this.paginationProductDto = paginationProductDtoRes;
     });
   }
-
   ngOnDestroy(): void {
     if(this.subscription)this.subscription.unsubscribe();
   }

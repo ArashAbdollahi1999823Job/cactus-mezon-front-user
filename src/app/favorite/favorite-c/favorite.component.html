@@ -1,1 +1,5 @@
-<p>favorite works!</p>
+<div class="container">
+  <div *ngFor="let product of productDtos">
+    <card-favorite-product-result [productDto]="product" (favoriteUpdate)="favoriteUpdate($event)"></card-favorite-product-result>
+  </div>
+</div>

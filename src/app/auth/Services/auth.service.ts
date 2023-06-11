@@ -85,7 +85,9 @@ export class AuthService {
   public getPhoneNumber(): string {
     return this.decodeToken(this.getToken())?.PhoneNumber;
   }
-
+  public getUserId(): string {
+    return this.decodeToken(this.getToken())?.Id;
+  }
   public forgetSend(forgetDto:ForgetDto): Observable<boolean> {
     return this.http.post<boolean>(`${this.backendUrlUser}/AccountUser/UserForget`,forgetDto);
   }

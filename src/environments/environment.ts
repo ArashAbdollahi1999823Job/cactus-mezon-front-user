@@ -41,6 +41,12 @@ export const environment={
     auth: {
       forgetPasswordSendSuccess:"رمز با موفقیت به سیم کارت شما ارسال شد."
     },
+    favorite:{
+      pleaseInter:"لطفا وارد اکانت خود شوید.",
+      favoriteAddSuccess:"این محصول به علاقه مندی شما اضاف شد.",
+      favoriteDeleteSuccess:"این محصول از علاقه مندی شما حذف شد.",
+      doYouWantToDeleteFavorite:"ایا میخاهید این محصول را از لیست علاقع مندی هایتان پاک کنید؟"
+    }
 },
   setting:{
     auth:{
