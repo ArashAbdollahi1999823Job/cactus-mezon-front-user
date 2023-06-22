@@ -1,9 +1,10 @@
-<app-nav></app-nav>
-<div class="app-body" style="background: url('./assets/images/back/b9r.jpg');background-size: cover;">
-  <ngx-spinner style="font-family: IRANSans;font-size: 1rem;padding-top: 30px;color: white">فروشگاه بزرگ کاکتوس ....
-  </ngx-spinner>
-  <main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
-    <router-outlet #o="outlet"></router-outlet>
-  </main>
+<div class="all" style=" background: url('./assets/images/back/b9r.jpg');background-size: cover;">
+  <app-nav></app-nav>
+  <div class="app-body" >
+    <ngx-spinner style="font-family: IRANSans;font-size: 1rem;padding-top: 30px;color: white">فروشگاه بزرگ کاکتوس ....
+    </ngx-spinner>
+    <main [@allPageAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
+  </div>
 </div>
-

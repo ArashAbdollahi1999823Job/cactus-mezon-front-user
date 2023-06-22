@@ -5,8 +5,8 @@
   position: relative;
   background: $color-white-a6;
   margin: 50px auto;
-  width: 350px;
-  height: 500px;
+  width: 280px;
+  height: 380px;
   .timer {
     border-radius: 20% 20% 0 0 ;
     margin:0 auto;
@@ -82,8 +82,8 @@
   }
   .card-image{
     position: relative;
-    width: 350px;
-    height: 350px;
+    width: 280px;
+    height: 280px;
     object-fit: cover;
     overflow: hidden;
     .card-enter-product {
@@ -106,7 +106,7 @@
     }
     .colors{
       bottom: 0;
-      right: 130px;
+      right: 100px;
       width: 100px;
       overflow: hidden;
       position: absolute;
@@ -125,8 +125,8 @@
         background: $color-saddlebrown;
       }
       .color{
-       /* width: 33%;
-        height: 50%;*/
+        /* width: 33%;
+         height: 50%;*/
         flex-grow: 1;
       }
     }
@@ -134,7 +134,7 @@
       top: 0;
       left: 0;
       position: absolute;
-      height: 350px;
+      height: 280px;
       background: $color-white;
       opacity: .6;
       transition: ease .4s;

@@ -17,7 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/front-user-cactus-mezon",
+            "outputPath": "../../../Back/CactusShop/Src/Presentation/WebApi/wwwroot/cactus",
+            "baseHref": "/cactus/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -38,6 +39,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",

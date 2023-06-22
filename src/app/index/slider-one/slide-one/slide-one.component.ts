@@ -9,6 +9,9 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {FavoriteAddDto} from "../../../shared/dto/favorite/favoriteAddDto";
 import {FavoriteService} from "../../../favorite/favorite-service/favorite.service";
+import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
+import {ProductPictureService} from "../../../shared/Services/product-picture.service";
+import {ProductPictureDto} from "../../../shared/dto/productPicture/productPictureDto";
 
 @Component({
   selector: 'slide-one',
@@ -17,12 +20,13 @@ import {FavoriteService} from "../../../favorite/favorite-service/favorite.servi
 })
 export class SlideOneComponent implements OnInit, OnDestroy {
   @Input('productDto') productDto: ProductDto;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   @ViewChild('timerEl', {static: false}) timerEl: ElementRef;
   private subscription: Subscription;
 
   ngOnInit(): void {
-    this.timer()
+    this.productPictureGetAll();
+    this.timer();
   }
 
   public showDetails(event: any): void {
@@ -57,7 +61,7 @@ export class SlideOneComponent implements OnInit, OnDestroy {
     cardDetails.style.borderRight = "0px solid black";
   }
 
-  constructor(private clipboard: Clipboard, private toastService: ToastrService, private authService: AuthService, private router: Router, private favoriteService: FavoriteService) {
+  constructor(private clipboard: Clipboard, private toastService: ToastrService, private authService: AuthService, private router: Router, private favoriteService: FavoriteService, private productPictureService: ProductPictureService) {
   }
 
   public timer(): void {
@@ -83,7 +87,7 @@ export class SlideOneComponent implements OnInit, OnDestroy {
     if (successful) this.toastService.success(environment.messages.common.addressCopySuccess)
   }
 
- public favoriteAdd(productId: string) {
+  public favoriteAdd(productId: string):void {
     let checkLogin;
     this.subscription = this.authService.currentUser$.subscribe((user: UserAuthorizeDto) => {
       checkLogin = !!user;
@@ -103,7 +107,18 @@ export class SlideOneComponent implements OnInit, OnDestroy {
       if (res == true) this.toastService.success(environment.messages.favorite.favoriteAddSuccess)
     })
   }
-
+  public productPictureGetAll(): void {
+    let productPictureParamDto = new ProductPictureSearchDto();
+    productPictureParamDto.productId = this.productDto.id;
+    productPictureParamDto.sort = Number(environment.setting.product.sortThumbnail);
+    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
+    this.subscription = this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
+        if (res) {
+          this.productDto.productPictures = res;
+        }
+      }
+    )
+  }
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
   }

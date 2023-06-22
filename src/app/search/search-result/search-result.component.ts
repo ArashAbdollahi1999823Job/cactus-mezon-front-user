@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild} from '@angular/core';
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
 import {ProductService} from "../../product/product-service/product.service";
@@ -8,7 +8,7 @@ import {ProductService} from "../../product/product-service/product.service";
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent {
+export class SearchResultComponent implements AfterViewInit{
   @Output() productUpdate = new EventEmitter<boolean>();
 
   @Input("paginationProductDto") paginationProductDto: PaginationDto<ProductDto>;
@@ -16,9 +16,13 @@ export class SearchResultComponent {
   slider: Element;
   public pageIndex = 1;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,private renderer: Renderer2,private ef:ElementRef) {
   }
 
+
+  ngAfterViewInit() {
+    this.renderer.setStyle(this.ef.nativeElement.querySelector('.container'), 'height', window.innerHeight-100-70+ "px");
+  }
   public scroll() {
     this.slider = this.key.nativeElement;
     if (this.slider.scrollTop > this.slider.scrollHeight -800) {

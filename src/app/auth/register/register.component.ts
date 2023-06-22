@@ -1,8 +1,7 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../Services/auth.service";
 import {RegisterDto} from "../../shared/dto/identity/registerDto";
-import {UserAuthorizeDto} from "../../shared/dto/identity/userAuthorizeDto";
 import {ToastrService} from "ngx-toastr";
 import {Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
@@ -15,6 +14,9 @@ import {RegisterReturnDto} from "../../shared/dto/identity/registerReturnDto";
 })
 export class RegisterComponent implements OnDestroy {
   private subscription:Subscription;
+  @ViewChild('password2') password2: ElementRef;
+  @ViewChild('password') password: ElementRef;
+  public toggle: boolean = false;
   registerForm = new FormGroup({
     phoneNumber: new FormControl("", [Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(11), Validators.minLength(11)]),
     password: new FormControl("", [Validators.required, Validators.maxLength(30), Validators.minLength(8),Validators.pattern("^[a-zA-Z0-9]*$")]),
@@ -43,8 +45,16 @@ export class RegisterComponent implements OnDestroy {
         return { match_error: 'Value does not match' };
       return null;
     };
+  }
+  public togglePassword():void {
+    this.toggle = !this.toggle;
+    if (this.toggle == true) this.password.nativeElement.type = 'text';
+    if (this.toggle != true) this.password.nativeElement.type = 'password';
 
-  }  ngOnDestroy(): void {
+    if (this.toggle == true) this.password2.nativeElement.type = 'text';
+    if (this.toggle != true) this.password2.nativeElement.type = 'password';
+  }
+  ngOnDestroy(): void {
     if(this.subscription)this.subscription.unsubscribe();
   }
 }

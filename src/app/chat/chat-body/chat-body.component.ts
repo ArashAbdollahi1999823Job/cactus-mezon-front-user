@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {ChatService} from "../chat-service/chat.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserDto} from "../../shared/dto/user/userDto";
 import {UserService} from "../../shared/Services/user.service";
@@ -24,7 +24,7 @@ import {ToastrService} from "ngx-toastr";
 export class ChatBodyComponent implements OnInit, OnDestroy {
   public responderPhoneNumber: string;
   private subscription: Subscription;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   public userDtoResponder: UserDto;
   public intervalReloadGroup;
   public divShowMessage: Element;
@@ -45,13 +45,15 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
     this.GroupAdd();
     this.userResponderGet();
   }
-  onFileChange(event: any):void {
+  public onFileChange(event: any):void {
     let reader = new FileReader();
     if (event.target.files.length > 0) {
       let file = null;
       file = event.target.files[0];
-      this.messageAddForm.patchValue({
-        fileSource: file,
+      this.compress(file,800,800).subscribe((res)=>{
+        this.messageAddForm.patchValue({
+          fileSource: res,
+        })
       })
       reader.readAsDataURL(file);
       reader.onload = () => {
@@ -59,6 +61,67 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
       }
     }
     this.pictureShowDelete();
+  }
+  public compress(file: File, maxHeight: number, maxWidth: number): Observable<File> {
+    const imageType = file.type || 'image/jpeg'
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    return Observable.create(observer => {
+      reader.onload = ev => {
+        const img = this.createImage(ev)
+        setTimeout(() => {
+          const canvas = document.createElement('canvas')
+          if (img.height < img.width) {
+            if (maxWidth) {
+              canvas.width = img.width > maxWidth ? maxWidth : img.width
+            } else {
+              canvas.width = img.width
+            }
+            if (maxHeight) {
+              canvas.height = img.height > maxHeight ? maxHeight : img.height
+            } else {
+              canvas.height = img.height
+            }
+          } else {
+            if (maxHeight) {
+              canvas.height = img.height > maxHeight ? maxHeight : img.height
+            } else {
+              canvas.height = img.height
+            }
+            if (maxWidth) {
+              canvas.width = canvas.height * 50 / 100
+            } else {
+              canvas.width = canvas.width
+            }
+          }
+          const canvasCtx = <CanvasRenderingContext2D>canvas.getContext('2d')
+          canvasCtx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          canvasCtx.canvas.toBlob(
+            blob => {
+              observer.next(
+                new File([blob], file.name, {
+                  type: imageType,
+                  lastModified: Date.now(),
+                }),
+              )
+            },
+            imageType,
+          )
+        })
+      }
+      reader.onerror = error => observer.error(error)
+    })
+  }
+  private createImage(ev) {
+
+    const imageContent = ev.target.result
+
+    const img = new Image()
+
+    img.src = imageContent
+
+    return img
+
   }
   private GroupAdd():void {
     this.intervalReloadGroup = setInterval(() => {
@@ -73,6 +136,7 @@ export class ChatBodyComponent implements OnInit, OnDestroy {
       }
     }, 500)
   }
+
   public userResponderGet():void {
     let userSearchDto = new UserSearchDto();
     userSearchDto.searchPhoneNumber = this.responderPhoneNumber;

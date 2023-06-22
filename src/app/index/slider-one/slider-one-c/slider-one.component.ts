@@ -10,6 +10,7 @@ import {ProductPictureService} from "../../../shared/Services/product-picture.se
 import {Subscription} from "rxjs";
 import {TypeService} from "../../../type/type-service/type.service";
 import {TypeSearchDto} from "../../../shared/dto/type/typeSearchDto";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'slider-one',
@@ -24,25 +25,25 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
   @ViewChild('key') key: ElementRef;
   public subscription: Subscription;
   public pageIndex = 1;
+  public productDtos:ProductDto[]=[];
 
-  constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService,private el:ElementRef) {
-  }
+  constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService,private el:ElementRef) {}
   ngOnInit(): void {
+    this.checkChild();
+   this.productGetAll(this.typeDto.id);
     this.changeBg();
     setTimeout(() => {
       this.btnClickLeft();
     }, 1000)
-    this.checkChild()
   }
-
-  private changeBg() {
+  private changeBg():void {
     if (this.index % 2 == 0) {
       this.el.nativeElement.querySelector(".container-slider-card").classList.add('bg-black-a7')
     } else if (this.index % 2 == 1) {
       this.el.nativeElement.querySelector(".container-slider-card").classList.add('bg-brown-a3')
     }
   }
-  public checkChild() {
+  public checkChild():void {
     let typeParamDto = new TypeSearchDto();
     typeParamDto.pageIndex = 1;
     typeParamDto.pageSize = 1;
@@ -56,7 +57,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       }
     })
   }
-  btnClickRight() {
+  public btnClickRight():void {
     this.slider = this.key.nativeElement;
     let scrollRight = setInterval(() => {
       this.slider.scrollLeft += 3;
@@ -65,7 +66,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       clearInterval(scrollRight);
     }, 600)
   }
-  btnClickLeft() {
+  public btnClickLeft():void {
     this.slider = this.key.nativeElement;
     let scrollRight = setInterval(() => {
       this.slider.scrollLeft -= 2;
@@ -80,39 +81,19 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
   }
   public productGetAll(typeId: string) {
     let productParamDto = new ProductSearchDto();
-    productParamDto.pageSize = 5;
+    productParamDto.pageSize =Number(environment.setting.product.addLoadNumber);
     productParamDto.pageIndex = this.pageIndex;
     productParamDto.typeId = typeId;
     this.productService.productSearchDtoSet(productParamDto);
     this.subscription = this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {
-        this.pageIndex=res.pageIndex;
-        res.data.forEach(x => {
-          this.typeDto.products.push(x);
-          this.productPictureGetAll(x.id, 1);
-        });
+        res.data.forEach(x=>{
+        this.productDtos.push(x);
+        })
       }
     })
   }
-  public productPictureGetAll(productId: string, sort: number){
-    let productPictureParamDto = new ProductPictureSearchDto();
-    productPictureParamDto.productId = productId;
-    productPictureParamDto.sort = sort;
-    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
-    this.subscription= this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
-        if (res) {
-          this.typeDto.products?.forEach(x => {
-            if (x.id == res[0].productId) {
-              if (res[0]) {
-              }
-              x.productPictures = res;
-            }
-          })
-        }
-      }
-    )
-  }
-  scroll() {
+  public scroll() :void {
     this.slider = this.key.nativeElement;
     if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth+100) {
       this.pageIndex++;

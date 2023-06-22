@@ -37,7 +37,7 @@
       <div class="error" *ngIf=" registerForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
       </div>
       <div>
-      <input type="password" placeholder="گذرواژه..." formControlName="password" [ngClass]="
+      <input type="password" #password  placeholder="گذرواژه..." formControlName="password" [ngClass]="
                      registerForm.controls.password.touched && registerForm.controls.password.errors?.required
                      || registerForm.controls.password.errors?.maxlength ||
                      registerForm.controls.password.errors?.minlength ? 'input-error' :'input-success'"   >
@@ -56,7 +56,7 @@
       </div>
       </div>
       <div>
-        <input type="password" placeholder="تکرار گذرواژه ..." formControlName="passwordConfirm" [ngClass]="
+        <input type="password" #password2  placeholder="تکرار گذرواژه ..." formControlName="passwordConfirm" [ngClass]="
                      registerForm.controls.passwordConfirm.touched && registerForm.controls.passwordConfirm.errors?.required
                      || registerForm.controls.passwordConfirm.errors?.maxlength ||
                      registerForm.controls.passwordConfirm.errors?.minlength ? 'input-error' :'input-success'">
@@ -67,6 +67,10 @@
         <div class="error" *ngIf=" registerForm.hasError('match_error')">تعداد
            رمز ها یکسان نیست!
         </div>
+      </div>
+      <div class="check">
+        نمایش رمز
+        <input type="checkbox" (change)="togglePassword()">
       </div>
       <button type="submit" [disabled]="!registerForm.valid" [ngClass]="!registerForm.valid ? 'disable':''">ثبت نام</button>
     </form>

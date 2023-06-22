@@ -1,15 +1,15 @@
 <div class="slider-container">
   <div class="image-container">
-    <span class="heart"><i class="fa fa-heart"></i></span>
+    <span class="heart" (click)="favoriteAdd(productDto.id)"><i class="fa fa-heart"></i></span>
     <span class="share"><i class="fa fa-share-alt-square" (click)="copyProductUrl()"></i></span>
-    <a routerLink="/chat/{{productDto.sellerPhoneNumber}}">
+    <a routerLink="/chat/{{productDto?.sellerPhoneNumber}}">
     <span class="comment"><i class="fa fa-comment"></i></span>
     </a>
-    <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}"
+    <img src="{{backendUrlPicture}}{{productPicture.pictureUrl}}"
          *ngFor="let productPicture of productPictureDtos;let index=index" class="picture-main " [ngClass]="index==0? 'block':''" id="{{productPicture.id}}">
   </div>
   <div class="images-container">
-    <img src="{{backendUrlPicture}}/{{productPicture.pictureUrl}}" #pictureOne alt="" *ngFor="let productPicture of productPictureDtos" class="picture-one"
+    <img src="{{backendUrlPicture}}{{productPicture.pictureUrl}}" #pictureOne alt="" *ngFor="let productPicture of productPictureDtos" class="picture-one"
          (click)="changePicture(productPicture.id,pictureOne)">
   </div>
 </div>

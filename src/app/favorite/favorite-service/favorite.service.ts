@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {FavoriteAddDto} from "../../shared/dto/favorite/favoriteAddDto";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 import {FavoriteSearchDto} from "../../shared/dto/favorite/favoriteSearchDto";
 import {ProductDto} from "../../shared/dto/product/productDto";
 import {FavoriteDeleteDto} from "../../shared/dto/favorite/favoriteDeleteDto";
@@ -10,7 +10,7 @@ import {FavoriteDeleteDto} from "../../shared/dto/favorite/favoriteDeleteDto";
   providedIn: 'root'
 })
 export class FavoriteService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public favoriteSearchDto:FavoriteSearchDto;
   constructor(private http:HttpClient) { }
   public favoriteAdd(favoriteAddDto:FavoriteAddDto):Observable<boolean>{

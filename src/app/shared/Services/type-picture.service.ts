@@ -1,5 +1,5 @@
  import {Injectable} from '@angular/core';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TypePictureParamDto} from "../dto/typePicture/typePictureParamDto";
@@ -9,13 +9,9 @@ import {TypePictureDto} from "../dto/typePicture/typePictureDto";
 })
 
 export class TypePictureService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public typePictureParam = new TypePictureParamDto();
   public constructor(private http: HttpClient) {}
-
-  public typePictureGetParam() {
-    return this.typePictureParam;
-  }
   public typePictureSetParam(typePictureParam: TypePictureParamDto) {
     this.typePictureParam = typePictureParam;
   }

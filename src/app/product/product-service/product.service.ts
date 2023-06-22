@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {Observable} from "rxjs";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
@@ -11,7 +11,7 @@ import {ProductDto} from "../../shared/dto/product/productDto";
 export class ProductService {
 
   constructor(private http: HttpClient) { }
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public productSearchDto : ProductSearchDto;
   public productSearchDtoGet() {
     return this.productSearchDto;

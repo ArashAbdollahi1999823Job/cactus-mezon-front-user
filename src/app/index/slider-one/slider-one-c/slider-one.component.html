@@ -1,8 +1,6 @@
 <section class="container-slider-card">
     <div class="container-slider-card-woman-items" (scroll)="scroll()" #key>
-      <ng-container *ngFor="let item of typeDto.products">
-        <slide-one [productDto]="item"></slide-one>
-      </ng-container>
+        <slide-one *ngFor="let productDto of productDtos"  [productDto]="productDto"></slide-one>
     </div>
   <div class="slider-button-div">
     <button class="btn-arrow-slider-man" (click)="btnClickRight()"><i class="fa fa-arrow-alt-circle-right"></i></button>

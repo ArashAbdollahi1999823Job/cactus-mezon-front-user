@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 import {ProductPictureSearchDto} from "../dto/productPicture/productPictureSearchDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ProductPictureDto} from "../dto/productPicture/productPictureDto";
@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ProductPictureService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public productPictureParam :ProductPictureSearchDto;
   public constructor(private http: HttpClient) {}
   public productPictureSearchDtoSet(productPictureParam: ProductPictureSearchDto) {

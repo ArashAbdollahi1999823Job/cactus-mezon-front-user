@@ -1,5 +1,3 @@
 <div class="container" (scroll)="scroll()" #key>
-  <div *ngFor="let product of paginationProductDto?.data">
-    <card-search-product-result [productDto]="product"></card-search-product-result>
-  </div>
+    <card-search-product-result *ngFor="let product of paginationProductDto?.data" [productDto]="product"></card-search-product-result>
 </div>

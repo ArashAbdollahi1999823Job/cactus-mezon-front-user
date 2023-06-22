@@ -14,7 +14,7 @@ import {ForgetDto} from "../../shared/dto/identity/forgetDto";
   providedIn: 'root'
 })
 export class AuthService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   private currentUser = new BehaviorSubject<UserAuthorizeDto>(null);
   public currentUser$ = this.currentUser.asObservable();
 
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public getToken() {
-    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.keyUserToken))
+    const user = <UserAuthorizeDto>JSON.parse(localStorage.getItem(environment.storage.userToken))
     if (user) {
       return user.token;
     }
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem(environment.keyUserToken);
+    localStorage.removeItem(environment.storage.userToken);
     this.currentUser.next(null);
     this.router.navigateByUrl('/Cactus');
     this.presenceService.stopHubConnection();
@@ -71,7 +71,7 @@ export class AuthService {
 
   public setCurrentUser(userAuthorizeDto: UserAuthorizeDto) {
     if (userAuthorizeDto) {
-      localStorage.setItem(environment.keyUserToken, JSON.stringify(userAuthorizeDto))
+      localStorage.setItem(environment.storage.userToken, JSON.stringify(userAuthorizeDto))
       this.currentUser.next(userAuthorizeDto);
     }
   }

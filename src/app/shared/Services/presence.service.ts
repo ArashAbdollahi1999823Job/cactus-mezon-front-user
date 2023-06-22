@@ -13,7 +13,7 @@ import {MessageDto} from "../dto/Chat/message/messageDto";
   providedIn: 'root'
 })
 export class PresenceService {
-  private hubUrl=environment.hubUrl;
+  private hubUrl=environment.setting.url.hubUrl;
   private hubConnection:HubConnection;
   public messageUnReadDtos = new BehaviorSubject<MessageDto[]>(null);
   public messageUnReadDtos$ = this.messageUnReadDtos.asObservable();

@@ -18,8 +18,8 @@ export class ChatService {
   public messageDtos = new BehaviorSubject<MessageDto[]>(null);
   public messageDtos$ = this.messageDtos.asObservable();
   public chatHub: HubConnection;
-  public chatHubUrl = environment.chatHubUrl;
-  public backendUrlUser=environment.backendUrlUser;
+  public chatHubUrl = environment.setting.url.chatHubUrl;
+  public backendUrlUser=environment.setting.url.backendUrlUser;
   constructor(private http: HttpClient, private toastService: ToastrService) {}
   public CreateChatHubConnection(token: string) {
     this.chatHub = new HubConnectionBuilder().withUrl(this.chatHubUrl, {

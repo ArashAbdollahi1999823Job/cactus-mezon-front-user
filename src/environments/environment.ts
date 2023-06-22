@@ -1,29 +1,12 @@
 export const environment={
-  production:false,
-  backendUrl:'http://localhost:9001/api',
-  backendUrlUser:'http://localhost:9001/api/User',
-  backendUrlPicture:'http://localhost:9001',
-  hubUrl:"http://localhost:9001/hubs",
-  chatHubUrl:"http://localhost:9001/hubs/chat",
+  production: false,
   storage:{
     otherUserPhoneNumberForChat:"otherUserPhoneNumberForChat",
     groupName:"groupName",
     myPhoneNumber:"myPhoneNumber",
     myPhoneNumberForAuth:"myPhoneNumberForAuth",
+    userToken:"userToken",
   },
-  roles:{
-    boss:"Boss",
-    admin:"Admin",
-    seller:"Seller",
-    user:"User",
-  },
-  productSetting:{
-    thumbnail:1,
-    sliderStart:2,
-    sliderEnd:10,
-  },
-  keyBasketLocalStorage:"customerBasketId",
-  keyUserToken:"userToken",
   messages:{
     common:{
       pleaseEnterSite:"لطفا ابتدا وارد سایت شوید.",
@@ -32,12 +15,11 @@ export const environment={
       doYouWantToExit:"ایا میخاهید خارج شوید؟",
       registerSuccess:"ثبت نام موفقیت انجام شد.",
       loginSuccess:"ورود با موفقیت انجام شد.",
-      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستلدن این عکس را کنسل کنید؟",
+      doYouWantToCancelSendThisPicture:"ایا میخاهید فرستا دن این عکس را کنسل کنید؟",
       addressCopySuccess:"ادرس با موفقیت کپی شد.",
       confirmPhoneNumberSuccess:"شماره موبایل با موفقیت تایید شد.",
       confirmPhoneNumberNotDonePleaseRegisterAgain:"عملیات تایید شماره تلفن انجام نشد لطفا دوباره ثبت نام کنید!",
-    }
-    ,
+    },
     auth: {
       forgetPasswordSendSuccess:"رمز با موفقیت به سیم کارت شما ارسال شد."
     },
@@ -51,6 +33,27 @@ export const environment={
   setting:{
     auth:{
       secondEndCode:"90"
+    },
+    type:{
+      typeMatherIndex:"00000000-0000-0000-0000-000000000000",
+    },
+    product:{
+      sortThumbnail:"1",
+      addLoadNumber:"5",
+    },
+    url:{
+      backendUrl:'http://localhost:9001/api',
+      backendUrlUser:'http://localhost:9001/api/User',
+      backendUrlPicture:'http://localhost:9001/',
+      hubUrl:"http://localhost:9001/hubs",
+      chatHubUrl:"http://localhost:9001/hubs/chat",
+    }
+  },
+  role:{
+    product:{
+      thumbnail:1,
+      sliderStart:2,
+      sliderEnd:10,
     }
   }
 }

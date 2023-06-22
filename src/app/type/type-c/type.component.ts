@@ -20,7 +20,7 @@ import {Subscription} from "rxjs";
   templateUrl: './type.component.html',
   styleUrls: ['./type.component.scss']
 })
-export class TypeComponent implements OnInit, OnDestroy {
+export class TypeComponent implements OnDestroy {
   public typeSlug: string;
   public typeDto: TypeDto;
   public typesDto: TypeDto[];
@@ -29,16 +29,12 @@ export class TypeComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute, private typeService: TypeService, private typePictureService: TypePictureService, private productPictureService: ProductPictureService, private productService: ProductService, private router: Router) {
     this.subscription = this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
-        this.ngOnInit();
+        this.typeGet();
       }
     })
   }
-
-  ngOnInit(): void {
+  public typeGet():void {
     this.typeSlug = this.activatedRoute.snapshot.paramMap.get("TypeSlug");
-    this.typeGet();
-  }
-  public typeGet() {
     let typeParamDto = new TypeSearchDto();
     typeParamDto.slug = this.typeSlug;
     this.typeService.typeSearchDtoSet(typeParamDto);
@@ -50,8 +46,7 @@ export class TypeComponent implements OnInit, OnDestroy {
       }
     })
   }
-
-  public typePicturesGet() {
+  public typePicturesGet():void {
     let typePictureParamDto = new TypePictureParamDto();
     typePictureParamDto.typeId = this.typeDto.id;
     this.typePictureService.typePictureSetParam(typePictureParamDto);
@@ -61,52 +56,13 @@ export class TypeComponent implements OnInit, OnDestroy {
       }
     })
   }
-  public typeGetAll() {
+  public typeGetAll():void {
     let typeParamDto = new TypeSearchDto();
     typeParamDto.justParentTypeId = this.typeDto.id;
     this.typeService.typeSearchDtoSet(typeParamDto);
     this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typesDto = res.data;
-        this.typesDto.forEach(x => {
-          this.productGetAll(x.id)
-        })
-      }
-    })
-  }
-  public productGetAll(typeId: string) {
-    let productParamDto = new ProductSearchDto();
-    productParamDto.typeId = typeId;
-    this.productService.productSearchDtoSet(productParamDto);
-    this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
-      if (res) {
-        this.typesDto.forEach(x => {
-          if (x.id == typeId) {
-            x.products = res.data;
-            x.products.forEach(x => {
-              this.productPictureGetAll(x.id, 1)
-            })
-          }
-        })
-      }
-    })
-  }
-  public productPictureGetAll(productId: string, sort: number) {
-    let productPictureParamDto = new ProductPictureSearchDto();
-    productPictureParamDto.productId = productId;
-    productPictureParamDto.sort = sort;
-    this.productPictureService.productPictureSearchDtoSet(productPictureParamDto);
-    this.productPictureService.productPictureGetAll().subscribe((res: ProductPictureDto[]) => {
-      if (res) {
-        this.typesDto?.forEach(x => {
-          x.products?.forEach(x => {
-            if (x.id == res[0].productId) {
-              if (res[0]) {
-              }
-              x.productPictures = res;
-            }
-          })
-        })
       }
     })
   }

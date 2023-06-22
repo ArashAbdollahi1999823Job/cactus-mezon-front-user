@@ -7,7 +7,7 @@
   <div class="new-Price" *ngIf="productDto.off">{{(productDto.price-(productDto.price/100)*productDto.off.offPercent)|number}}</div>
   <div class="card-image">
     <ng-container *ngFor="let picture of productDto.productPictures" >
-      <img src="{{backendUrlPicture}}/{{picture.pictureUrl}} " >
+      <img src="{{backendUrlPicture}}{{picture.pictureUrl}} " >
     </ng-container>
 
     <span class="off" *ngIf="productDto.off">{{productDto.off.offPercent}}%</span>

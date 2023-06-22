@@ -28,13 +28,6 @@
         </i><br>چت
       </li>
     </a>
-<!--    <a routerLink="/auth">
-      <li class="nav-ul-li" routerLinkActive="active">
-        <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
-        </i><br>پروفایل
-      </li>
-    </a>-->
-
     <a routerLink="/auth" *ngIf="!(authService.currentUser$|async)">
       <li class="nav-ul-li" routerLinkActive="active">
         <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">

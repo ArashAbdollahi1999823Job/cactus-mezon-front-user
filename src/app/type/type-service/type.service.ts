@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -10,7 +10,7 @@ import {PaginationDto} from "../../shared/dto/base/paginationDto";
   providedIn: 'root'
 })
 export class TypeService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public typeSearchDto :TypeSearchDto;
   public constructor(private http: HttpClient) {}
   public typeSearchDtoGet() {

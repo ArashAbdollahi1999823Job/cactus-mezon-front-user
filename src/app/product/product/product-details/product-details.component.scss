@@ -76,13 +76,13 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 3px;
-  color: white;
+  color: black;
 }
-tr:nth-child(odd){
-  background-color: rgba(0,0,0,.9);
+/*tr:nth-child(odd){
+  background-color: rgba(0,0,0,.2);
 
 }
 tr:nth-child(even){
-  background-color: rgba(0,0,0,.5);
-}
+  background-color: rgba(0,0,0,.1);
+}*/
 

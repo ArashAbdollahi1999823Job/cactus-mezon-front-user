@@ -9,7 +9,7 @@ import {BrandDto} from "../dto/brand/brandDto";
   providedIn: 'root'
 })
 export class BrandService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public brandSearchDto = new BrandSearchDto();
   public constructor(private http: HttpClient) {}
   public brandSearchDtoGet():BrandSearchDto {

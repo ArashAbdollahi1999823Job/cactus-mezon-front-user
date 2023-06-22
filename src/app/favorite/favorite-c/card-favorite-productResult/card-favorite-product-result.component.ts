@@ -20,7 +20,7 @@ import {FavoriteService} from "../../favorite-service/favorite.service";
 })
 export class CardFavoriteProductResultComponent implements OnInit {
   @Input('productDto') productDto: ProductDto;
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   @ViewChild('timerEl', {static: false}) timerEl: ElementRef;
   private subscription: Subscription;
   @Output('favoriteUpdate') favoriteUpdate=new EventEmitter<boolean>();
@@ -84,7 +84,7 @@ export class CardFavoriteProductResultComponent implements OnInit {
   }
 
   public copyProductUrl(slug: string): void {
-    const successful = this.clipboard.copy(slug);
+    const successful = this.clipboard.copy(`${location.href}/${slug}`);
     if (successful) this.toastService.success(environment.messages.common.addressCopySuccess)
   }
 

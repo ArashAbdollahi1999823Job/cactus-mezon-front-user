@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./chat-nav.component.scss']
 })
 export class ChatNavComponent implements OnInit {
-  public backendUrlPicture = environment.backendUrlPicture;
+  public backendUrlPicture = environment.setting.url.backendUrlPicture;
   public userDtosBoss: UserDto[];
   public userDtosAdmin: UserDto[];
   public userDtosSeller: UserDto[];

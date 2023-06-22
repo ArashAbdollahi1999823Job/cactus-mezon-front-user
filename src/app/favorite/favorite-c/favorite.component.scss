@@ -1,0 +1,12 @@
+@import "src/assets/styles/practicalValue";
+.container{
+  height: calc(100vh - 70px);
+  overflow: scroll;
+  .empty{
+    background: white;
+    width: 200px;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+  }
+}

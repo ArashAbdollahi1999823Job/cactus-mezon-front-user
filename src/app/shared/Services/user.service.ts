@@ -9,7 +9,7 @@ import {UserDto} from "../dto/user/userDto";
   providedIn: 'root'
 })
 export class UserService {
-  private backendUrlUser = environment.backendUrlUser;
+  private backendUrlUser = environment.setting.url.backendUrlUser;
   public userSearchDto = new UserSearchDto();
   constructor(private readonly http: HttpClient) {}
   public userGetAll(): Observable<PaginationDto<UserDto>> {

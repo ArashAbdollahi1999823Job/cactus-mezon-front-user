@@ -9,7 +9,7 @@
   <a [routerLink]="boss.phoneNumber" *ngFor="let boss of userDtosBoss">
     <div class="user-container ">
       <div class="user-img">
-        <img src="{{backendUrlPicture}}/{{boss?.userPictureDto?.pictureUrl}}">
+        <img src="{{backendUrlPicture}}{{boss?.userPictureDto?.pictureUrl}}">
         <img *ngIf="!boss?.userPictureDto" src="assets/images/userIcon.png">
       </div>
       <span class="show-online-user"
@@ -31,7 +31,7 @@
   <a [routerLink]="admin.phoneNumber" *ngFor="let admin of userDtosAdmin">
     <div class="user-container " [class.online]="(presenceService.usersOnline$ | async).includes(admin.phoneNumber)">
       <div class="user-img ">
-        <img *ngIf="admin?.userPictureDto" src="{{backendUrlPicture}}/{{admin?.userPictureDto?.pictureUrl}}">
+        <img *ngIf="admin?.userPictureDto" src="{{backendUrlPicture}}{{admin?.userPictureDto?.pictureUrl}}">
         <img *ngIf="!admin?.userPictureDto" src="assets/images/userIcon.png">
       </div>
       <span class="show-online-user"
@@ -53,7 +53,7 @@
   <a [routerLink]="seller.phoneNumber" *ngFor="let seller of userDtosSeller">
     <div class="user-container " [class.online]="(presenceService.usersOnline$ | async).includes(seller.phoneNumber)">
       <div class="user-img ">
-        <img *ngIf="seller?.userPictureDto" src="{{backendUrlPicture}}/{{seller?.userPictureDto?.pictureUrl}}">
+        <img *ngIf="seller?.userPictureDto" src="{{backendUrlPicture}}{{seller?.userPictureDto?.pictureUrl}}">
         <img src="assets/images/userIcon.png">
       </div>
       <span class="show-online-user"

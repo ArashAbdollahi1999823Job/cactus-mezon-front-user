@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TypeDto} from "../../../shared/dto/type/typeDto";
-import {environment} from "../../../../environments/environment.prod";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'slider-two',
@@ -8,7 +8,7 @@ import {environment} from "../../../../environments/environment.prod";
   styleUrls: ['./slider-two.component.scss']
 })
 export class SliderTwoComponent implements OnInit ,OnDestroy{
-  public backendUrlPicture=environment.backendUrlPicture;
+  public backendUrlPicture=environment.setting.url.backendUrlPicture;
   @Input('typeDto') typeDto:TypeDto;
 
   public slide;
