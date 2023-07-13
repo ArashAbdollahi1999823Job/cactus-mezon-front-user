@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {PresenceService} from "../../Services/presence.service";
 import {ChatService} from "../../../chat/chat-service/chat.service";
 import {AuthService} from "../../../auth/Services/auth.service";
@@ -13,7 +13,11 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit{
-  constructor(public authService: AuthService, public chatService:ChatService, public presenceService:PresenceService) {}
+  public fadeMoreNav:boolean=false;
+  public moreNavEl: Element;
+  public flashEl: Element;
+
+  constructor(public authService: AuthService, public chatService:ChatService, public presenceService:PresenceService,private ef:ElementRef) {}
   ngOnInit(): void {
     this.messageUnReadGetAll();
   }
@@ -31,6 +35,25 @@ export class NavComponent implements OnInit{
   logout() {
     if(confirm(environment.messages.common.doYouWantToExit)){
     this.authService.logout();
+    }
+  }
+
+  handleMoreNav() {
+    this.fadeMoreNav = !this.fadeMoreNav;
+
+    this.moreNavEl = this.ef.nativeElement.getElementsByClassName('more-nav')[0];
+    this.flashEl = this.ef.nativeElement.getElementsByClassName('flash')[0];
+
+    if (this.fadeMoreNav) {
+      this.moreNavEl.classList.add('fadeInMoreNav');
+      this.moreNavEl.classList.remove('fadeOutMoreNav');
+      this.flashEl.classList.add('animateDown');
+      this.flashEl.classList.remove('animateUp');
+    } else {
+      this.moreNavEl.classList.add('fadeOutMoreNav');
+      this.moreNavEl.classList.remove('fadeInMoreNav');
+      this.flashEl.classList.remove('animateDown');
+      this.flashEl.classList.add('animateUp');
     }
   }
 }

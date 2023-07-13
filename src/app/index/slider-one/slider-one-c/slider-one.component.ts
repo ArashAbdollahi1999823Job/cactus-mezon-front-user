@@ -3,14 +3,13 @@ import {TypeDto} from "../../../shared/dto/type/typeDto";
 import {ProductSearchDto} from "../../../shared/dto/product/productSearchDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../../shared/dto/product/productDto";
-import {ProductPictureSearchDto} from "../../../shared/dto/productPicture/productPictureSearchDto";
-import {ProductPictureDto} from "../../../shared/dto/productPicture/productPictureDto";
 import {ProductService} from "../../../product/product-service/product.service";
 import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {Subscription} from "rxjs";
 import {TypeService} from "../../../type/type-service/type.service";
 import {TypeSearchDto} from "../../../shared/dto/type/typeSearchDto";
 import {environment} from "../../../../environments/environment";
+import {ActiveType} from "../../../shared/enum/activeType";
 
 @Component({
   selector: 'slider-one',
@@ -84,6 +83,7 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     productParamDto.pageSize =Number(environment.setting.product.addLoadNumber);
     productParamDto.pageIndex = this.pageIndex;
     productParamDto.typeId = typeId;
+    productParamDto.isActive=ActiveType.active;
     this.productService.productSearchDtoSet(productParamDto);
     this.subscription = this.productService.productGetAll().subscribe((res: PaginationDto<ProductDto>) => {
       if (res) {

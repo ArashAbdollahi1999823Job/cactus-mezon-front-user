@@ -27,4 +27,5 @@ export class ProductDto {
   productPictures:ProductPictureDto[];
   colorDtos:ColorDto[];
   productItemDtos:ProductItemDto[];
+  storeSlug:string;
 }

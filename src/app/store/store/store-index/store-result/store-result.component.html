@@ -1,0 +1,3 @@
+<div class="container" (scroll)="scroll()" #key>
+    <store-card *ngFor="let store of paginationStoreDto?.data" [storeDto]="store"></store-card>
+</div>

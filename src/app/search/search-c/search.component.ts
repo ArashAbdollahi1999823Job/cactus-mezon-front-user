@@ -5,6 +5,8 @@ import {ProductDto} from "../../shared/dto/product/productDto";
 import {ProductService} from "../../product/product-service/product.service";
 import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
 import {Subscription} from "rxjs";
+import {ActiveType} from "../../shared/enum/activeType";
+
 @Component({
   selector: 'app-search-c',
   templateUrl: './search.component.html',
@@ -24,6 +26,7 @@ export class SearchComponent implements OnInit ,OnDestroy{
     if (updated) this.productGetAll()
   }
   private productGetAll():void {
+    this.productService.productSearchDto.isActive=ActiveType.active;
    this.subscription= this.productService.productGetAll().subscribe((paginationProductDtoRes:PaginationDto<ProductDto>) => {
       this.paginationProductDto = paginationProductDtoRes;
     });

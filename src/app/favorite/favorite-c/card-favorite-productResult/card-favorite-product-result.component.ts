@@ -34,27 +34,34 @@ export class CardFavoriteProductResultComponent implements OnInit {
     let cardDetails = event.srcElement.querySelector('.card-details');
     let detailsButton = event.srcElement.querySelectorAll('.details-button');
     let cardEnterProduct = event.srcElement.querySelectorAll('.card-enter-product')[0];
+    let cardBrandProduct = event.srcElement.querySelectorAll('.card-brand-product')[0];
     let colors = event.srcElement.querySelectorAll('.colors')[0];
     if (colors) {
       colors.style.height = '25%'
     }
     cardEnterProduct.style.width = "30%";
+    if(cardBrandProduct){
+    cardBrandProduct.style.width = "70%";
+    }
     cardDetails.style.width = "60px";
     cardDetails.style.borderRight = "1px solid black";
     detailsButton.forEach(x => {
       x.style.fontSize = '1.7vh';
     })
   }
-
   public hideDetails(event: any): void {
     let cardDetails = event.srcElement.querySelector('.card-details');
     let detailsButton = event.srcElement.querySelectorAll('.details-button');
     let cardEnterProduct = event.srcElement.querySelectorAll('.card-enter-product')[0];
+    let cardBrandProduct = event.srcElement.querySelectorAll('.card-brand-product')[0];
     let colors = event.srcElement.querySelectorAll('.colors')[0];
     if (colors) {
       colors.style.height = '0'
     }
     cardEnterProduct.style.width = "0";
+    if(cardBrandProduct){
+    cardBrandProduct.style.width = "0";
+    }
     detailsButton.forEach(x => {
       x.style.fontSize = '1vh';
     })

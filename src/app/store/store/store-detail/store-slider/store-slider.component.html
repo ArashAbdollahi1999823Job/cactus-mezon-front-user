@@ -1,0 +1,13 @@
+<div class="slider-container">
+  <div class="image-container">
+    <a routerLink="/chat/{{sellerPhoneNumber}}">
+      <span class="comment"><i class="fa fa-comment"></i></span>
+    </a>
+    <img src="{{backendUrlPicture}}{{storePicture.pictureUrl}}"
+         *ngFor="let storePicture of storePictureDtos;let index=index" class="picture-main " [ngClass]="index==0? 'block':''" id="{{storePicture.id}}">
+  </div>
+  <div class="images-container">
+    <img src="{{backendUrlPicture}}{{storePicture.pictureUrl}}" #pictureOne alt="" *ngFor="let storePicture of storePictureDtos" class="picture-one"
+         (click)="changePicture(storePicture.id,pictureOne)">
+  </div>
+</div>

@@ -54,6 +54,11 @@ export const environment={
       thumbnail:1,
       sliderStart:2,
       sliderEnd:10,
+    },
+    store:{
+      thumbnail:1,
+      sliderStart:2,
+      sliderEnd:10,
     }
   }
 }
