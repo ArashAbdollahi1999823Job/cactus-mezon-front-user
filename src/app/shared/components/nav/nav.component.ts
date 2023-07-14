@@ -7,6 +7,8 @@ import {IsReadType} from "../../enum/isReadType";
 import {PaginationDto} from "../../dto/base/paginationDto";
 import {MessageDto} from "../../dto/Chat/message/messageDto";
 import {environment} from "../../../../environments/environment";
+import {map} from "rxjs";
+import {UserAuthorizeDto} from "../../dto/identity/userAuthorizeDto";
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -19,7 +21,9 @@ export class NavComponent implements OnInit{
 
   constructor(public authService: AuthService, public chatService:ChatService, public presenceService:PresenceService,private ef:ElementRef) {}
   ngOnInit(): void {
-    this.messageUnReadGetAll();
+    this.authService.currentUser$.subscribe((userAuthorizeDto:UserAuthorizeDto)=>{
+      if(userAuthorizeDto)this.messageUnReadGetAll();
+    })
   }
   public messageUnReadGetAll(){
     let messageSearchDto=new MessageSearchDto();
