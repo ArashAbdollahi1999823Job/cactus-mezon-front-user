@@ -65,8 +65,8 @@ export class AuthService {
     this.presenceService.stopHubConnection();
   }
 
-  public userDelete(phoneNumber: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.backendUrlUser}/AccountUser/UserDelete/${phoneNumber}`);
+  public userVerifyDelete(phoneNumber: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.backendUrlUser}/AccountUser/UserVerifyDelete/${phoneNumber}`);
   }
 
   public setCurrentUser(userAuthorizeDto: UserAuthorizeDto) {

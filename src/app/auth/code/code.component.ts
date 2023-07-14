@@ -41,13 +41,13 @@ export class CodeComponent implements OnInit, OnDestroy {
     this.interval = setInterval(() => {
       sec = sec - 1
       if (sec == 0) {
-        this.userDelete();
+        this.userVerifyDelete();
       }
       this.timerEl.nativeElement.innerHTML = sec;
     }, 1000);
   }
-  public userDelete(): void {
-    this.subscription = this.authService.userDelete(localStorage.getItem(environment.storage.myPhoneNumberForAuth)).subscribe((res: boolean) => {
+  public userVerifyDelete(): void {
+    this.subscription = this.authService.userVerifyDelete(localStorage.getItem(environment.storage.myPhoneNumberForAuth)).subscribe((res: boolean) => {
       if (res == true) {
         this.toast.info(environment.messages.common.confirmPhoneNumberNotDonePleaseRegisterAgain)
         this.router.navigateByUrl('Cactus');
@@ -60,7 +60,7 @@ export class CodeComponent implements OnInit, OnDestroy {
       checkLogin = !!user;
     })
     if (!checkLogin) setTimeout(() => {
-      this.userDelete();
+      this.userVerifyDelete();
     })
     clearInterval(this.interval);
     if (this.subscription) this.subscription.unsubscribe();
