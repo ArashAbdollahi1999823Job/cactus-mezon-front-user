@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import {ErrorHandlingInterceptor} from "./shared/interceptors/error-handling.int
 import {LoadingInterceptor} from "./shared/interceptors/loading.interceptor";
 import {TypeModule} from "./type/type.module";
 import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
     AuthModule,
     ChatModule,
     ToastrModule.forRoot({positionClass:'toast-top-full-width',progressAnimation:'decreasing',timeOut:5000,progressBar:true,preventDuplicates:true,closeButton:false}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorHandlingInterceptor,multi:true},

@@ -30,7 +30,7 @@ export class LoginComponent implements OnDestroy {
    this.subscription= this.authService.login(<LoginDto>this.loginForm.value).subscribe((userAuthorizeDtoRes:UserAuthorizeDto)=>{
       if(userAuthorizeDtoRes){
         this.toast.success(environment.messages.common.loginSuccess,userAuthorizeDtoRes.username)
-        this.router.navigateByUrl("/Cactus")
+        this.router.navigateByUrl("/index")
       }
     });
   }

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {TypeService} from "../type-service/type.service";
 import {TypeDto} from "../../shared/dto/type/typeDto";
@@ -7,10 +7,6 @@ import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {TypePictureService} from "../../shared/Services/type-picture.service";
 import {TypePictureParamDto} from "../../shared/dto/typePicture/typePictureParamDto";
 import {TypePictureDto} from "../../shared/dto/typePicture/typePictureDto";
-import {ProductSearchDto} from "../../shared/dto/product/productSearchDto";
-import {ProductDto} from "../../shared/dto/product/productDto";
-import {ProductPictureSearchDto} from "../../shared/dto/productPicture/productPictureSearchDto";
-import {ProductPictureDto} from "../../shared/dto/productPicture/productPictureDto";
 import {ProductPictureService} from "../../shared/Services/product-picture.service";
 import {ProductService} from "../../product/product-service/product.service";
 import {Subscription} from "rxjs";
