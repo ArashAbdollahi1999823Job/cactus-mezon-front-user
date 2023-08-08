@@ -13,9 +13,6 @@ export class TypeService {
   private backendUrlUser = environment.setting.url.backendUrlUser;
   public typeSearchDto :TypeSearchDto;
   public constructor(private http: HttpClient) {}
-  public typeSearchDtoGet() {
-    return this.typeSearchDto;
-  }
   public typeSearchDtoSet(typeSearchDto: TypeSearchDto) {
     this.typeSearchDto = typeSearchDto;
   }
@@ -35,6 +32,8 @@ export class TypeService {
     requestTypeParam = requestTypeParam.append('pageSize', this.typeSearchDto.pageSize);
     requestTypeParam = requestTypeParam.append('isActive', this.typeSearchDto.activeType);
     requestTypeParam=requestTypeParam.append('sortType',this.typeSearchDto.sortType);
+    requestTypeParam=requestTypeParam.append('minutesCache',environment.cache.type.type)
+
     return requestTypeParam;
   }
 }

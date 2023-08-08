@@ -10,6 +10,7 @@ import {TypePictureDto} from "../../shared/dto/typePicture/typePictureDto";
 import {ProductPictureService} from "../../shared/Services/product-picture.service";
 import {ProductService} from "../../product/product-service/product.service";
 import {Subscription} from "rxjs";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'type',
@@ -22,7 +23,8 @@ export class TypeComponent implements OnDestroy {
   public typesDto: TypeDto[];
   public subscription: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute, private typeService: TypeService, private typePictureService: TypePictureService, private productPictureService: ProductPictureService, private productService: ProductService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private typeService: TypeService, private typePictureService: TypePictureService,
+              private productPictureService: ProductPictureService, private productService: ProductService, private router: Router,private meta:Meta,private title:Title) {
     this.subscription = this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.typeGet();
@@ -37,6 +39,10 @@ export class TypeComponent implements OnDestroy {
     this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
       if (res) {
         this.typeDto = res.data[0];
+        this.meta.updateTag({ name: 'keywords', content: this.typeDto.metaDescription });
+        this.meta.updateTag({ name: 'robots', content: "index,follow" });
+        this.meta.updateTag( { name: 'description', content: this.typeDto.metaDescription } );
+        this.title.setTitle(this.typeDto.name)
         this.typePicturesGet()
         this.typeGetAll();
       }

@@ -9,6 +9,7 @@ import {PaginationDto} from "../../../../shared/dto/base/paginationDto";
 import {StorePictureSearchDto} from "../../../../shared/dto/storePicture/storePictureSearchDto";
 import {environment} from "../../../../../environments/environment";
 import {StorePictureService} from "../../../store-service/store-picture.service";
+import {Meta, Title} from "@angular/platform-browser";
 @Component({
   selector: 'store-detail',
   templateUrl: './store-detail.component.html',
@@ -19,7 +20,7 @@ export class StoreDetailComponent implements OnInit,AfterViewInit{
   public storeDto:StoreDto;
   public storePictureDtos:StoreUserPictureDto[];
   private subscription:Subscription;
-  constructor(private activatedRoute:ActivatedRoute,private storeService:StoreService,private storePictureService:StorePictureService,private renderer: Renderer2,private ef:ElementRef) {
+  constructor(private title:Title,private activatedRoute:ActivatedRoute,private storeService:StoreService,private storePictureService:StorePictureService,private renderer: Renderer2,private ef:ElementRef,private meta:Meta) {
   }
   ngOnInit(): void {
     this.storeSlug= this.activatedRoute.snapshot.paramMap.get('StoreSlug');
@@ -34,8 +35,15 @@ export class StoreDetailComponent implements OnInit,AfterViewInit{
     storeSearchDto.slug=this.storeSlug;
     this.storeService.storeSearchDtoSet(storeSearchDto);
     this.subscription=this.storeService.storeGetAll().subscribe((paginationStoreDtoRes:PaginationDto<StoreDto>)=>{
-      if (paginationStoreDtoRes)this.storeDto=paginationStoreDtoRes.data[0];
-      this.storePictureGet();
+      if (paginationStoreDtoRes) {
+        this.storeDto = paginationStoreDtoRes.data[0];
+
+        this.meta.updateTag({ name: 'keywords', content: this.storeDto.description + this.storeDto.address });
+        this.meta.updateTag( { name: 'description', content: this.storeDto.description + this.storeDto.address } );
+        this.meta.updateTag({ name: 'robots', content: "index,follow" });
+        this.title.setTitle(" مغازه " +this.storeDto.name)
+        this.storePictureGet();
+      }
     })
   }
 

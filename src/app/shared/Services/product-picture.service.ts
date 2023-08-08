@@ -4,7 +4,6 @@ import {ProductPictureSearchDto} from "../dto/productPicture/productPictureSearc
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ProductPictureDto} from "../dto/productPicture/productPictureDto";
 import {Observable} from "rxjs";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +21,7 @@ export class ProductPictureService {
     if (this.productPictureParam.sort) productPictureParam=productPictureParam.append('sort',this.productPictureParam.sort);
     if (this.productPictureParam.startRange) productPictureParam=productPictureParam.append('startRange',this.productPictureParam.startRange);
     if (this.productPictureParam.endRange) productPictureParam=productPictureParam.append('endRange',this.productPictureParam.endRange);
+    productPictureParam=productPictureParam.append('minutesCache',environment.cache.product.productPicture)
     return this.http.get<ProductPictureDto[]>(`${this.backendUrlUser}/ProductPictureUser/ProductPictureGetAll`, {params: productPictureParam});
   }
 }

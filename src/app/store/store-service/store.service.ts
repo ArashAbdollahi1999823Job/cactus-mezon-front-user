@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {TypeSearchDto} from "../../shared/dto/type/typeSearchDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {TypeDto} from "../../shared/dto/type/typeDto";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
 import {StoreSearchDto} from "../../shared/dto/store/storeSearchDto";
 import {StoreDto} from "../../shared/dto/store/storeDto";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +34,7 @@ export class StoreService {
     requestStoreParam = requestStoreParam.append('pageSize', this.storeSearchDto.pageSize);
     requestStoreParam = requestStoreParam.append('activeType', this.storeSearchDto.activeType);
     requestStoreParam=requestStoreParam.append('sortType',this.storeSearchDto.sortType);
+    requestStoreParam=requestStoreParam.append('minutesCache',environment.cache.store.store)
     return requestStoreParam;
   }
 }

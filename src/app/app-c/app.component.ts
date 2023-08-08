@@ -12,12 +12,10 @@ declare var $: any;
   animations:[allPageAnimation]
 })
 export class AppComponent implements OnInit,AfterViewInit{
-  title = 'فروشگاه بزرگ کاکتوس';
   constructor(private authService:AuthService,private presenceService:PresenceService,private ef:ElementRef,private renderer: Renderer2) {}
   ngOnInit(): void {
     this.initialUser();
   }
-
   ngAfterViewInit() {
     this.renderer.setStyle(this.ef.nativeElement.querySelector('.all'), 'height', window.innerHeight+ "px");
   }

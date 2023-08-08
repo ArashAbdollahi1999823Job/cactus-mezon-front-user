@@ -25,6 +25,8 @@ export class BrandService {
     brandSearchDtoReq = brandSearchDtoReq.append('pageIndex', this.brandSearchDto.pageIndex);
     brandSearchDtoReq = brandSearchDtoReq.append('pageSize', this.brandSearchDto.pageSize);
     brandSearchDtoReq=brandSearchDtoReq.append('sortType',this.brandSearchDto.sortType);
+    brandSearchDtoReq=brandSearchDtoReq.append('minutesCache',this.brandSearchDto.minutesCache)
+
     return this.http.get<PaginationDto<BrandDto>>(`${this.backendUrlUser}/BrandUser/BrandGetAll`, {params: brandSearchDtoReq});
   }
 }

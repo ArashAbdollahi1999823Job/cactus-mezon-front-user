@@ -4,7 +4,7 @@
     </div>
   <div class="slider-button-div">
     <button class="btn-arrow-slider-man" (click)="btnClickRight()"><i class="fa fa-arrow-alt-circle-right"></i></button>
-    <a *ngIf="haveChild" routerLink="/{{typeDto.slug}}"><button class="slider-button-enter"> ورود به دسته {{typeDto.name}} </button></a>
+    <a *ngIf="haveChild" routerLink="/{{typeDto.slug}}" title="{{typeDto.name}}"><button class="slider-button-enter"> ورود به دسته {{typeDto.name}} </button></a>
     <a *ngIf="!haveChild" ><button class="slider-button-enter">  {{typeDto.name}} </button></a>
     <button class="btn-arrow-slider-man" (click)="btnClickLeft()"><i class="fa fa-arrow-alt-circle-left"></i></button>
   </div>

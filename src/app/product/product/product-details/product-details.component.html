@@ -1,6 +1,10 @@
 <div class="details-container">
   <div class="name">
-    <span>{{productDto?.name}}</span>
+    <span>
+      <h1 class="h1">
+      {{productDto?.name}}
+    </h1>
+    </span>
     <span> فروشگاه {{productDto?.store}}</span>
     <span class="not-exist" *ngIf="productDto?.count==0">ناموجود</span>
     <span class="exist" *ngIf="productDto?.count>0">موجود</span>

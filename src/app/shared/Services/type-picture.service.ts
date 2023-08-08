@@ -23,6 +23,7 @@ export class TypePictureService {
     let requestParams = new HttpParams();
     if (this.typePictureParam.typeId) requestParams = requestParams.append("typeId", this.typePictureParam.typeId);
     if (this.typePictureParam.id) requestParams=requestParams.append('id',this.typePictureParam.id);
+    requestParams=requestParams.append('minutesCache',environment.cache.type.typePicture)
     return requestParams;
   }
 }

@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {FavoriteService} from "../favorite-service/favorite.service";
 import {AuthService} from "../../auth/Services/auth.service";
 import {FavoriteSearchDto} from "../../shared/dto/favorite/favoriteSearchDto";
+import {Meta} from "@angular/platform-browser";
 @Component({
   selector: 'favorite-c',
   templateUrl: './favorite.component.html',
@@ -12,8 +13,9 @@ import {FavoriteSearchDto} from "../../shared/dto/favorite/favoriteSearchDto";
 export class FavoriteComponent implements OnInit{
   public productDtos:ProductDto[];
   public subscription:Subscription;
-  constructor(private favoriteService:FavoriteService,private authService:AuthService) {}
+  constructor(private favoriteService:FavoriteService,private authService:AuthService,private meta:Meta) {}
   ngOnInit(): void {
+    this.meta.updateTag({ name: 'robots', content: "noindex,follow" });
     this.favoriteGetAll();
   }
   public favoriteGetAll():void{

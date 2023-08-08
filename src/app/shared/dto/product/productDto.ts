@@ -19,6 +19,7 @@ export class ProductDto {
   store: string
   type: string
   typeId:string
+  typeSlug:String
   brand: string
   inventory: string
   inventoryId:string

@@ -39,6 +39,7 @@ export class ProductService {
     requestProductParam = requestProductParam.append('pageSize', this.productSearchDto.pageSize);
     requestProductParam=requestProductParam.append('sortType',this.productSearchDto.sortType);
     requestProductParam=requestProductParam.append('user',this.productSearchDto.user)
+    requestProductParam=requestProductParam.append('minutesCache',environment.cache.product.product)
     return requestProductParam;
   }
 

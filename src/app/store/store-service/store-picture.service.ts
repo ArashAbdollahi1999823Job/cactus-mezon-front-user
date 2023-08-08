@@ -18,10 +18,8 @@ export class StorePictureService {
     if (this.storePictureSearchDto.sort) storePictureReq=storePictureReq.append('sort',this.storePictureSearchDto.sort);
     if (this.storePictureSearchDto.startRange) storePictureReq=storePictureReq.append('startRange',this.storePictureSearchDto.startRange);
     if (this.storePictureSearchDto.endRange) storePictureReq=storePictureReq.append('endRange',this.storePictureSearchDto.endRange);
+    storePictureReq=storePictureReq.append('minutesCache',environment.cache.store.storePicture)
     return this.http.get<StoreUserPictureDto[]>(`${this.backendUrlAdmin}/StorePictureUser/StorePictureGetAll`, {params: storePictureReq});
-  }
-  public storePictureSearchDtoGet() {
-    return this.storePictureSearchDto;
   }
   public storePictureSearchDtoSet(storePictureSearchDto: StorePictureSearchDto) {
     this.storePictureSearchDto = storePictureSearchDto;

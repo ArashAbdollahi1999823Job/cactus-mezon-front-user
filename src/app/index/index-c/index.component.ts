@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Title} from "@angular/platform-browser";
+import {Meta, Title} from "@angular/platform-browser";
 import {Subscription} from "rxjs";
 import {TypeService} from "../../type/type-service/type.service";
 import {PaginationDto} from "../../shared/dto/base/paginationDto";
@@ -13,15 +13,17 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit, OnDestroy {
-  constructor(private title: Title, private typeService: TypeService) {
-    this.title.setTitle("فروشگاه بزرگ کاکتوس")
-  }
+  constructor(private title: Title, private typeService: TypeService,private meta:Meta) {  }
 
   public subscription: Subscription;
   public typeDtos: TypeDto[];
 
   ngOnInit(): void {
     this.typeGetAll();
+    this.meta.updateTag({ name: 'keywords', content: environment.seo.index.keywords });
+    this.meta.updateTag({ name: 'robots', content: "index,follow" });
+    this.meta.updateTag( { name: 'description', content: environment.seo.index.description } );
+    this.title.setTitle(environment.seo.index.title)
   }
 
   public typeGetAll(): void {

@@ -3,6 +3,7 @@ import {SortType} from "../../enum/sortType";
 
 
 export class TypeSearchDto {
+   minutesCache:number=60;
   slug:string;
   id:string;
   pageIndex:number=1;

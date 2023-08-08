@@ -2,6 +2,7 @@ import {ActiveType} from "../../enum/activeType";
 import {SortType} from "../../enum/sortType";
 
 export class ProductSearchDto {
+  public minutesCache:number;
   public pageIndex: number=1;
   public pageSize: number=10;
   public id: string;
