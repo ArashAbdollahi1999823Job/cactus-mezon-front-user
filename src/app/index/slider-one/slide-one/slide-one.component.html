@@ -1,7 +1,17 @@
 <div class="container-slider-card-item" (mouseenter)="showDetails($event)" (mouseleave)="hideDetails($event)" >
-  <div class="timer" #timerEl *ngIf="productDto.off"></div>
+  <div class="clock" *ngIf="productDto.off">
+    <div class="container-clock">
+      <h2 #day  id ="day">00</h2>
+      <h2  class="dot">:</h2>
+      <h2 #hour id ="hour">00</h2>
+      <h2 class="dot">:</h2>
+      <h2 #minute id ="minute">00</h2>
+      <h2 class="dot">:</h2>
+      <h2 #second id ="second">00</h2>
+    </div>
+  </div>
   <div class="exist" *ngIf="productDto.count>0">موجود</div>
-  <div class="notExist" *ngIf="productDto.count==0">ناموجود</div>
+  <div class="exist" *ngIf="productDto.count==0">ناموجود</div>
   <div class="old-price" ><del>{{productDto.price|number}}</del></div>
   <div class="old-price" *ngIf="!productDto.off"  >{{productDto.price|number}}</div>
   <div class="new-Price" *ngIf="productDto.off">{{(productDto.price-(productDto.price/100)*productDto.off.offPercent)|number}}</div>

@@ -22,6 +22,10 @@ export class SlideOneComponent implements OnInit, OnDestroy {
   @Input('productDto') productDto: ProductDto;
   public backendUrlPicture = environment.setting.url.backendUrlPicture;
   @ViewChild('timerEl', {static: false}) timerEl: ElementRef;
+  @ViewChild('day', {static: false}) day: ElementRef;
+  @ViewChild('hour', {static: false}) hour: ElementRef;
+  @ViewChild('minute', {static: false}) minute: ElementRef;
+  @ViewChild('second', {static: false}) second: ElementRef;
   private subscription: Subscription;
 
   ngOnInit(): void {
@@ -67,11 +71,9 @@ export class SlideOneComponent implements OnInit, OnDestroy {
     cardDetails.style.width = "0px";
     cardDetails.style.borderRight = "0px solid black";
   }
-
   constructor(private clipboard: Clipboard, private toastService: ToastrService, private authService: AuthService, private router: Router, private favoriteService: FavoriteService, private productPictureService: ProductPictureService) {
   }
-
-  public timer(): void {
+  public timer(){
     if (this.productDto.off) {
       let end = new Date(this.productDto.off.endDate)
       let now = new Date();
@@ -84,16 +86,17 @@ export class SlideOneComponent implements OnInit, OnDestroy {
         const minutes = Math.floor((sec % 3600) / 60);
         const hours = Math.floor((sec % (3600 * 24)) / 3600);
         const days = Math.floor(sec / (3600 * 24));
-        this.timerEl.nativeElement.innerHTML = days + ":" + hours + ":" + minutes + ":" + seconds;
+      this.day.nativeElement.innerHTML=days.toString();
+        this.hour.nativeElement.innerHTML=hours.toString();
+        this.minute.nativeElement.innerHTML=minutes.toString();
+        this.second.nativeElement.innerHTML=seconds.toString();
       }, 1000)
     }
   }
-
   public copyProductUrl(slug: string): void {
     const successful = this.clipboard.copy(`${location.href}/${slug}`);
     if (successful) this.toastService.success(environment.messages.common.addressCopySuccess)
   }
-
   public favoriteAdd(productId: string):void {
     let checkLogin;
     this.subscription = this.authService.currentUser$.subscribe((user: UserAuthorizeDto) => {

@@ -2,23 +2,18 @@
 
 .body-auth {
   width: 100%;
-  height: calc(100vh - 70px);
-  background-color: $color-white-a9;
+  height: calc(100%);
   overflow-y: scroll;
   .auth-btn-container{
     display: flex;
     width: 100%;
     button{
       width: 33.3333%;
-      height: 5vh;
+      height: 50px;
       cursor: pointer;
       background: $color-black;
       color: $color-burlywood;
       border: 1px solid burlywood;
     }
   }
-}
-.fadeIn{
-  color: $color-white !important;
-height: 6vh !important;
 }

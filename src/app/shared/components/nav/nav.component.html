@@ -1,21 +1,27 @@
 <div class="more-nav ">
   <ul class="nav-ul">
-  <a routerLink="/auth" rel="nofollow" *ngIf="!(authService.currentUser$|async)">
-    <li class="nav-ul-li" routerLinkActive="activeMoreNav">
-      <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
-      </i><br>ورود
-    </li>
-  </a>
- <a (click)="logout()" rel="nofollow" *ngIf="(authService.currentUser$|async)">
-     <li class="nav-ul-li">
-       <i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
-       </i><br>خروج
-     </li>
-   </a>
-    <a routerLink="/store"  title="مغازه های فروشگاه کاکتوس">
+    <a routerLink="/auth" rel="nofollow" *ngIf="!(authService.currentUser$|async)">
+      <li class="nav-ul-li" routerLinkActive="activeMoreNav">
+        <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>ورود
+      </li>
+    </a>
+    <a (click)="logout()" rel="nofollow" *ngIf="(authService.currentUser$|async)">
+      <li class="nav-ul-li">
+        <i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
+        </i><br>خروج
+      </li>
+    </a>
+    <a routerLink="/store" title="مغازه های فروشگاه کاکتوس">
       <li class="nav-ul-li" routerLinkActive="activeMoreNav">
         <i class="fa fa-store nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
         </i><br>فروشگاه ها
+      </li>
+    </a>
+    <a routerLink="/favorite" rel="nofollow">
+      <li class="nav-ul-li" routerLinkActive="active">
+        <i class="fa fa-heartbeat nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>علاقه ها
       </li>
     </a>
   </ul>
@@ -23,47 +29,59 @@
 
 
 <nav class="nav">
- <ul class="nav-ul">
-   <a routerLink="/" title="صحفه اصلی فروشگاه کاکتوس">
-     <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-       <img src="assets/images/logo3.png" class="logo" alt="" >
-     </li>
-   </a>
-   <a routerLink="/search" title="جستجو در محصولات کاکتوس">
-     <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-       <i class="fa fa-search nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
-       </i><br>جستجو
-     </li>
-   </a>
-   <a routerLink="/favorite" rel="nofollow">
+  <ul class="nav-ul">
+    <a rel="nofollow">
+      <li class="nav-ul-li" >
+        <i class="fa-brands fa-windows nav-ul-li-i" aria-hidden="true">
+        </i><br>دسته بندی
+        <div class="click" (click)="toggleMenu()"></div>
+        <ul class="ul-type-nav" *ngIf="typeDtos.length>0">
+          <li class="li-type-nav" *ngFor="let typeDto of typeDtos">
+            <div class="li-container">
+              <img src="{{backendUrlPicture}}{{typeDto?.typePictures[0]?.pictureUrl}}"
+                   alt="{{typeDto?.typePictures[0]?.pictureAlt}}" title="{{typeDto?.typePictures[0]?.pictureTitle}}"
+                   width="100px" height="70px">
+              <span class="name">{{typeDto?.name}}</span>
 
-     <li class="nav-ul-li" routerLinkActive="active">
-       <i class="fa fa-heartbeat nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
-       </i><br>علاقه ها
-     </li>
-   </a>
+              <ng-container *ngIf="currentLever!=1"  >
+              <div class="more">
+                  <div (click)="backward()"><i class="fa fa-chevron-right"></i></div>
+                  <div routerLink="/{{typeDto.slug}}">ورود</div>
+                  <div (click)="forward(typeDto.id)"><i class="fa fa-chevron-left"></i></div>
+              </div>
+              </ng-container>
 
-   <a routerLink="/chat" rel="nofollow">
-     <li class="nav-ul-li" routerLinkActive="active">
+              <ng-container *ngIf="currentLever==1">
+                <div class="more1">
+                  <div routerLink="/{{typeDto.slug}}">ورود</div>
+                  <div (click)="forward(typeDto.id)"><i class="fa fa-chevron-left"></i></div>
+                </div>
+              </ng-container>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </a>
+    <a routerLink="/" title="صحفه اصلی فروشگاه کاکتوس">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <img src="assets/images/logo3.png" class="logo" alt="">
+      </li>
+    </a>
+    <a routerLink="/search" title="جستجو در محصولات کاکتوس">
+      <li class="nav-ul-li" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="fa fa-search nav-ul-li-i" routerLinkActive="fa-bounce" aria-hidden="true">
+        </i><br>جستجو
+      </li>
+    </a>
+    <a routerLink="/chat" rel="nofollow">
+      <li class="nav-ul-li" routerLinkActive="active">
        <span class="message-count" *ngIf="(presenceService.messageUnReadDtos$ | async)?.length>0">
          {{(presenceService.messageUnReadDtos$ | async)?.length}}
        </span>
-       <i class="fa fa-comments nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
-       </i><br>چت
-     </li>
-   </a>
-<!--    <a routerLink="/auth" *ngIf="!(authService.currentUser$|async)">
-     <li class="nav-ul-li" routerLinkActive="active">
-       <i class="fa fa-user-circle nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
-       </i><br>ورود
-     </li>
-   </a>-->
-   <!-- <a (click)="logout()" *ngIf="(authService.currentUser$|async)">
-      <li class="nav-ul-li">
-        <i class="fa fa-door-open nav-ul-li-i" aria-hidden="true">
-        </i><br>خروج
+        <i class="fa fa-comments nav-ul-li-i" aria-hidden="true" routerLinkActive="fa-bounce">
+        </i><br>چت
       </li>
-    </a>-->
+    </a>
     <div class="more" (click)="handleMoreNav()">
       <div class="flash">
         <i class="fa fa-arrow-alt-circle-up"></i>

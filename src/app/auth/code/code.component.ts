@@ -32,7 +32,7 @@ export class CodeComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.codeSend(codeDto).subscribe((userAuthorizeDtoRes: UserAuthorizeDto) => {
       if (userAuthorizeDtoRes) {
         this.toast.success(environment.messages.common.confirmPhoneNumberSuccess)
-        this.router.navigateByUrl("index")
+        this.router.navigateByUrl("/")
       }
     });
   }
@@ -50,7 +50,7 @@ export class CodeComponent implements OnInit, OnDestroy {
     this.subscription = this.authService.userVerifyDelete(localStorage.getItem(environment.storage.myPhoneNumberForAuth)).subscribe((res: boolean) => {
       if (res == true) {
         this.toast.info(environment.messages.common.confirmPhoneNumberNotDonePleaseRegisterAgain)
-        this.router.navigateByUrl('index');
+        this.router.navigateByUrl('/');
       }
     })
   }

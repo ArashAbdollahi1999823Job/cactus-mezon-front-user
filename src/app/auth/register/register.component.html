@@ -1,3 +1,88 @@
+<div class="body">
+  <div class="container">
+    <div class="box">
+      <div class="cover"></div>
+      <div class="shadow"></div>
+      <div class="content">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form">
+          <h3 class="logo">
+            <i class="fa-solid fa-key"></i>
+          </h3>
+          <h2>ثبت نام</h2>
+          <div class="input-box">
+            <input type="text" required formControlName="name">
+            <i class="fa-solid fa-user"></i>
+            <span> نام</span>
+          </div>
+          <div class="error"
+               *ngIf="registerForm.controls.name.hasError('required') &&registerForm.controls.name.touched">
+            لطفا نام  را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.name.hasError('maxlength')">تعداد
+            کاراکتر ها نمیتواند بیشتر از 30 باشد !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.name.hasError('minlength')">تعداد
+            کاراکتر ها نمیتواند کمتر از 3 باشد !
+          </div>
+          <div class="input-box">
+            <input type="tel" required formControlName="phoneNumber"  pattern="[0-9]{4}[0-9]{3}[0-9]{4}" >
+            <i class="fa-solid fa-mobile-screen-button"> </i>
+            <span>شماره همراه</span>
+          </div>
+          <div class="error"
+               *ngIf="registerForm.controls.phoneNumber.hasError('required') &&registerForm.controls.phoneNumber.touched">
+            لطفا شماره همراه را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.phoneNumber.hasError('maxlength')">تعداد
+            کاراکتر ها نمیتواند بیشتر از 11 باشد !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.phoneNumber.hasError('minlength')">تعداد
+            کاراکتر ها نمیتواند کمتر از 11 باشد !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
+          <div class="input-box">
+            <input type="text" required formControlName="password">
+            <i class="fa-solid fa-lock"></i>
+            <span>گذرواژه</span>
+          </div>
+          <div class="error"
+               *ngIf="registerForm.controls.password.errors?.required &&registerForm.controls.password.touched">
+            لطفا گذرواژه را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.password.hasError('maxlength')">تعداد
+            کاراکتر ها نمیتواند بیشتر از 30 باشد !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.password.hasError('minlength')">تعداد
+            کاراکتر ها نمیتواند کمتر از 8 باشد !
+          </div>
+          <div class="error" *ngIf=" registerForm.controls.password.hasError('pattern')">
+            فقط حروف بزرگ و کوچک انگلیسی و اعداد انگلیسی مجاز است
+          </div>
+          <div class="input-box">
+            <input type="text" required formControlName="passwordConfirm">
+            <i class="fa-solid fa-lock"></i>
+            <span>تکرار گذرواژه</span>
+          </div>
+          <div class="error"
+               *ngIf="registerForm.controls.passwordConfirm.errors?.required &&registerForm.controls.passwordConfirm.touched">
+            لطفا گذرواژه را وارد کنید !
+          </div>
+          <div class="error" *ngIf=" registerForm.hasError('match_error')">
+            رمز ها یکسان نیست!
+          </div>
+          <div class="input-box">
+            <input type="submit" value="ثبت نام" [disabled]="!registerForm.valid" [ngClass]="!registerForm.valid ? 'disable':''" >
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
 <div class="login-container">
   <div class="login">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -76,3 +161,4 @@
     </form>
   </div>
 </div>
+-->

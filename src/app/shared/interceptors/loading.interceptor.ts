@@ -14,7 +14,8 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.busyService.show();
+    return next.handle(request);
+/*    this.busyService.show();
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
         if (event.type === HttpEventType.Sent) {
@@ -30,6 +31,6 @@ export class LoadingInterceptor implements HttpInterceptor {
           return error;
         });
       })
-    );
+    );*/
   }
 }

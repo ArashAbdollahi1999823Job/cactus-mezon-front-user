@@ -61,7 +61,7 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(environment.storage.userToken);
     this.currentUser.next(null);
-    this.router.navigateByUrl('/index');
+    this.router.navigateByUrl('/');
     this.presenceService.stopHubConnection();
   }
 

@@ -1,47 +1,47 @@
-<div class="login-container">
-  <div class="login">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div>
-        <input type="tel" placeholder="شماره همراه..." formControlName="phoneNumber" name="phoneNumber"
-               pattern="[0-9]{4}[0-9]{3}[0-9]{4}" required
-               [ngClass]="
+<div class="body">
+  <div class="box">
+    <span class="border-line"></span>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" >
+      <h2>ورود</h2>
+      <div class="input-box">
+        <input type="tel" formControlName="phoneNumber" name="phoneNumber"
+               pattern="[0-9]{4}[0-9]{3}[0-9]{4}" required  >
+        <span>شماره همراه</span>
+        <i [ngClass]="
                      loginForm.controls.phoneNumber.touched && loginForm.controls.phoneNumber.errors?.required
                      || loginForm.controls.phoneNumber.errors?.maxlength ||
-                     loginForm.controls.phoneNumber.errors?.minlength ? 'input-error' :'input-success'">
-        <div class="error"
-             *ngIf="loginForm.controls.phoneNumber.hasError('required') &&loginForm.controls.phoneNumber.touched">
-          لطفا شماره همراه را وارد کنید !
-        </div>
-        <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 11 باشد !
-        </div>
-        <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('minlength')">تعداد
-          کاراکتر ها نمیتواند کمتر از 11 باشد !
-        </div>
-        <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
-
+                     loginForm.controls.phoneNumber.errors?.minlength ? 'error-input' :'success-input'"></i>
       </div>
-      <div>
-        <input type="password" #password placeholder="گذرواژه..." formControlName="password" [ngClass]="
-                     loginForm.controls.password.touched && loginForm.controls.password.errors?.required
-                     || loginForm.controls.password.errors?.maxlength ||
-                     loginForm.controls.password.errors?.minlength ? 'input-error' :'input-success'">
-        <div class="error"
-             *ngIf="loginForm.controls.password.errors?.required &&loginForm.controls.password.touched">
-          لطفا گذرواژه را وارد کنید !
-        </div>
-        <div class="error" *ngIf=" loginForm.controls.password.hasError('maxlength')">تعداد
-          کاراکتر ها نمیتواند بیشتر از 30 باشد !
-        </div>
-        <div class="error" *ngIf=" loginForm.controls.password.hasError('minlength')">تعداد
-          کاراکتر ها نمیتواند کمتر از 8 باشد !
-        </div>
+      <div class="error"
+           *ngIf="loginForm.controls.phoneNumber.hasError('required') &&loginForm.controls.phoneNumber.touched">
+        لطفا شماره همراه را وارد کنید !
       </div>
-      <div class="check">
-        نمایش رمز
-        <input type="checkbox" (change)="togglePassword()">
+      <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('maxlength')">تعداد
+        کاراکتر ها نمیتواند بیشتر از 11 باشد !
       </div>
-      <button type="submit" [disabled]="!loginForm.valid" [ngClass]="!loginForm.valid ? 'disable':''">ورورد</button>
+      <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('minlength')">تعداد
+        کاراکتر ها نمیتواند کمتر از 11 باشد !
+      </div>
+      <div class="error" *ngIf=" loginForm.controls.phoneNumber.hasError('pattern')">شماره همراه صحیح نمیباشد !</div>
+      <div class="input-box">
+        <input type="text" formControlName="password" required>
+        <span>گذرواژه</span>
+        <i [ngClass]="
+        loginForm.controls.password.touched && loginForm.controls.password.errors?.required
+        || loginForm.controls.password.errors?.maxlength ||
+        loginForm.controls.password.errors?.minlength ? 'error-input' :'success-input'"></i>
+      </div>
+      <div class="error"
+           *ngIf="loginForm.controls.password.errors?.required &&loginForm.controls.password.touched">
+        لطفا گذرواژه را وارد کنید !
+      </div>
+      <div class="error" *ngIf=" loginForm.controls.password.hasError('maxlength')">تعداد
+        کاراکتر ها نمیتواند بیشتر از 30 باشد !
+      </div>
+      <div class="error" *ngIf=" loginForm.controls.password.hasError('minlength')">تعداد
+        کاراکتر ها نمیتواند کمتر از 8 باشد !
+      </div>
+      <input type="submit" value="ورود" [disabled]="!loginForm.valid" [ngClass]="!loginForm.valid ? 'disable':''">
     </form>
   </div>
 </div>

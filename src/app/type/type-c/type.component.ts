@@ -23,8 +23,7 @@ export class TypeComponent implements OnDestroy {
   public typesDto: TypeDto[];
   public subscription: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute, private typeService: TypeService, private typePictureService: TypePictureService,
-              private productPictureService: ProductPictureService, private productService: ProductService, private router: Router,private meta:Meta,private title:Title) {
+  constructor(private activatedRoute: ActivatedRoute, private typeService: TypeService, private typePictureService: TypePictureService, private router: Router,private meta:Meta,private title:Title) {
     this.subscription = this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.typeGet();
@@ -63,8 +62,18 @@ export class TypeComponent implements OnDestroy {
     typeParamDto.justParentTypeId = this.typeDto.id;
     this.typeService.typeSearchDtoSet(typeParamDto);
     this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
-      if (res) {
+      if (res.data.length>0) {
         this.typesDto = res.data;
+      }
+      else{
+        let typeParamDto = new TypeSearchDto();
+        typeParamDto.id = this.typeDto.id;
+        this.typeService.typeSearchDtoSet(typeParamDto);
+        this.typeService.typeGetAll().subscribe((res: PaginationDto<TypeDto>) => {
+          if (res) {
+            this.typesDto = res.data;
+          }
+        });
       }
     })
   }

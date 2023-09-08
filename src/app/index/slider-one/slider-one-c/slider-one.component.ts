@@ -4,7 +4,6 @@ import {ProductSearchDto} from "../../../shared/dto/product/productSearchDto";
 import {PaginationDto} from "../../../shared/dto/base/paginationDto";
 import {ProductDto} from "../../../shared/dto/product/productDto";
 import {ProductService} from "../../../product/product-service/product.service";
-import {ProductPictureService} from "../../../shared/Services/product-picture.service";
 import {Subscription} from "rxjs";
 import {TypeService} from "../../../type/type-service/type.service";
 import {TypeSearchDto} from "../../../shared/dto/type/typeSearchDto";
@@ -25,8 +24,9 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
   public subscription: Subscription;
   public pageIndex = 1;
   public productDtos:ProductDto[]=[];
+  public allowRequest:boolean=true;
 
-  constructor(private productService: ProductService, private productPictureService: ProductPictureService, private typeService: TypeService,private el:ElementRef) {}
+  constructor(private productService: ProductService, private typeService: TypeService,private el:ElementRef) {}
   ngOnInit(): void {
     this.checkChild();
    this.productGetAll(this.typeDto.id);
@@ -73,12 +73,13 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
     setTimeout(() => {
       clearInterval(scrollRight);
     }, 630)
-    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth + 240) {
+    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth) {
       this.pageIndex++;
-      this.productGetAll(this.typeDto.id);
+      if (this.allowRequest)this.productGetAll(this.typeDto.id);
     }
   }
   public productGetAll(typeId: string) {
+    this.allowRequest=false;
     let productParamDto = new ProductSearchDto();
     productParamDto.pageSize =Number(environment.setting.product.addLoadNumber);
     productParamDto.pageIndex = this.pageIndex;
@@ -89,15 +90,17 @@ export class SliderOneComponent implements OnInit ,OnDestroy {
       if (res) {
         res.data.forEach(x=>{
         this.productDtos.push(x);
+        this.pageIndex=res.pageIndex;
+        this.allowRequest=true;
         })
       }
     })
   }
   public scroll() :void {
     this.slider = this.key.nativeElement;
-    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth+100) {
+    if (this.slider.scrollWidth + this.slider.scrollLeft <= window.innerWidth) {
       this.pageIndex++;
-      this.productGetAll(this.typeDto.id);
+      if (this.allowRequest)this.productGetAll(this.typeDto.id);
     }
   }
   ngOnDestroy(): void {

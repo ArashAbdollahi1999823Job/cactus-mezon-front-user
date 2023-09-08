@@ -1,20 +1,30 @@
 <div class="container-search">
   <div class="search-bar">
     <div class="container-search-btn">
-      <input type="text" #search id="input-search" class="input-search" placeholder="جستجو کنید..." (keyup.enter)="changeSearch()">
+      <input type="text" #search id="input-search" class="input-search" placeholder="جستجو کنید..." (keyup.enter)="changeSearch()" (keyup)="changeSearchGetProduct()" (keyup)="changeSearchGetType()" (focusin)="showPre()" (focusout)="dontShowPre()">
       <button class="btn-search" (click)="changeSearch()"><i class="fa fa-search"></i></button>
+      <div class="pre">
+        <div class="pre-show-product">
+          <span>محصولات:</span>
+          <span *ngFor="let productDto of productDtoPre" (click)="clickProductPre(productDto.name)">{{productDto.name}}</span>
+        </div>
+        <div class="pre-show-type">
+          <span>دسته ها:</span>
+          <span *ngFor="let typeDto of typeDtoPre" (click)="onChangeType(typeDto.id)" >{{typeDto.name}}</span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="select-filters">
     <div class="select-right-filters">
       <select (change)="onChangeType($any($event.target)?.value)">
-        <option class="option" value="00000000-0000-0000-0000-000000000001">دسته بندی</option>
-        <option class="option" *ngFor="let type of typeDtos" [value]="type?.id">{{type?.name}}</option>
+        <option class="option" value="00000000-0000-0000-0000-000000000001">تمام دسته بندی ها</option>
+        <option class="option" [selected]="productSearchDto.typeId == type.id" *ngFor="let type of typeDtos" [value]="type?.id">{{type?.name}}</option>
       </select>
     </div>
     <div class="select-left-filters">
       <select (change)="onChangeBrand($any($event.target)?.value)">
-        <option class="option" value="00000000-0000-0000-0000-000000000000">برند</option>
+        <option class="option" value="00000000-0000-0000-0000-000000000000">تمام برند ها</option>
         <option class="option" *ngFor="let brand of brandDtos" [value]="brand?.id">{{brand?.name}}</option>
       </select>
     </div>
